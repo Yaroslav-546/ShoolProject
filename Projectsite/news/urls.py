@@ -1,7 +1,7 @@
 from django.urls import path
 # from . import views
 
-from .views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView, HomeView, ExitView, ActivitiesView
+from .views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView, HomeView, ExitView, ActivitiesView, ActivePythonView, ActiveRoboticsView
 
 #url ссылки и каталоги в сайте для того чтобы отображались файлы
 urlpatterns = [
@@ -13,4 +13,6 @@ urlpatterns = [
     path('post/<int:pk>/', BlogDetailView.as_view(), name='post_detail'),
     path('', HomeView.as_view() , name='index'),
     path('news/', BlogListView.as_view(), name='news'),
+    path('activities/active-python', ActivePythonView.as_view(), name='active-python'),
+    path('activities/active-robotics', ActiveRoboticsView.as_view(), name='active-robotics'),
 ]

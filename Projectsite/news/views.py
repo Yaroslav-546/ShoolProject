@@ -45,6 +45,11 @@ class ActivitiesView(ListView):
     model = News
     template_name = 'activities.html'
 
+class ActivePythonView(ListView):
+    model = News
+    template_name = 'active-python.html'
 
-
+class ActiveRoboticsView(ListView):
+    model = News
+    template_name = 'active-robotics.html'
 

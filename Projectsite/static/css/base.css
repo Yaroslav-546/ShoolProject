@@ -265,30 +265,14 @@ input, textarea, select {
     margin-top: 10px;
 }
 
-.main-index {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.index-text {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.index-text>p {
-    width: 30%;
-}
-
 @media (max-width: 1200px) {
     .image-news>img{
         width: 350px;
     }
 
-    .index-text>p {
+    /* .index-text>p {
         width: 80%;
-    }
+    } */
 
     .favicon-image {
         width: 5%;
@@ -307,9 +291,9 @@ input, textarea, select {
         max-width: 10ch;
     }
     
-    .index-text>p {
+    /* .index-text>p {
         width: 100%;
-    }
+    } */
 
     .favicon-image {
         width: 15%;
@@ -328,9 +312,9 @@ input, textarea, select {
         max-width: 12ch;
     }
     
-    .index-text>p {
+    /* .index-text>p {
         width: 80%;
-    }
+    } */
 
     .favicon-image {
         width: 8%;
@@ -346,7 +330,7 @@ input, textarea, select {
     }
 }
 
-@media (max-width: 330px) {
+@media (max-width: 344px) {
     .image-news>img{
         width: 145px;
     }
@@ -388,7 +372,7 @@ input, textarea, select {
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 424px) {
     .image-news>img{
         width: 180px;
     }
@@ -412,5 +396,43 @@ input, textarea, select {
 @media (max-width: 750px) {
     #cardbody-info {
         text-align: center
+    }
+}
+
+@media (max-width: 345px) {
+    .image-news>img{
+        width: 170px;
+    }
+
+    .card-body>p{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 5ch;
+    }
+
+    #card-body-text{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 7ch;
+    }
+
+    #card-body-data {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 5ch;
+    }
+    
+    .card-body>h2{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 5ch;
+    }
+
+    .buttonNews{
+        justify-content: left;
     }
 }

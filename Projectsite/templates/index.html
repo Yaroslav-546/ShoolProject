@@ -16,9 +16,13 @@
 <body class="{% block body_class %}{% endblock %}">
     {% block content %}
 
+    <div class="index-image-background-block">
+        <img class="index-image" src="{% static 'Images/index-home.jpg' %}">
+    </div>
+
     <div class="main-index">
         <div class="index-global-text">
-            <p>Целями деятельности Центров являются:</p>
+            <p class="index-h-p-text">Целями деятельности Центров являются:</p>
             <div class="index-text">
                 <p> — создание условий для внедрения на уровнях начального общего, основного общего и (или) среднего общего
                     образования новых методов обучения и воспитания, образовательных технологий, обеспечивающих освоение
@@ -32,7 +36,12 @@
         </div>
     </div>
 
-    <div class="history">
+    <div class="index-images-activities">
+        <img class="index-images-active-1" src="{% static 'Images/robot-tecncic.png' %}">
+        <img class="index-images-active-2" src="{% static 'Images/python.png' %}">
+    </div>
+
+    <!-- <div class="history">
         <div class="container">
             <div class="history-holder">
                     <div class="history-images">
@@ -42,7 +51,7 @@
                     </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     {% endblock content %}
 
