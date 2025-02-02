@@ -1,0 +1,47 @@
+html {
+    height: 100%;
+}
+
+body {
+    background-size: cover;
+}
+
+.over {
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.e404 {
+    margin-top: 100px;
+    text-align: center;
+    font-size: 10em;
+    color: #fcf9f9;
+    position: relative;
+    z-index: 2;
+}
+
+.notfound {
+    text-align: center;
+    color: #fff;
+    font-size: 2em;
+    position: relative;
+    z-index: 2;
+}
+
+.notfound a {
+    color: #fff;
+    font-size: 0.8em;
+}
+
+.notfound a:hover {
+    color: rgb(138, 139, 138);
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}

@@ -1,0 +1,16 @@
+#header {
+    background-color: rgb(240, 59, 59);
+    color: rgb(255, 255, 255);
+}
+
+a:visited {
+    color: rgb(255, 255, 255);
+}
+
+#header a:link, #header a:visited, #logout-form button {
+    color: rgb(255, 255, 255);
+}
+
+html[data-theme="light"], :root {
+    --primary: rgb(240, 59, 59); 
+}

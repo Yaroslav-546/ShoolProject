@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'base.html' %} 
+{% block title %}Войти{% endblock title %}
+
+&nbsp;{% block content %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="input">
+        <form method="post">
+            <h2>Вход</h2>
+            <div class="regisrtat">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-dark butn">Войти</button>
+            </div>
+        </form>
+        {% endblock content %}
+    </div>
+</body>
+</html>

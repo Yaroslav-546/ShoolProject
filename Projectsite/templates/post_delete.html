@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Удалить{% endblock title %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <title>Новости</title>
+</head>
+<body>
+    {% block content %}
+        {% if user.is_superuser %}
+        <div class="dlete">
+            <h2>Удалить Новость</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="form-size">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <p>Вы уверены что хотите удалить новость "{{ news.title }}"?</p>
+                                    <input type="submit" value="Удалить" class="btn btn-dark" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="dlete">
+            <div>
+                <h2>Отказано в доступе</h2>
+                <a href="{% url 'index' %}" class="btn btn-dark"> перейти на главную страницу..</a>
+            </div>
+        </div>
+        
+        {% endif %}
+    {% endblock content %}
+</body>
+</html> 

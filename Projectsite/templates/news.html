@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <title>Новости</title>
+</head>
+
+<body>
+    {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mt-3 left">
+                    {% for post in object_list %}
+                    <div class="news-card">
+                        <div class="image-news">
+                            <img src="{{ post.image.url }}" alt="">
+                        </div>
+                        <div class="news-post">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ post.title }}</h2>
+                                <p class="card-text text-muted h6" id="card-body-data">{{ post.date }}</p>
+                                <p class="card-text" id="card-body-text">{{ post.body | slice:":200" }}</p>
+                                <div class="buttonNews">
+                                    <a href="{% url 'post_detail' post.pk %}" class="btn btn-dark" id="but-body-text-change"><span>Подробнее</span></a>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4 float-right">
+                    <div class="card my-4">
+                        <h5 class="card-header">Дополнительные действия</h5>
+                        <div class="card-body" id="cardbody-info">
+                            <a href="{% url 'index' %}" class="btn btn-dark">Перейти На Главную Страницу</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock content %}
+
+    <script>
+        (function () {
+	        
+        })();
+    </script>
+</body>
+</html>

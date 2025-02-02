@@ -1,0 +1,43 @@
+{% extends "admin/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        {% block extrastyle %}
+        <style>
+            #header {
+                background-color: rgb(240, 59, 59);
+                color: rgb(255, 255, 255);
+            }
+
+            a:visited {
+                color: rgb(180, 180, 180);
+            }
+
+            #header a:link, #header a:visited, #logout-form button {
+                color: white;
+            }
+
+            html[data-theme="light"], :root {
+                --primary: rgb(247, 83, 83); 
+                --link-fg: rgb(180, 180, 180);
+            }
+        </style>
+        {% endblock %}
+</head>
+<body>
+    {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+    
+    {% block branding %}
+    <h1 id="site_name">
+        <a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a>
+    </h1>
+    {% endblock %}
+    
+    {% block nav-global %}{% endblock %}
+</body>
+</html>
