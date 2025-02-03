@@ -16,42 +16,28 @@
 <body class="{% block body_class %}{% endblock %}">
     {% block content %}
 
-    <div class="index-image-background-block">
+    <!-- <div class="index-image-background-block">
         <img class="index-image" src="{% static 'Images/index-home.jpg' %}">
-    </div>
+    </div> -->
 
     <div class="main-index">
+        <p class="index-h-p-text">Целями деятельности Центров являются:</p>
         <div class="index-global-text">
-            <p class="index-h-p-text">Целями деятельности Центров являются:</p>
             <div class="index-text">
-                <p> — создание условий для внедрения на уровнях начального общего, основного общего и (или) среднего общего
-                    образования новых методов обучения и воспитания, образовательных технологий, обеспечивающих освоение
-                    обучающимися основных и дополнительных общеобразовательных программ цифрового, естественнонаучного,
-                    технического и гуманитарного профилей;</p>
-                    
-                <p> — обновление содержания и совершенствование методов обучения предметных областей «Технология»,
-                    «Математика и информатика», «Физическая культура и основы безопасности жизнедеятельности» «Естественные
-                    науки».</p>
+                <p> Cоздание условий для внедрения на уровнях начального общего, основного общего и (или) среднего
+                    общего образования новых методов обучения и воспитания, образовательных технологий, обеспечивающих
+                    освоение обучающимися основных и дополнительных общеобразовательных программ цифрового,
+                    естественнонаучного, технического и гуманитарного профилей;</p>
+                <p> Обновление содержания и совершенствование методов обучения предметных областей «Технология»,
+                    «Математика и информатика», «Физическая культура и основы безопасности жизнедеятельности»
+                    «Естественные науки».</p>
+            </div>
+            <div class="index-images-activities">
+                <img class="index-images-active-1" src="{% static 'Images/robot-tecncic.png' %}">
+                <img class="index-images-active-2" src="{% static 'Images/python.png' %}">
             </div>
         </div>
     </div>
-
-    <div class="index-images-activities">
-        <img class="index-images-active-1" src="{% static 'Images/robot-tecncic.png' %}">
-        <img class="index-images-active-2" src="{% static 'Images/python.png' %}">
-    </div>
-
-    <!-- <div class="history">
-        <div class="container">
-            <div class="history-holder">
-                    <div class="history-images">
-                        <img class="images-1" src="{% static 'Images/icon.png' %}">
-                        <img class="images-2" src="{% static 'Images/icon.png' %}">
-                        <img class="images-3" src="{% static 'Images/icon.png' %}">
-                    </div>
-            </div>
-        </div>
-    </div> -->
 
     {% endblock content %}
 
