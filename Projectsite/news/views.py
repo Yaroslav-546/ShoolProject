@@ -1,13 +1,8 @@
-from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import News
-from django.http import HttpResponse
-from django.template import loader
-
-from django.contrib.auth import login, authenticate
-# Подключение различных модулей некоторые необязательны забыл удалить
+# Подключение различных модулей
 
 # Пример модели
 class BlogListView(ListView):
