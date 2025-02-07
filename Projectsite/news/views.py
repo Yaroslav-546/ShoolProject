@@ -40,11 +40,34 @@ class ActivitiesView(ListView):
     model = News
     template_name = 'activities.html'
 
-class ActivePythonView(ListView):
+class ActiveProgrammingView(ListView):
     model = News
-    template_name = 'active-python.html'
+    template_name = 'active-programming.html'
 
 class ActiveRoboticsView(ListView):
     model = News
     template_name = 'active-robotics.html'
 
+class ActiveChessView(ListView):
+    model = News
+    template_name = 'active-chess.html'
+
+class ActiveGeoInformaticsView(ListView):
+    model = News
+    template_name = 'active-geoinformatics.html'
+
+class ActiveObjzView(ListView):
+    model = News
+    template_name = 'active-objz.html'
+
+class ActivePhotoVideoView(ListView):
+    model = News
+    template_name = 'active-photo-video.html'
+
+class ActiveVirtualRealityView(ListView):
+    model = News
+    template_name = 'active-virtualreality.html'
+
+class ActivePromDesignView(ListView):
+    model = News
+    template_name = 'active-promdesign.html'
