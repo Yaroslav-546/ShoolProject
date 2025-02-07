@@ -107,7 +107,7 @@
     width: 50%;
 }
 
-.tablichka {
+.active-table-container {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -115,6 +115,7 @@
     align-items: center;
     text-align: center;
 }
+
 
 #idss .bfak {
     margin-top: 10px !important;
@@ -265,17 +266,119 @@ input, textarea, select {
     margin-top: 10px;
 }
 
+#logo-image {
+    width: 2%;
+}
+
+.active-links {
+    color: rgb(240, 59, 59);
+    text-decoration: none;
+}
+
+#active-table {
+    width: 70%; 
+}
+
+.text-width {
+    width: 25%;
+}
+
+#active-table thead {
+    font-weight: bold;
+}
+
+#active-table td {
+    padding: 0.6rem 1rem; 
+    border-bottom: 1px solid #e8e9eb;
+}
+
+.image-post-detail {
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 800px) {
+    .text-width {
+        width: 100%;
+    }
+    #active-table thead {
+        display: none;
+    }
+
+    #active-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #e8e9eb;
+    }
+
+    #active-table td {
+        display: block;
+        text-align: right;
+    }  
+
+    #active-table td:before {
+        content: attr(aria-label);
+        float: left;
+        font-weight: bold;
+    }
+  }
+
 @media (max-width: 1200px) {
     .image-news>img{
         width: 350px;
     }
+}
 
-    /* .index-text>p {
-        width: 80%;
-    } */
+@media (max-width: 2000px) {
+    #logo-image {
+        width: 3%;
+    }
+}
 
-    .favicon-image {
+@media (max-width: 1500px) {
+    #logo-image {
+        width: 4%;
+    }
+}
+
+@media (max-width: 1100px) {
+    #logo-image {
         width: 5%;
+    }
+}
+
+@media (max-width: 850px) {
+    #logo-image {
+        width: 6%;
+    }
+}
+
+@media (max-width: 600px) {
+    #logo-image {
+        width: 10%;
+    }
+
+    #active-table {
+        width: 80%; 
+    }
+}
+
+@media (max-width: 400px) {
+    #logo-image {
+        width: 12%;
+    }
+
+    #active-table {
+        width: 90%; 
+    }
+}
+
+@media (max-width: 350px) {
+    #logo-image {
+        width: 15%;
+    }
+
+    #active-table {
+        width: 97%; 
     }
 }
 
@@ -290,14 +393,6 @@ input, textarea, select {
         text-overflow: ellipsis;
         max-width: 10ch;
     }
-    
-    /* .index-text>p {
-        width: 100%;
-    } */
-
-    .favicon-image {
-        width: 15%;
-    }
 }
 
 @media (max-width: 800px) {
@@ -310,14 +405,6 @@ input, textarea, select {
         white-space: nowrap;
         text-overflow: ellipsis;
         max-width: 12ch;
-    }
-    
-    /* .index-text>p {
-        width: 80%;
-    } */
-
-    .favicon-image {
-        width: 8%;
     }
 }
 

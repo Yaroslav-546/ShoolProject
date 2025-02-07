@@ -20,7 +20,7 @@
                     <div class="card-body-detail">
                         <h1>{% block title %} {{ news.title }} {% endblock title %}</h1>
                         <p class="text-muted"> {{ news.date }}</p>
-                        <img src="{{ news.image.url }}" alt="" width="100%">
+                        <img src="{{ news.image.url }}" class="image-post-detail" alt="Image" width="100%">
                         <p class="card-text" id="post-detail-text-image">{{ news.body }}</p>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
 
                         {% else %}
                             <div class="side-bar-buttons">
-                                <a href="{% url 'news' %}" class="btn btn-danger">Все новости</a>
+                                <a href="{% url 'news' %}" class="btn btn-dark">Все новости</a>
                             </div>
                         {% endif %}
                     </div>
