@@ -129,11 +129,13 @@
 
 .index-images-active-1 {
     width: 100%;
+    border-radius: 5px;
 }
 
 .index-images-active-2 {
     margin-top: 10px;
     width: 100%;
+    border-radius: 5px;
 }
 
 @media (max-width: 500px) {
