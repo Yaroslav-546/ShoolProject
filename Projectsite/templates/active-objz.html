@@ -15,7 +15,26 @@
 
 <body class="{% block body_class %}{% endblock %}">
     {% block content %}
-        <p>Test-text-objz</p>
+    <div class="main-index">
+        <h1 class="index-h-p-text">ОБЖ</h1>
+        <div class="index-container">
+            <div class="index-text">
+                <p> Программа «Школа безопасности» ориентирована на создание у обучающихся правильного
+                    представления о личной безопасности, на расширение знаний и приобретение практических
+                    навыков поведения при попадании в экстремальные и чрезвычайные ситуации. В
+                    содержание курса «Школа безопасности» входят аспекты различных знаний из предметов
+                    естественнонаучного цикла и ОБЖ, которые систематизирует знания в области
+                    безопасности жизнедеятельности, полученные учащимися в процессе обучения в школе, и
+                    способствует у них цельного представления в области безопасности жизнедеятельности
+                    личности.
+                    </p>
+            </div>
+            <div class="index-images-activities">
+                <img class="index-images-active-1" src="{% static 'Images/robot-tecncic-1.png' %}">
+                <img class="index-images-active-2" src="{% static 'Images/python.png' %}">
+            </div>
+        </div>
+    </div>
     {% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

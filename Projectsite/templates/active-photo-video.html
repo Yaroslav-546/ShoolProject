@@ -15,7 +15,27 @@
 
 <body class="{% block body_class %}{% endblock %}">
     {% block content %}
-        <p>Test-text-photo-video</p>
+    <div class="main-index">
+        <h1 class="index-h-p-text">Фото и Видеосъемка</h1>
+        <div class="index-container">
+            <div class="index-text">
+                <p> Дополнительная образовательная программа предназначена для овладения
+                    учащимися основами фотографии, кино- и видеосъемки, в конечном итоге –
+                    создания самостоятельных авторских фотографий и видеофильмов, постепенное
+                    обретение системы взглядов об искусстве кино и фотографии, выработке вкуса,
+                    умения отличать подлинное произведение искусства от фильма-однодневки.
+                    Объединение также является своеобразным центром общения: совместные
+                    прогулки и походы, участие в фотовыставках, просмотры и обсуждение лучших
+                    игровых и документальных фильмов способствуют сближению учащихся,
+                    установлению дружеских взаимоотношений между воспитанниками объединения. 
+                    </p>
+            </div>
+            <div class="index-images-activities">
+                <img class="index-images-active-1" src="{% static 'Images/photo-video-1.jpg' %}">
+                <img class="index-images-active-2" src="{% static 'Images/photo-video-2.jpg' %}">
+            </div>
+        </div>
+    </div>
     {% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

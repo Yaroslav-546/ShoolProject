@@ -15,7 +15,20 @@
 
 <body class="{% block body_class %}{% endblock %}">
     {% block content %}
-        <p>Test-text-promdesign</p>
+    <div class="main-index">
+        <h1 class="index-h-p-text">Промышленный Дизайн</h1>
+        <div class="index-container">
+            <div class="index-text">
+                <p> Кружок «Промышленный дизайн»  направлен на формирование начальных знаний и практических умений в
+                    области создания современных продуктов промышленного дизайна.
+                    </p>
+            </div>
+            <div class="index-images-activities">
+                <img class="index-images-active-1" src="{% static 'Images/robot-tecncic-1.png' %}">
+                <img class="index-images-active-2" src="{% static 'Images/python.png' %}">
+            </div>
+        </div>
+    </div>
     {% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

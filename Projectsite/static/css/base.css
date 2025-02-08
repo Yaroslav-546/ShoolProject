@@ -206,7 +206,7 @@ input, textarea, select {
 }
 
 .image-news>img{
-    width: 500px;
+    width: 100%;
     border-radius: 0.375rem;
 }
 
@@ -296,6 +296,7 @@ input, textarea, select {
     border-radius: 5px;
 }
 
+
 @media screen and (max-width: 800px) {
     .text-width {
         width: 100%;
@@ -323,8 +324,21 @@ input, textarea, select {
   }
 
 @media (max-width: 1200px) {
-    .image-news>img{
-        width: 350px;
+    .image-news{
+        width: 85%;
+    }
+
+    #card-body-text{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 20ch;
+    }
+}
+
+@media (max-width: 8000px) {
+    .image-news{
+        width: 85%;
     }
 }
 
@@ -332,17 +346,29 @@ input, textarea, select {
     #logo-image {
         width: 3%;
     }
+
+    .image-news{
+        width: 85%;
+    }
 }
 
 @media (max-width: 1500px) {
     #logo-image {
         width: 4%;
     }
+
+    .image-news{
+        width: 85%;
+    }
 }
 
 @media (max-width: 1100px) {
     #logo-image {
         width: 5%;
+    }
+
+    .image-news{
+        width: 85%;
     }
 }
 
@@ -382,12 +408,17 @@ input, textarea, select {
     }
 }
 
-@media (max-width: 450px) {
-    .image-news>img{
-        width: 200px;
+@media (max-width: 501px) {
+    .card-title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 5ch;
     }
+}
 
-    #card-body-text{
+@media (max-width: 701px) {
+    .card-title {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -395,10 +426,43 @@ input, textarea, select {
     }
 }
 
-@media (max-width: 800px) {
-    .image-news>img{
-        width: 250px;
+@media (max-width: 991px) {
+    .card-title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 10ch;
     }
+}
+
+@media (max-width: 767px) {
+    #cardbody-info {
+        text-align: center;
+    }
+}
+
+@media (max-width: 450px) {
+
+    #card-body-text{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 10ch;
+    }
+
+    .image-news{
+        width: 100%;
+    }
+
+    .card-title {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 5ch;
+    }
+}
+
+@media (max-width: 800px) {
 
     #card-body-text{
         overflow: hidden;
@@ -408,19 +472,20 @@ input, textarea, select {
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
     #card-body-text{
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         max-width: 12ch;
+    }
+
+    .image-news{
+        width: 90%;
     }
 }
 
 @media (max-width: 344px) {
-    .image-news>img{
-        width: 145px;
-    }
 
     .card-body>p{
         overflow: hidden;
@@ -459,10 +524,7 @@ input, textarea, select {
     }
 }
 
-@media (max-width: 424px) {
-    .image-news>img{
-        width: 180px;
-    }
+@media (max-width: 500px) {
 
     #card-body-text{
         overflow: hidden;
@@ -477,6 +539,10 @@ input, textarea, select {
         text-overflow: ellipsis;
         max-width: 12ch;
     }
+
+    .news-post{
+        width: 50%;
+    }
     
 }
 
@@ -487,10 +553,10 @@ input, textarea, select {
 }
 
 @media (max-width: 345px) {
-    .image-news>img{
-        width: 170px;
-    }
 
+    .news-post{
+        width: 50%;
+    }
     .card-body>p{
         overflow: hidden;
         white-space: nowrap;
@@ -520,6 +586,6 @@ input, textarea, select {
     }
 
     .buttonNews{
-        justify-content: left;
+        justify-content: right;
     }
 }

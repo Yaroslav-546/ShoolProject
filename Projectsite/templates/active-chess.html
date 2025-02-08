@@ -15,7 +15,27 @@
 
 <body class="{% block body_class %}{% endblock %}">
     {% block content %}
-        <p>Test-text-chess</p>
+    <div class="main-index">
+        <h1 class="index-h-p-text">Шахматы</h1>
+        <div class="index-container">
+            <div class="index-text">
+                <p> Целью данной кружковой работы является знакомство учащихся с основами игры в
+                    шахматы (правила игры, ходовые свойства каждой фигуры – правила перемещения
+                    фигур по шахматной доске), формирования интереса к данной игре, обеспечение
+                    прочного и сознательного овладения учащимися системы умений и навыков игры в
+                    шахматы, необходимых в повседневной жизни.</p>
+                <p>Актуальность программы обусловлена тем, что помогает учащимся воспитать в
+                    себе усидчивость, силу воли, характер, уверенность в себе, развить свои
+                    индивидуальные способности (внимание, логическое мышление, память), расширить
+                    кругозор, уметь находить выход в нестандартных ситуациях, дает возможность
+                    проявить себя.</p>
+            </div>
+            <div class="index-images-activities">
+                <img class="index-images-active-1" src="{% static 'Images/chess-1.png' %}">
+                <img class="index-images-active-2" src="{% static 'Images/chess-2.jpg' %}">
+            </div>
+        </div>
+    </div>
     {% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
