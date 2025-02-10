@@ -40,6 +40,14 @@
                             <a class="nav-link" aria-current="page" href="{% url 'activities' %}">Кружки</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'achievements' %}">Достижения</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'gallery' %}">Галерея</a>
+                        </li>
+
                         {% if user.is_superuser %}
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{% url 'post_new' %}">Добавить Новости</a>

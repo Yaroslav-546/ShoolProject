@@ -71,3 +71,11 @@ class ActiveVirtualRealityView(ListView):
 class ActivePromDesignView(ListView):
     model = News
     template_name = 'active-promdesign.html'
+
+class ActiveGalleryView(ListView):
+    model = News
+    template_name = 'gallery.html'
+
+class ActiveAchievementsView(ListView):
+    model = News
+    template_name = 'achievements.html'

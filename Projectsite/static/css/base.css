@@ -314,6 +314,19 @@ input, textarea, select {
     word-break: break-all;
 }
 
+.gallery-images-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    margin-left: 20%;
+}
+
+.gallery-next-text {
+    margin-top: 10px;
+}
+
 @media screen and (max-width: 800px) {
     .text-width {
         width: 100%;
@@ -441,6 +454,11 @@ input, textarea, select {
         white-space: nowrap;
         text-overflow: ellipsis;
         max-width: 10ch;
+    }
+
+    .gallery-images-container {
+        width: 90%;
+        margin-left: 5%;
     }
 }
 

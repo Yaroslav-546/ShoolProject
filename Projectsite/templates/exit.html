@@ -21,7 +21,10 @@
                                 <span class="bg-prcoltext">Вы уверены что хотите выйти?</span>
                             </div>
                             <div class="card-body">
-                                <a href="{% url 'logout' %}" class="btn btn-dark">Выйти</a>
+                                <form action="{% url 'logout'%}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-dark">Выйти</button>
+                                </form>
                             </div>
                         </div>
                     </div>
