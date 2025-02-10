@@ -212,7 +212,12 @@ input, textarea, select {
 
 .news-post {
     display: flex;
-    width: 350px;
+    width: 50%;
+}
+
+.text-color-text {
+    color: white;
+    height: 100%;
 }
 
 .news-card {
@@ -252,9 +257,10 @@ input, textarea, select {
 
 .buttonNews {
     align-self: flex-end;
+    justify-content: end;
     display: flex;
-    justify-content: flex-end;
 }
+
 
 .card-body-detail{
     flex: 1 1 auto;
@@ -296,6 +302,17 @@ input, textarea, select {
     border-radius: 5px;
 }
 
+#cardbody-info {
+    text-align: center;
+}
+
+.card-header {
+    text-align: center;
+}
+
+.card-title {
+    word-break: break-all;
+}
 
 @media screen and (max-width: 800px) {
     .text-width {
@@ -321,7 +338,7 @@ input, textarea, select {
         float: left;
         font-weight: bold;
     }
-  }
+}
 
 @media (max-width: 1200px) {
     .image-news{
@@ -342,6 +359,7 @@ input, textarea, select {
     }
 }
 
+
 @media (max-width: 2000px) {
     #logo-image {
         width: 3%;
@@ -358,7 +376,7 @@ input, textarea, select {
     }
 
     .image-news{
-        width: 85%;
+        width: 80%;
     }
 }
 
