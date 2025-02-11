@@ -23,7 +23,9 @@
                                 <form action="" method="post">
                                     {% csrf_token %}
                                     <p>Вы уверены что хотите удалить новость "{{ news.title }}"?</p>
-                                    <input type="submit" value="Удалить" class="btn btn-dark" />
+                                    <div class="news-delete-button">
+                                        <input type="submit" value="Удалить" class="btn btn-dark" />
+                                    </div>
                                 </form>
                             </div>
                         </div>

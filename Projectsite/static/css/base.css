@@ -15,7 +15,7 @@
 }
 
 .side-bar-buttons>a{
-    width: 150px;
+    width: 155px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -310,9 +310,9 @@ input, textarea, select {
     text-align: center;
 }
 
-.card-title {
-    word-break: break-all;
-}
+/* .card-title {
+    здесь был перенос по буквам
+} */
 
 .gallery-images-container {
     text-align: center;
@@ -327,6 +327,25 @@ input, textarea, select {
     margin-top: 10px;
 }
 
+.col-md-8-news {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+.news-delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.news-delete-button>input {
+    width: 120px;
+}
+
+.active-links:hover {
+    color: red;
+}
 @media screen and (max-width: 800px) {
     .text-width {
         width: 100%;
@@ -353,7 +372,7 @@ input, textarea, select {
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
     .image-news{
         width: 85%;
     }
@@ -362,7 +381,7 @@ input, textarea, select {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 20ch;
+        max-width: 30ch;
     }
 }
 
@@ -477,6 +496,28 @@ input, textarea, select {
     }
 }
 
+@media (min-width: 515px) {
+    .buttonNews {
+        position: absolute;
+        bottom: 9px;
+        right: 9px;
+    }
+}
+
+@media (min-width: 700px) {
+    .buttonNews {
+        position: absolute;
+        bottom: 18px;
+        right: 18px;
+    }
+}
+
+@media (min-width: 576px) {
+    .container, .container-sm {
+        max-width: 100% !important;
+    }
+}
+
 @media (max-width: 450px) {
 
     #card-body-text{
@@ -494,7 +535,7 @@ input, textarea, select {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 5ch;
+        max-width: 7ch;
     }
 }
 
@@ -513,7 +554,7 @@ input, textarea, select {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 12ch;
+        max-width: 15ch;
     }
 
     .image-news{
@@ -566,7 +607,7 @@ input, textarea, select {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 7ch;
+        max-width: 10ch;
     }
 
     .card-body>p{
