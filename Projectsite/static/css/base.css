@@ -140,7 +140,7 @@ input, textarea, select {
 }
 
 .butn {
-    width: 35% !important;
+    margin-top: 10px;
 }
 
 #mn-navbar{
@@ -363,7 +363,7 @@ input, textarea, select {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
+}
 
 @media screen and (max-width: 800px) {
     .text-width {

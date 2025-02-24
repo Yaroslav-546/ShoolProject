@@ -1,7 +1,7 @@
 from django.urls import path
 # from . import views
 
-from .views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView, HomeView, ExitView, ActivitiesView, ActiveProgrammingView, ActiveRoboticsView, ActiveChessView, ActiveGeoInformaticsView, ActiveObjzView, ActivePhotoVideoView, ActiveVirtualRealityView, ActivePromDesignView, ActiveGalleryView, ActiveAchievementsView
+from .views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView, HomeView, ExitView, ActivitiesView, ActiveProgrammingView, ActiveRoboticsView, ActiveChessView, ActiveGeoInformaticsView, ActiveObjzView, ActivePhotoVideoView, ActiveVirtualRealityView, ActivePromDesignView, ActiveGalleryView, ActiveAchievementsView, Error403
 
 #url ссылки и каталоги в сайте для того чтобы отображались файлы
 urlpatterns = [
@@ -24,4 +24,5 @@ urlpatterns = [
     path('activities/active-promdesign', ActivePromDesignView.as_view(), name='active-promdesign'),
     path('gallery/', ActiveGalleryView.as_view(), name='gallery'),
     path('achievements/', ActiveAchievementsView.as_view(), name='achievements'),
+    path('error403', Error403.as_view(), name='error403')
 ]

@@ -15,11 +15,20 @@
     <div class="input">
         <form method="post">
             <h2>Вход</h2>
-            <div class="regisrtat">
-                {% csrf_token %}
-                {{ form.as_p }}
-
-                <button type="submit" class="btn btn-dark butn">Войти</button>
+            <div class="container">
+                <div class="row">
+                    <div class="form-size">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <div class="card-body">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <button type="submit" class="btn btn-dark butn">Войти</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
         {% endblock content %}
