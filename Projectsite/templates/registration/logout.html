@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/exit.css' %}">
+    <title>Подтверждение выхода</title>
+</head>
+<body>
+    <div class="logout-container">
+        <h2>Вы уверены, что хотите выйти?</h2>
+        <div class="button-group">
+            <a href="{% url 'index' %}" class="btn btn-cancel">Остаться</a>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-logout">Выйти</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

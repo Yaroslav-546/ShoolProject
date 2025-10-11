@@ -12,27 +12,30 @@
 
 <body>
     {% block content %}
-        <div class="container">
-            <div class="news-cards">
-                {% for post in object_list %}
-                <div class="news-card">
-                    <div class="image-news-container">
-                        <img src="{{ post.image.url }}" alt="Image">
-                    </div>
-                    <div class="news-text-info">
-                        <div class="card-body">
-                            <h2 class="card-title">{{ post.title|truncatechars:100 }}</h2>
-                            <p class="card-text text-muted h6" id="card-body-data">{{ post.date }}</p>
-                            <p class="card-text" id="card-body-text">{{ post.body|truncatechars:1000 }}</p>
+        <div class="animation-card">
+            <div class="container" id="container-news">
+                <div class="news-cards">
+                    {% for post in object_list %}
+                    <div class="news-card">
+                        <div class="image-news-container">
+                            <a data-fancybox="gallery" data-src="{{ post.image.url }}"><img class="news-image" src="{{ post.image.url }}" alt="Image"></a>
                         </div>
-                        <div class="news-button">
-                            <a href="{% url 'post_detail' post.pk %}" class="btn btn-dark" id="but-body-text-change"><span>Подробнее</span></a>
+                        <div class="news-text-info">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ post.title|truncatechars:100 }}</h2>
+                                <p class="card-text text-muted h6" id="card-body-data">{{ post.date }}</p>
+                                <p class="card-text" id="card-body-text">{{ post.body|truncatechars:1000 }}</p>
+                            </div>
+                            <div class="news-button">
+                                <a href="{% url 'post_detail' post.pk %}" class="btn btn-dark" id="but-body-text-change"><span>Подробнее</span></a>
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
     {% endblock content %}
 </body>
 </html>
+

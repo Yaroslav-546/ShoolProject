@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block title %}Личный кабинет{% endblock title %}
+
+{% load static %}
+{% block content %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <title>Личный кабинет</title>
+</head>
+<body>
+    <div class="animation-card">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <a data-fancybox="gallery" data-src="{{ user.avatar.url }}"><img alt="Аватар" class="avatar" onerror="this.src='/media/users/default_avatar.svg'" src="{{ user.avatar.url }}"></a>
+                    <div class="user-details">
+                        <h1>{{ user.get_full_name|default:user.username }}</h1>
+                        <p>@{{ user.username }}</p>
+                    </div>
+                </div>
+                <div class="user-stats">
+                    <div class="stat-number-text">Участник с</div>
+                    <div>{{ user.date_joined|date:"d.m.Y" }}</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>Личная информация</h3>
+                    <div class="profile-info">
+                        <div class="info-item">
+                            <span class="info-label">ФИО:</span>
+                            <span class="info-value">{{ user.get_full_name|default:"Не указано" }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Логин:</span>
+                            <span class="info-value">@{{ user.username }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value">{{ user.email|default:"Не указан" }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Дата регистрации:</span>
+                            <span class="info-value">{{ user.date_joined|date:"d.m.Y" }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Последний вход:</span>
+                            <span class="info-value">{{ user.last_login|date:"d.m.Y H:i"|default:"Еще не входил" }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Быстрые действия</h3>
+                    <div class="quick-actions">
+                        <a href="{% url 'profile_edit' %}" class="btn btn-secondary">Редактировать профиль</a>
+                        <a href="{% url 'profile' %}" class="btn btn-secondary">Просмотреть профиль</a>
+                        <a href="{% url 'sign_up_active' %}" class="btn btn-secondary">Запись на кружки</a>
+                        <a href="{% url 'my_registrations' %}" class="btn btn-secondary">Мои Кружки</a>
+                        <a href="{% url 'logout_page' %}" class="btn btn btn-danger">Выйти</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Статистика аккаунта</h3>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">{{ user.date_joined|timesince }}</div>
+                        <div>В системе</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">
+                            {% if user.last_login %}
+                            {{ user.last_login|timesince }}
+                            {% else %}
+                            Ни разу
+                            {% endif %}
+                        </div>
+                        <div>Последний вход</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+</html>

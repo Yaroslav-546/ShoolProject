@@ -17,6 +17,7 @@ body, html {
     font-weight: 600;
     font-size: 8rem;
     line-height: 1;
+    animation: rotate 4s linear forwards infinite;
 }
 
 .error403-zapret-text {
@@ -89,6 +90,12 @@ body, html {
     color: rgb(80, 47, 47);
     background-color: rgb(254, 230, 223);
     box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgb(80, 46, 46);
+}
+
+@keyframes rotate {
+    0% { transform: rotateY(0deg) translateZ(0px); }
+    50% { transform: rotateY(180deg) translateZ(0px); }
+    100% { transform: rotateY(360deg) translateZ(0px); }
 }
 
 @media (max-width: 767px) {

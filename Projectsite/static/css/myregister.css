@@ -1,0 +1,42 @@
+.container-custom {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+}
+.registration-card {
+    border-left: 5px solid #db3434;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+.registration-card:hover {
+    transform: translateX(5px);
+}
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: #6c757d;
+}
+
+.btn-custom-2 {
+    margin-top: 10px;
+    background: #6c757d;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.3s;
+}
+
+.btn-custom-2:hover {
+    background: #6c757d;
+    transform: translateY(-2px);
+}
+
+.btn-custom-2:hover>span {
+    color: white;
+}
+
+.container-btn {
+    display: flex;
+    justify-content: center;
+}

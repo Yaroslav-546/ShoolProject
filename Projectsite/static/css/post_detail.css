@@ -1,0 +1,249 @@
+.news-detail-container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.news-detail-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.news-header {
+    padding: 40px 40px 20px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.news-title {
+    color: #2d3748;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.news-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #718096;
+    font-size: 1rem;
+}
+
+.news-date {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.news-date::before {
+    content: "📅";
+    font-size: 1.1rem;
+}
+
+.news-content {
+    padding: 30px 40px;
+}
+
+.news-image-container {
+    margin-bottom: 30px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.news-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.news-image:hover {
+    transform: scale(1.02);
+}
+
+.news-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4a5568;
+    text-align: justify;
+}
+
+.news-body p {
+    margin-bottom: 1.5rem;
+}
+
+.news-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* Сайдбар стили */
+.sidebar-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.sidebar-header {
+    background: linear-gradient(135deg, #ea6666 0%, #e93f3f 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.sidebar-header h5 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.sidebar-body {
+    padding: 25px;
+}
+
+.side-bar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-custom {
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1rem;
+}
+
+.btn-all-news {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-all-news:hover {
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-edit {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-edit:hover {
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-delete {
+    background: #ff4d5f;
+    color: white;
+}
+
+.btn-delete:hover {
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-dark-custom {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-dark-custom:hover {
+    transform: translateY(-2px);
+    color: white;
+    text-decoration: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .news-detail-container {
+        padding: 15px;
+    }
+
+    .news-header {
+        padding: 25px 20px 15px;
+    }
+
+    .news-title {
+        font-size: 2rem;
+    }
+
+    .news-content {
+        padding: 20px;
+    }
+
+    .news-body {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .sidebar-body {
+        padding: 20px;
+    }
+
+    .btn-custom {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .news-title {
+        font-size: 1.7rem;
+    }
+
+    .news-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* Дополнительные стили для улучшения читаемости */
+.news-body h2, .news-body h3, .news-body h4 {
+    color: #2d3748;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.news-body ul, .news-body ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.news-body li {
+    margin-bottom: 0.5rem;
+}
+
+.news-body blockquote {
+    border-left: 4px solid #667eea;
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #718096;
+}
+
+.news-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+}

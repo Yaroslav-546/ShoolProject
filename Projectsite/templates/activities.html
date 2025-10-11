@@ -12,7 +12,8 @@
 </head>
 <body>
     {% block content %}
-    <div class="active-table-container">
+    <div class="animation-card">
+        <div class="active-table-container">
         <h2>Кружки</h2>
         <table id="active-table" class="table table-bordered">
             <thead>
@@ -81,7 +82,7 @@
                     <td aria-label="Кабинет">18</td>
                     <td aria-label="Преподаватель">Бекетова Т.И.</td>
                 </tr>
-                
+
                 <tr>
                     <td aria-label="Название" class="text-width"><a class="active-links" href="{% url 'active-chess' %}">Шахматы</a></td>
                     <td aria-label="Классы">3-7</td>
@@ -98,13 +99,8 @@
                     <td aria-label="Преподаватель">Дунаев А.П.</td>
                 </tr>
         </table>
-        {% if user.is_superuser %}
-        {% else %}
-            <a href="{% url 'profile' %}" class="btn btn-dark">Записаться</a>
-        {% endif %}
     </div>
-
-
+    </div>
     {% endblock content %}
 </body>
 </html>

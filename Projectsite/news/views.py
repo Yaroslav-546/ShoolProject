@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from .models import News
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django import forms
 # Подключение различных модулей
 
 # Пример модели
@@ -24,7 +25,7 @@ class RedirectPermissionRequiredMixin(PermissionRequiredMixin):
 class BlogCreateView(RedirectPermissionRequiredMixin, CreateView):
     model = News
     template_name = 'post_new.html'
-    fields = ['title', 'author', 'body', 'image']
+    fields = ['title', 'body', 'image']
     permission_required = ('auth.add_user')
 
 class BlogUpdateView(RedirectPermissionRequiredMixin, UpdateView):
@@ -32,6 +33,15 @@ class BlogUpdateView(RedirectPermissionRequiredMixin, UpdateView):
     template_name = "post_edit.html"
     fields = ["title", "body", 'image']
     permission_required = ('auth.change_user')
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # Меняем виджет для поля image
+        form.fields['image'].widget = forms.FileInput(attrs={'class': 'file-input', 'accept': 'image/*'})
+        # Добавляем классы к другим полям
+        form.fields['title'].widget.attrs.update({'class': 'form-input'})
+        form.fields['body'].widget.attrs.update({'class': 'form-textarea'})
+        return form
 
 class BlogDeleteView(RedirectPermissionRequiredMixin, DeleteView):
     model = News
