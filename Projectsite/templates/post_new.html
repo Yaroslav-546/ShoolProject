@@ -8,29 +8,121 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    <title>Новости</title>
+    {% block content %}
+    <link href="{% static 'css/news_add.css' %}" rel="stylesheet">
+    <title>Создание новости</title>
 </head>
 <body>
-    {% block content %}
     {% if user.is_superuser %}
-    <div class="new-news">
-        <h2>Создать Новость</h2>
-        <div class="container">
-            <div class="row">
-                <div class="form-size">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <form action="" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <input type="submit" class="btn btn-dark" value="Сохранить" />
-                            </form>
-                        </div>
-                    </div>
+    <div class="animation-card">
+        <div class="news-container">
+            <div class="news-create-container">
+                <div class="news-header">
+                    <h1>Создание новости</h1>
+                    <p>Заполните форму ниже, чтобы опубликовать новую новость</p>
                 </div>
+
+                <form method="post" enctype="multipart/form-data" class="news-form">
+                    {% csrf_token %}
+
+                    <!-- Поле заголовка -->
+                    <div class="form-group">
+                        <label for="id_title" class="form-label">Заголовок новости</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                        <div class="errorlist">{{ form.title.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Поле текста новости -->
+                    <div class="form-group">
+                        <label for="id_body" class="form-label">Текст новости</label>
+                        {{ form.body }}
+                        {% if form.body.errors %}
+                        <div class="errorlist">{{ form.body.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Поле изображения -->
+                    <div class="form-group">
+                        <label for="id_image" class="form-label">Изображение</label>
+                        <div class="file-upload-wrapper">
+                            {{ form.image }}
+                            <label for="id_image" class="file-upload-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                    <circle cx="12" cy="13" r="2"></circle>
+                                    <path d="M20 17l-4.5-4.5L11 18"></path>
+                                </svg>
+                                Выберите изображение
+                            </label>
+                        </div>
+                        <div class="image-preview" id="imagePreview">
+                            <img src="" alt="Предпросмотр изображения">
+                        </div>
+                        {% if form.image.errors %}
+                        <div class="errorlist">{{ form.image.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                            <polyline points="7 3 7 8 15 8"></polyline>
+                        </svg>
+                        Опубликовать новость
+                    </button>
+                </form>
             </div>
         </div>
     </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageInput = document.getElementById('id_image');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImage = imagePreview.querySelector('img');
+
+            if (imageInput) {
+                imageInput.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result;
+                            imagePreview.style.display = 'block';
+                        }
+
+                        reader.readAsDataURL(this.files[0]);
+                    } else {
+                        imagePreview.style.display = 'none';
+                    }
+                });
+            }
+
+            const titleInput = document.getElementById('id_title');
+            const bodyInput = document.getElementById('id_body');
+
+            if (titleInput) {
+                titleInput.className = 'form-input';
+            }
+
+            if (bodyInput) {
+                bodyInput.className = 'form-textarea';
+            }
+
+            const errorFields = document.querySelectorAll('.errorlist');
+            errorFields.forEach(errorField => {
+                const input = errorField.previousElementSibling;
+                if (input && (input.classList.contains('form-input') || input.classList.contains('form-textarea'))) {
+                    input.classList.add('error');
+                }
+            });
+        });
+    </script>
     {% else %}
         <div class="dlete">
             <div>
@@ -38,7 +130,7 @@
                 <a href="{% url 'index' %}" class="btn btn-dark"> перейти на главную страницу..</a>
             </div>
         </div>
-        
+
     {% endif %}
     {% endblock content %}
 </body>

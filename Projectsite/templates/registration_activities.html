@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на кружок</title>
+    <link rel="stylesheet" href="{% static 'css/signupactive.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
+</head>
+<body>
+    <div class="container">
+        <div class="registration-container">
+            <div class="registration-header">
+                <h2>🎯 Запись на кружки</h2>
+                <p class="text-muted">Выберите кружок для записи</p>
+            </div>
+
+            {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-custom alert-dismissible fade show {% if 'уже записаны' in message.message %}duplicate-warning{% elif 'успешно' in message.message %}success-alert{% endif %}" role="alert">
+                            <div class="d-flex align-items-center">
+                                {% if message.tags == 'error' or 'уже записаны' in message.message %}
+                                    <span class="me-2">❌</span>
+                                {% elif message.tags == 'success' %}
+                                    <span class="me-2">✅</span>
+                                {% elif message.tags == 'warning' %}
+                                    <span class="me-2">⚠️</span>
+                                {% endif %}
+                                <div>{{ message }}</div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-card">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Ваше имя</label>
+                        <input type="text" class="form-control" value="{{ user.get_full_name }}" readonly>
+                        <div class="form-text">Данные берутся из вашего профиля</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.active.id_for_label }}" class="form-label">{{ form.active.label }}</label>
+                        {{ form.active }}
+                        {% if form.active.errors %}
+                            <div class="text-danger">{{ form.active.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="{{ form.Class.id_for_label }}" class="form-label">{{ form.Class.label }}</label>
+                        {{ form.Class }}
+                        {% if form.Class.errors %}
+                            <div class="text-danger">{{ form.Class.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-custom">📝 <span>Записаться на кружок</span></button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-custom-2"><span>Отмена</span></a>
+                    </div>
+                </form>
+            </div>
+
+            {% if existing_registrations %}
+            <div class="registrations-list">
+                <h5>✅ Ваши текущие записи:</h5>
+                {% for registration in existing_registrations %}
+                    <div class="registration-item">
+                        <strong>{{ registration.active }}</strong>
+                        <br>
+                        <small class="text-muted">Класс: {{ registration.Class }} | Запись: {{ registration.created_at|date:"d.m.Y" }}</small>
+                    </div>
+                {% endfor %}
+                <div class="text-center mt-3">
+                    <a href="{% url 'my_registrations' %}" class="btn btn-outline-primary btn-sm">📋<span>Все мои записи</span></a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

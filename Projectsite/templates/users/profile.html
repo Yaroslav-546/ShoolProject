@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.css"
+    />
+    <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <a data-fancybox="gallery" data-src="{{ user_profile.avatar.url }}"><img src="{{ user_profile.avatar.url }}" alt="Аватар" class="avatar" onerror="this.src='/media/users/default_avatar.png'"></a>
+            <h1>{{ user_profile.get_full_name|default:user_profile.username }}</h1>
+            <p>@{{ user_profile.username }}</p>
+        </div>
+        
+        <div class="profile-info">
+            <div class="info-item">
+                <span class="info-label">Фамилия:</span>
+                <span class="info-value">{{ user_profile.last_name|default:"Не указана" }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Имя:</span>
+                <span class="info-value">{{ user_profile.first_name|default:"Не указано" }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Отчество:</span>
+                <span class="info-value">{{ user_profile.patronymic|default:"Не указано" }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Логин:</span>
+                <span class="info-value">@{{ user_profile.username }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{ user_profile.email|default:"Не указан" }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Дата регистрации:</span>
+                <span class="info-value">{{ user_profile.date_joined|date:"d.m.Y" }}</span>
+            </div>
+        </div>
+        
+        {% if user == user_profile %}
+        <div style="text-align: center;">
+            <a href="{% url 'profile_edit' %}" class="btn">Редактировать профиль</a>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">В личный кабинет</a>
+        </div>
+        {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js"></script>
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            Carousel: {
+                Zoomable: {
+                Panzoom: {
+                    clickAction: "iterateZoom",
+                    maxScale: 2,
+                },
+            },
+        },
+    });
+    </script>
+</body>
+</html>

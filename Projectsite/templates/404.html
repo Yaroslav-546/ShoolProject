@@ -1,20 +1,37 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% block content %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/404.css' %}" rel="stylesheet">
+    <link href="{% static 'css/errors.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
+    <title>Не Найдено</title>
 </head>
 
-<body>
-    <div class="over"></div>
-    <div class="e404">404</div>
-    <div class="notfound">страница не найдена<br>
-        <a href="{% url 'index' %}"> перейти на главную страницу..</a>
+<body class="{% block body_class %}error403-main-bg-color{% endblock %}">
+    {% block content %}
+    <div class="error-403-container">
+        <div class="error-403-container-main-text">
+            <span class="error403-403-text" id="error403-text-color">404</span>
+            <span class="error403-zapret-text" id="error403-text-color">Не Найдено</span></h2>
+        </div>
+        <div class="error-403-container-p-text">
+            <span class="error403-p-text" id="error403-text-color">Запрошенный ресурс не существует на сервере или был
+                перемещен в другое место. Пожалуйста, проверьте адрес, который вы пытались открыть.</span>
+            <span class="error403-p-text" id="error403-text-color">Приносим извинения за причиненные неудобства.</span>
+        </div>
+
+        <a href="{% url 'index' %}" class="return-button">Вернуться на главную страницу</a>
+    </div>
+    {% endblock content %}
+
+    <script>
+        const windowInnerHeight = window.innerHeight;
+        document.getElementsByClassName('error-403-container')[0].style.height = ""+window.innerHeight + "px";
+    </script>
 </body>
 
 </html>
-{% endblock %}

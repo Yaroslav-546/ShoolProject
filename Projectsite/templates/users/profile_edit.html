@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/profile-edit.css' %}">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.css"
+    />
+    <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
+    <title>Редактирование профиля</title>
+</head>
+<body>
+    <div class="edit-container">
+        <h2>Редактирование профиля</h2>
+        
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_avatar" class="form-label form-label-center">Текущий аватар:</label>
+                
+                {% if user.avatar %}
+                <div class="avatar-preview-container">
+                    <a data-fancybox="gallery" data-src="{{ user.avatar.url }}">
+                        <img src="{{ user.avatar.url }}" alt="Текущий аватар" class="avatar-preview" onerror="this.src='/media/users/default_avatar.png'">
+                    </a>
+                </div>
+                {% endif %}
+                
+                <label for="id_avatar" class="form-label form-label-center">Новый аватар:</label>
+                
+                <div class="file-upload-wrapper">
+                    {{ form.avatar }}
+                    <label for="id_avatar" class="file-upload-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10,9 9,9 8,9"></polyline>
+                        </svg>
+                        Выбрать файл
+                </div>
+                
+                {% if form.avatar.errors %}
+                <div class="errorlist">{{ form.avatar.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_first_name">Имя:</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                <div class="errorlist">{{ form.first_name.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_last_name">Фамилия:</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                <div class="errorlist">{{ form.last_name.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="id_patronymic">Отчество:</label>
+                {{ form.patronymic }}
+                {% if form.patronymic.errors %}
+                <div class="errorlist">{{ form.patronymic.errors }}</div>
+                {% endif %}
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="submit" class="btn">Сохранить изменения</button>
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary">Отмена</a>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('id_avatar').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const result = e.target.result;
+                    
+                    let preview = document.querySelector('.avatar-preview');
+                    if (!preview) {
+                        preview = document.createElement('img');
+                        preview.className = 'avatar-preview';
+                        preview.alt = 'Текущий аватар';
+                        preview.onerror = "this.src='/media/users/default_avatar.png'";
+                        
+                        const link = document.createElement('a');
+                        link.setAttribute('data-fancybox', 'gallery');
+                        link.setAttribute('data-src', result);
+                        link.appendChild(preview);
+                        
+                        const firstLabel = document.querySelector('.form-group label[for="id_avatar"]');
+                        firstLabel.after(link);
+                    } else {
+                        preview.src = result;
+                        
+                        const fancyboxLink = preview.closest('a[data-fancybox]');
+                        if (fancyboxLink) {
+                            fancyboxLink.setAttribute('data-src', result);
+                        }
+                    }
+                    
+                    preview.src = result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('id_avatar');
+        const fileButton = document.querySelector('.file-upload-button');
+        
+        if (fileInput && fileButton) {
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    // Можно добавить отображение имени файла в кнопке
+                    const originalText = fileButton.innerHTML;
+                    fileButton.innerHTML = `<svg...></svg> Выбран: ${this.files[0].name}`;
+                    
+                    // Или изменить стиль кнопки при выборе файла
+                    fileButton.style.background = '#10b981';
+                }
+            });
+        }
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js"></script>
+
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            Carousel: {
+                Zoomable: {
+                Panzoom: {
+                    clickAction: "iterateZoom",
+                    maxScale: 2,
+                },
+            },
+        },
+    });
+    </script>
+</body>
+</html>
