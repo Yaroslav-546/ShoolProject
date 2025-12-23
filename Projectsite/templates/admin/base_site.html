@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         {% block extrastyle %}
+        <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
         <style>
             #header {
                 background-color: rgb(240, 59, 59);
@@ -23,7 +24,7 @@
             }
 
             html[data-theme="light"], :root {
-                --primary: rgb(247, 83, 83); 
+                --primary: rgb(247, 83, 83);
                 --link-fg: rgb(180, 180, 180);
             }
 
@@ -35,18 +36,22 @@
                 background: rgb(247, 83, 83) !important;
                 color: white;
             }
+
+            .theme-toggle svg.theme-icon-when-auto, .theme-toggle svg.theme-icon-when-dark, .theme-toggle svg.theme-icon-when-light {
+                color: rgb(240, 59, 59) !important;
+            }
         </style>
         {% endblock %}
 </head>
 <body>
     {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
-    
+
     {% block branding %}
     <h1 id="site_name">
         <a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a>
     </h1>
     {% endblock %}
-    
+
     {% block nav-global %}{% endblock %}
 </body>
 </html>

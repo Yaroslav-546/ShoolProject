@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.css"
@@ -93,10 +94,62 @@
         </nav>
     </header>
     {% endblock header %}
-    {% block content %}
 
-    {% endblock content %}
+    <main class="main-content">
+        <div class="container content-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container-fluid px-4 py-4">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5 class="mb-3 text-dark">Точка Роста МБОУ СОШ N2 с.Новобелокатай</h5>
+                    <p class="text-muted">Образовательная платформа для школьников. Записывайтесь на кружки и развивайте свои таланты</p>
+                </div>
 
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-3 text-dark">Навигация</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{% url 'index' %}" class="text-dark hover-primary">Главная</a></li>
+                        <li class="mb-2"><a href="{% url 'dashboard' %}" class="text-dark hover-primary">Личный кабинет</a></li>
+                        <li class="mb-2"><a href="{% url 'index' %}" class="text-dark hover-primary">О нас</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-3 text-dark">Социальные сети</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="https://vk.com/shcola2nb" class="text-dark hover-primary">
+                                <i class="fab fa-vk me-2"></i>ВКонтакте
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-3 text-dark">Контакты</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2 text-muted">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Адрес 452580, Республика Башкортостан, Белокатайский район , с.Новобелокатай,ул. Ленина, 24
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="my-4 border-secondary">
+
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">&copy; 2025. Все права защищены.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% block extra_js %}{% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
@@ -125,100 +178,99 @@
     <canvas id="windSnow"></canvas>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const canvas = document.getElementById('windSnow');
-        const ctx = canvas.getContext('2d');
-
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-
-        // Настройки снега
-        const snowflakes = [];
-        const maxSnowflakes = 200;
-        let windForce = 0;
-        let windDirection = 1;
-
-        class SnowParticle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * -height;
-                this.size = Math.random() * 3 + 1;
-                this.speed = Math.random() * 1 + 0.5;
-                this.wind = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.3;
-                this.swing = Math.random() * Math.PI * 2;
-                this.swingSpeed = Math.random() * 0.05 + 0.02;
-            }
-
-            update() {
-                this.y += this.speed;
-                this.x += this.wind + windForce * windDirection;
-                this.swing += this.swingSpeed;
-                this.x += Math.sin(this.swing) * 0.5;
-
-                if (this.y > height) {
-                    this.reset();
-                    this.y = -10;
-                }
-
-                if (this.x > width + 10) {
-                    this.x = -10;
-                } else if (this.x < -10) {
-                    this.x = width + 10;
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < maxSnowflakes; i++) {
-            snowflakes.push(new SnowParticle());
-        }
-
-        function updateWind() {
-            windForce = (Math.random() - 0.5) * 0.3;
-            if (Math.random() > 0.98) {
-                windDirection *= -1;
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            updateWind();
-
-            snowflakes.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', function() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        });
-
         const currentMonth = new Date().getMonth();
         if (currentMonth === 11 || currentMonth === 0 || currentMonth === 1) {
+            const canvas = document.getElementById('windSnow');
+            const ctx = canvas.getContext('2d');
+
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            // Настройки снега
+            const snowflakes = [];
+            const maxSnowflakes = 200;
+            let windForce = 0;
+            let windDirection = 1;
+
+            class SnowParticle {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * -height;
+                    this.size = Math.random() * 3 + 1;
+                    this.speed = Math.random() * 1 + 0.5;
+                    this.wind = (Math.random() - 0.5) * 0.5;
+                    this.opacity = Math.random() * 0.5 + 0.3;
+                    this.swing = Math.random() * Math.PI * 2;
+                    this.swingSpeed = Math.random() * 0.05 + 0.02;
+                }
+
+                update() {
+                    this.y += this.speed;
+                    this.x += this.wind + windForce * windDirection;
+                    this.swing += this.swingSpeed;
+                    this.x += Math.sin(this.swing) * 0.5;
+
+                    if (this.y > height) {
+                        this.reset();
+                        this.y = -10;
+                    }
+
+                    if (this.x > width + 10) {
+                        this.x = -10;
+                    } else if (this.x < -10) {
+                        this.x = width + 10;
+                    }
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < maxSnowflakes; i++) {
+                snowflakes.push(new SnowParticle());
+            }
+
+            function updateWind() {
+                windForce = (Math.random() - 0.5) * 0.3;
+                if (Math.random() > 0.98) {
+                    windDirection *= -1;
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+
+                updateWind();
+
+                snowflakes.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', function() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            });
+
             animate();
         }
     });
     </script>
-
 </body>
 
 </html>

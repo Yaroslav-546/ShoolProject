@@ -20,7 +20,7 @@
             <h1>{{ user_profile.get_full_name|default:user_profile.username }}</h1>
             <p>@{{ user_profile.username }}</p>
         </div>
-        
+
         <div class="profile-info">
             <div class="info-item">
                 <span class="info-label">Фамилия:</span>
@@ -35,6 +35,10 @@
                 <span class="info-value">{{ user_profile.patronymic|default:"Не указано" }}</span>
             </div>
             <div class="info-item">
+                <span class="info-label">Класс:</span>
+                <span class="info-value">{{ user_profile.grade|default:"Не указано" }}</span>
+            </div>
+            <div class="info-item">
                 <span class="info-label">Логин:</span>
                 <span class="info-value">@{{ user_profile.username }}</span>
             </div>
@@ -47,7 +51,7 @@
                 <span class="info-value">{{ user_profile.date_joined|date:"d.m.Y" }}</span>
             </div>
         </div>
-        
+
         {% if user == user_profile %}
         <div style="text-align: center;">
             <a href="{% url 'profile_edit' %}" class="btn">Редактировать профиль</a>

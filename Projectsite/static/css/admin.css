@@ -12,5 +12,5 @@ a:visited {
 }
 
 html[data-theme="light"], :root {
-    --primary: rgb(240, 59, 59); 
+    --primary: rgb(240, 59, 59);
 }

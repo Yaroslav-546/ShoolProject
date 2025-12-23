@@ -11,12 +11,22 @@ class ProfileForm(forms.ModelForm):
         }
         widgets = {
             'active': forms.Select(attrs={'class': 'form-control form-select'}),
-            'Class': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Например, 10А'}),
+            'Class': forms.TextInput(attrs={
+                'class': 'form-control', 
+                'placeholder': 'Например, 10А',
+                'autocomplete': 'class-name'
+            })
         }
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(ProfileForm, self).__init__(*args, **kwargs)
+
+        if self.request and self.request.user.is_authenticated:
+            user = self.request.user
+            if user.grade:  
+                self.fields['Class'].initial = user.grade
+                self.fields['Class'].widget.attrs['readonly'] = True
 
         # Обновляем классы для полей
         for field_name in self.fields:

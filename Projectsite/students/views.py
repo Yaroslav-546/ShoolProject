@@ -13,10 +13,10 @@ class RedirectPermissionRequiredMixin(PermissionRequiredMixin):
 
     def handle_no_permission(self):
         return redirect(self.get_login_url())
-    
+
 class LoginRequiredMixinCustom(LoginRequiredMixin):
     login_url = reverse_lazy('login')
-    
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.warning(request, "Для доступа к этой странице необходимо войти в систему.")
@@ -34,34 +34,33 @@ class ProfileFormView(LoginRequiredMixinCustom, CreateView):
         kwargs = super().get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
-    
+
     def form_valid(self, form):
         if not self.request.user.is_authenticated:
             form.add_error(None, "Для записи на кружок необходимо авторизоваться")
             return self.form_invalid(form)
-        
+
         profile = form.save(commit=False)
         profile.user = self.request.user
         profile.family = self.request.user.last_name
         profile.name = self.request.user.first_name
-        
+
         if Profile.objects.filter(user=self.request.user, active=profile.active).exists():
-            print("No")
             existing_reg = Profile.objects.filter(
-                user=self.request.user, 
+                user=self.request.user,
                 active=profile.active
             ).first()
             messages.error(
-                self.request, 
+                self.request,
                 f"❌ Не удалось записаться на кружок '{profile.active}'. "
                 f"Вы уже записаны на этот кружок с {existing_reg.created_at.strftime('%d.%m.%Y')}."
             )
             return self.form_invalid(form)
-            
+
         profile.save()
         messages.success(self.request, f"✅ Вы успешно записались на кружок '{profile.active}'")
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         # Добавляем сообщение об ошибке для невалидной формы
         if form.errors:
@@ -85,7 +84,7 @@ class MyRegistrationsView(LoginRequiredMixinCustom, ListView):
     model = Profile
     template_name = 'my_registrations.html'
     context_object_name = 'registrations'
-    
+
     def get_queryset(self):
         return Profile.objects.filter(user=self.request.user).order_by('-created_at')
 
@@ -93,11 +92,11 @@ class RegistrationDeleteView(LoginRequiredMixinCustom, DeleteView):
     model = Profile
     template_name = 'registration_confirm_delete.html'
     success_url = reverse_lazy('my_registrations')
-    
+
     def get_queryset(self):
         # Пользователь может удалять только свои записи
         return Profile.objects.filter(user=self.request.user)
-    
+
     def delete(self, request, *args, **kwargs):
         messages.success(request, "Запись на кружок успешно удалена")
         return super().delete(request, *args, **kwargs)

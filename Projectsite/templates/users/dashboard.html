@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="user-stats">
-                    <div class="stat-number-text">Участник с</div>
+                    <div class="stat-number-text">Зарегестрирован с</div>
                     <div>{{ user.date_joined|date:"d.m.Y" }}</div>
                 </div>
             </div>
@@ -35,6 +35,10 @@
                         <div class="info-item">
                             <span class="info-label">ФИО:</span>
                             <span class="info-value">{{ user.get_full_name|default:"Не указано" }}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Класс:</span>
+                            <span class="info-value">{{ user.grade|default:"Не указано" }}</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">Логин:</span>

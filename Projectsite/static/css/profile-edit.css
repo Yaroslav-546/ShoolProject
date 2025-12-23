@@ -174,9 +174,9 @@ input[type="file"] {
 }
 
 .file-upload-wrapper input[type="file"]:valid + .file-upload-button {
-    background: #10b981;
+    background: #f63b3b;
 }
 
 .file-upload-wrapper input[type="file"]:valid + .file-upload-button:hover {
-    background: #059669;
+    background: #f63b3b;
 }

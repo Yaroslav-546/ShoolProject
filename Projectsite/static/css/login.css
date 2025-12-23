@@ -22,6 +22,21 @@
     margin-top: 20px;
 }
 
+.no-radius-top {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.no-shadow {
+    box-shadow: none !important;
+}
+
+.border-rad {
+    border-radius: 15px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
 .login-header {
     padding: 40px 40px 20px;
     text-align: center;

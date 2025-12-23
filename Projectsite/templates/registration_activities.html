@@ -14,7 +14,7 @@
     <div class="container">
         <div class="registration-container">
             <div class="registration-header">
-                <h2>🎯 Запись на кружки</h2>
+                <h2>Запись на кружки</h2>
                 <p class="text-muted">Выберите кружок для записи</p>
             </div>
 
@@ -41,11 +41,10 @@
             <div class="form-card">
                 <form method="post">
                     {% csrf_token %}
-                    
+
                     <div class="mb-3">
                         <label class="form-label">Ваше имя</label>
                         <input type="text" class="form-control" value="{{ user.get_full_name }}" readonly>
-                        <div class="form-text">Данные берутся из вашего профиля</div>
                     </div>
 
                     <div class="mb-3">
@@ -65,7 +64,7 @@
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-custom">📝 <span>Записаться на кружок</span></button>
+                        <button type="submit" class="btn btn-custom"><span>Записаться на кружок</span></button>
                         <a href="{% url 'dashboard' %}" class="btn btn-custom-2"><span>Отмена</span></a>
                     </div>
                 </form>
@@ -73,7 +72,7 @@
 
             {% if existing_registrations %}
             <div class="registrations-list">
-                <h5>✅ Ваши текущие записи:</h5>
+                <h5>Ваши текущие записи:</h5>
                 {% for registration in existing_registrations %}
                     <div class="registration-item">
                         <strong>{{ registration.active }}</strong>
