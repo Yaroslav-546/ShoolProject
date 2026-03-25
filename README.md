@@ -5,7 +5,7 @@
   ![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python&logoColor=white)
   ![Django](https://img.shields.io/badge/Django-4.2+-green?logo=django&logoColor=white)
   ![PythonAnywhere](https://img.shields.io/badge/Hosted-PythonAnywhere-yellow?logo=python&logoColor=white)
-  ![License](https://img.shields.io/badge/License-MIT-red.svg)
+
   
   <br>
   
