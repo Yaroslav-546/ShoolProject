@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load event_filters %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/events.css' %}">
+<style>
+    .event-header {
+        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+        border-radius: 32px;
+        padding: clamp(1.5rem, 4vw, 2rem);
+        margin-bottom: 2rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .event-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -30%;
+        width: 80%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        animation: rotate 20s linear infinite;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-3 py-md-4">
+    <!-- Хлебные крошки -->
+    <nav aria-label="breadcrumb" class="mb-4 fade-in">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'events:event_list' %}">
+                    <i class="fas fa-calendar-alt me-1"></i>Мероприятия
+                </a>
+            </li>
+            <li class="breadcrumb-item active text-truncate">{{ event.title|truncatechars:40 }}</li>
+        </ol>
+    </nav>
+
+    <!-- Заголовок -->
+    <div class="info-card fade-in-up">
+        <div class="event-header fade-in-up">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-4 fw-bold mb-3">{{ event.title }}</h1>
+                    <div class="d-flex flex-wrap gap-2 margin-bottom-important">
+                        <span class="badge bg-white text-danger px-3 py-2 rounded-pill">
+                            <i class="fas fa-tag me-1"></i>{{ event.get_event_type_display }}
+                        </span>
+                        <span class="badge bg-white text-danger px-3 py-2 rounded-pill">
+                            <i class="fas fa-users me-1"></i>{{ event.current_participants }}/{{ event.max_participants }} участников
+                        </span>
+                        {% if event.is_registration_open %}
+                            <span class="badge bg-success px-3 py-2 rounded-pill">
+                                <i class="fas fa-door-open me-1"></i>Регистрация открыта
+                            </span>
+                        {% else %}
+                            <span class="badge bg-secondary px-3 py-2 rounded-pill">
+                                <i class="fas fa-door-closed me-1"></i>Регистрация закрыта
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <i class="fas fa-calendar-alt fa-4x opacity-25"></i>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <!-- Изображение -->
+                {% if event.image %}
+                    <div class="mb-4 fade-in-up" style="animation-delay: 0.1s;">
+                        <img src="{{ event.image.url }}" class="img-fluid rounded-4 shadow-sm w-100"
+                             alt="{{ event.title }}" style="max-height: 400px; object-fit: cover;">
+                    </div>
+                {% endif %}
+    
+                <!-- Статистика -->
+                <div class="event-stats fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="stat-box">
+                        <i class="fas fa-calendar-day fa-2x mb-2 text-danger"></i>
+                        <div class="stat-number">{{ event.start_date|date:"d.m.Y" }}</div>
+                        <div class="text-muted">Дата начала</div>
+                        <small class="text-muted">{{ event.start_date|date:"H:i" }}</small>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-clock fa-2x mb-2 text-danger"></i>
+                        <div class="stat-number">{{ event.end_date|date:"d.m.Y" }}</div>
+                        <div class="text-muted">Дата окончания</div>
+                        <small class="text-muted">{{ event.end_date|date:"H:i" }}</small>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-hourglass-half fa-2x mb-2 text-danger"></i>
+                        <div class="stat-number">{{ event.registration_deadline|date:"d.m.Y" }}</div>
+                        <div class="text-muted">Срок регистрации</div>
+                        <small class="text-muted">{{ event.registration_deadline|date:"H:i" }}</small>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-chair fa-2x mb-2 text-danger"></i>
+                        <div class="stat-number">{{ event.available_slots }}</div>
+                        <div class="text-muted">Свободных мест</div>
+                    </div>
+                </div>
+    
+                <!-- Описание -->
+                <div class="info-card fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="info-title">
+                        <i class="fas fa-info-circle fa-lg"></i>
+                        <span>О мероприятии</span>
+                    </div>
+                    <div class="event-description" style="line-height: 1.8; color: var(--gray-600);">
+                        {{ event.description|linebreaks|default:"Описание отсутствует" }}
+                    </div>
+                </div>
+    
+                <!-- Место проведения -->
+                <div class="info-card fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="info-title">
+                        <i class="fas fa-map-marker-alt fa-lg"></i>
+                        <span>Место проведения</span>
+                    </div>
+                    <p class="mb-1 fw-semibold fs-5">{{ event.location }}</p>
+                    {% if event.address %}
+                        <p class="text-muted mb-0">
+                            <i class="fas fa-location-dot me-1 text-danger"></i>{{ event.address }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+    
+            <div class="col-lg-4">
+                <!-- Регистрация -->
+                <div class="registration-card fade-in-up" style="animation-delay: 0.5s;">
+                    <h5 class="fw-bold mb-4 text-danger">
+                        <i class="fas fa-pen-alt me-2"></i>Регистрация
+                    </h5>
+    
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted">Заполнено мест</span>
+                            <span class="fw-semibold">{{ event.current_participants }}/{{ event.max_participants }}</span>
+                        </div>
+                        <div class="progress-custom">
+                            <div class="progress-bar-custom"
+                                 style="width: {% widthratio event.current_participants event.max_participants 100 %}%">
+                            </div>
+                        </div>
+                    </div>
+    
+                    {% if user.is_authenticated %}
+                        {% if user_registration %}
+                            {% if user_registration.status == 'cancelled' %}
+                                <div class="alert alert-warning border-0 rounded-4 mb-4">
+                                    <i class="fas fa-undo-alt me-2"></i>
+                                    <strong>Ваша запись была отменена</strong>
+                                    <p class="mb-0 mt-2 small">Вы можете записаться снова, если есть свободные места.</p>
+                                </div>
+                                {% if is_registration_open %}
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" name="register" class="btn btn-success w-100 btn-custom">
+                                            <i class="fas fa-redo-alt me-2"></i>Записаться снова
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            {% else %}
+                                <div class="alert alert-{% if user_registration.status == 'confirmed' %}success{% elif user_registration.status == 'waiting' %}warning{% endif %} border-0 rounded-4 mb-4">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="fas fa-info-circle me-2 fs-5"></i>
+                                        <strong>Ваш статус:</strong>
+                                        <span class="ms-2 badge bg-{% if user_registration.status == 'confirmed' %}success{% else %}warning text-dark{% endif %} rounded-pill">
+                                            {{ user_registration.get_status_display }}
+                                        </span>
+                                    </div>
+                                    <hr class="my-2">
+                                    <small class="d-block text-muted">
+                                        <i class="far fa-clock me-1"></i>
+                                        Запись от {{ user_registration.registration_date|date:"d.m.Y H:i" }}
+                                    </small>
+                                </div>
+    
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" name="cancel" class="btn btn-danger w-100 btn-custom"
+                                            onclick="return confirm('Вы уверены, что хотите отменить запись?')">
+                                        <i class="fas fa-times-circle me-2"></i>Отменить запись
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            {% if is_registration_open %}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {% if form.non_field_errors %}
+                                        <div class="alert alert-danger border-0 rounded-4 mb-3">
+                                            {% for error in form.non_field_errors %}
+                                                <i class="fas fa-exclamation-circle me-2"></i>{{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                    <button type="submit" name="register" class="btn btn-primary-custom w-100 btn-custom text-white-important">
+                                        <i class="fas fa-check-circle me-2"></i>Записаться
+                                    </button>
+                                </form>
+                                <div class="text-center mt-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-envelope me-1"></i>
+                                        После записи вы получите уведомление на email
+                                    </small>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-warning border-0 rounded-4 mb-0">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Регистрация закрыта</strong>
+                                    <hr class="my-2">
+                                    <small class="d-block">
+                                        {% if not event.is_active %}
+                                            Мероприятие неактивно.
+                                        {% elif event.registration_deadline < now %}
+                                            Срок регистрации истек {{ event.registration_deadline|date:"d.m.Y H:i" }}.
+                                        {% elif event.current_participants >= event.max_participants %}
+                                            Все места заняты ({{ event.current_participants }}/{{ event.max_participants }}).
+                                        {% endif %}
+                                    </small>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <div class="alert alert-info border-0 rounded-4 text-center mb-0">
+                            <i class="fas fa-sign-in-alt fa-2x mb-2"></i>
+                            <p class="mb-2"><strong>Требуется авторизация</strong></p>
+                            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+                                <a href="{% url 'login' %}" class="btn btn-outline-primary btn-custom btn-sm">Войти</a>
+                                <a href="{% url 'register' %}" class="btn btn-primary-custom btn-custom btn-sm">Регистрация</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+    
+                <!-- Управление (для админов) -->
+                {% if user.is_staff %}
+                    <div class="registration-card mt-4 fade-in-up" style="animation-delay: 0.6s;">
+                        <h5 class="fw-bold mb-3 text-danger">
+                            <i class="fas fa-tools me-2"></i>Управление
+                        </h5>
+                        <div class="d-flex flex-column gap-2">
+                            <a href="{% url 'events:event_edit' event.pk %}" class="btn btn-warning btn-custom text-white-important">
+                                <i class="fas fa-edit me-2"></i>Редактировать мероприятие
+                            </a>
+                            <a href="{% url 'events:event_participants' event.pk %}" class="btn btn-info btn-custom text-white">
+                                <i class="fas fa-users me-2"></i>Список участников
+                            </a>
+                            <a href="{% url 'events:event_delete' event.pk %}" class="btn btn-danger-custom btn-custom text-white-important"
+                               onclick="return confirm('Вы уверены, что хотите удалить это мероприятие?');">
+                                <i class="fas fa-trash-alt me-2"></i>Удалить мероприятие
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

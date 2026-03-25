@@ -1,56 +1,356 @@
 {% extends 'base.html' %}
 {% block title %}Галерея{% endblock title %}
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
 
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Галерея</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Адаптивная карусель</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
 </head>
+<body>
+    <div class="carousel-container-main">
+        <div class="carousel-container">
 
-<body class="{% block body_class %}{% endblock %}">
-    {% block content %}
-    <div class="animation-card">
-        <div class="gallery-images-container">
-        <a data-fancybox="gallery" data-src="{% static 'Images/chess-1.png' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/chess-1.png' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/chess-2.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/chess-2.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/chess-new-gambit.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/chess-new-gambit.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/day-respublic.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/day-respublic.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/geoinform.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/geoinform.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/geoinform-1.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/geoinform-1.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/Night-in-museum.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/Night-in-museum.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/obj.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/obj.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/obj-1.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/obj-1.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/program-1.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/program-1.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/promdis.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/promdis.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/promdis-1.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/promdis-1.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/votocnimok-jpg.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/votocnimok-jpg.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/votocnimok-jpg-1.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/votocnimok-jpg-1.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/vr.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/vr.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/vr-1.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/vr-1.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/program.png' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/program.png' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/robotics-1.png' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/robotics-1.png' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/robotics-2.png' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/robotics-2.png' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/volonter.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/volonter.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/giber.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/giber.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/win-fast-chess.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/win-fast-chess.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/new-resurs.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/new-resurs.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/win-day-resp.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/win-day-resp.jpg' %}"></div></a>
-        <a data-fancybox="gallery" data-src="{% static 'Images/win-white.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/win-white.jpg' %}"></div></a>
+        <div class="carousel">
+            <div class="progress-bar" id="progressBar"></div>
+
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Слайды будут добавлены JavaScript -->
+            </div>
+
+            <!-- Компьютерные стрелки -->
+            <button class="carousel-btn btn-prev" id="prevBtn">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="carousel-btn btn-next" id="nextBtn">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+
+            <!-- Индикаторы -->
+            <div class="carousel-indicators" id="indicators">
+                <!-- Индикаторы добавятся автоматически -->
+            </div>
+
+            <!-- Счетчик -->
+            <div class="slide-counter" id="slideCounter">1 / 5</div>
+        </div>
+
+        <div class="carousel-info" style="text-align: center; margin-top: 20px; color: #666;">
+            <p><i class="bi bi-info-circle"></i> Всего слайдов: <span id="totalSlides">5</span> | Автопрокрутка: <span id="autoStatus">Включена</span></p>
+        </div>
     </div>
     </div>
-    {% endblock content %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
     <script>
-        document.title = "Галерея"
+        // Данные для слайдов
+        const slidesData = [
+            {
+                image: "{% static 'Images/chess-1.png' %}",
+                description: "Шахматы"
+            },
+            {
+                image: "{% static 'Images/chess-2.jpg' %}",
+                description: "Шахматы"
+            },
+            {
+                image: "{% static 'Images/chess-new-gambit.jpg' %}",
+                description: "Шахматы 'Новый гамбит'"
+            },
+            {
+                image: "{% static 'Images/day-respublic.jpg' %}",
+                description: "День Республики"
+            },
+            {
+                image: "{% static 'Images/geoinform.jpg' %}",
+                description: "Геоинформатика"
+            },
+            {
+                image: "{% static 'Images/geoinform-1.jpg' %}",
+                description: "Геоинформатика"
+            },
+            {
+                image: "{% static 'Images/Night-in-museum.jpg' %}",
+                description: "Ночь музеев 2021"
+            },
+            {
+                image: "{% static 'Images/obj.jpg' %}",
+                description: "ОБЖ"
+            },
+            {
+                image: "{% static 'Images/obj-1.jpg' %}",
+                description: "ОБЖ"
+            },
+            {
+                image: "{% static 'Images/program-1.jpg' %}",
+                description: "Программирование"
+            },
+            {
+                image: "{% static 'Images/promdis.jpg' %}",
+                description: "Промышленный дизайн"
+            },
+            {
+                image: "{% static 'Images/promdis-1.jpg' %}",
+                description: "Промышленный дизайн"
+            },
+            {
+                image: "{% static 'Images/votocnimok-jpg.jpg' %}",
+                description: "Фотосъемка"
+            },
+
+            {
+                image: "{% static 'Images/votocnimok-jpg-1.jpg' %}",
+                description: "Фотосъемка"
+            },
+            {
+                image: "{% static 'Images/vr.jpg' %}",
+                description: "Виртуальная реальность"
+            },
+            {
+                image: "{% static 'Images/vr-1.jpg' %}",
+                description: "Виртуальная реальность"
+            },
+            {
+                image: "{% static 'Images/program.png' %}",
+                description: "Программирование"
+            },
+            {
+                image: "{% static 'Images/robotics-1.png' %}",
+                description: "Робототехника"
+            },
+            {
+                image: "{% static 'Images/robotics-2.png' %}",
+                description: "Робототехника"
+            },
+            {
+                image: "{% static 'Images/volonter.jpg' %}",
+                description: "Волонтерство"
+            },
+            {
+                image: "{% static 'Images/giber.jpg'' %}",
+                description: "Соревнования по Берлоге"
+            },
+            {
+                image: "{% static 'Images/win-fast-chess.jpg' %}",
+                description: "Шахматы"
+            },
+            {
+                image: "{% static 'Images/new-resurs.jpg' %}",
+                description: "Новое оборудование"
+            },
+            {
+                image: "{% static 'Images/win-day-resp.jpg' %}",
+                description: "Шахматы"
+            },
+            {
+                image: "{% static 'Images/win-white.jpg' %}",
+                description: "Шахматы"
+            },
+        ];
+
+        class Carousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = slidesData.length;
+                this.track = document.getElementById('carouselTrack');
+                this.indicatorsContainer = document.getElementById('indicators');
+                this.slideCounter = document.getElementById('slideCounter');
+                this.totalSlidesElement = document.getElementById('totalSlides');
+                this.progressBar = document.getElementById('progressBar');
+                this.autoPlayInterval = null;
+                this.autoPlayDelay = 10000; // 5 секунд
+                this.isAutoPlay = true;
+                this.autoStatusElement = document.getElementById('autoStatus');
+                this.touchStartX = 0;
+                this.touchEndX = 0;
+                this.swipeThreshold = 50; // Минимальное расстояние свайпа
+
+                this.init();
+                this.startAutoPlay();
+            }
+
+            init() {
+                // Создаем слайды
+                this.createSlides();
+
+                // Создаем индикаторы
+                this.createIndicators();
+
+                // Обновляем счетчик
+                this.updateCounter();
+
+                // Назначаем обработчики событий
+                this.addEventListeners();
+
+                // Показываем первый слайд
+                this.updateSlidePosition();
+            }
+
+            createSlides() {
+                slidesData.forEach((slide, index) => {
+                    const slideElement = document.createElement('div');
+                    slideElement.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+                    slideElement.innerHTML = `
+                        <img src="${slide.image}">
+                        <div class="slide-content">
+                            <p>${slide.description}</p>
+                        </div>
+                    `;
+                    this.track.appendChild(slideElement);
+                });
+
+                this.totalSlidesElement.textContent = this.totalSlides;
+            }
+
+            createIndicators() {
+                for (let i = 0; i < this.totalSlides; i++) {
+                    const indicator = document.createElement('div');
+                    indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
+                    indicator.dataset.index = i;
+                    indicator.addEventListener('click', () => this.goToSlide(i));
+                    this.indicatorsContainer.appendChild(indicator);
+                }
+            }
+
+            addEventListeners() {
+                // Стрелки
+                document.getElementById('prevBtn').addEventListener('click', () => this.prevSlide());
+                document.getElementById('nextBtn').addEventListener('click', () => this.nextSlide());
+
+                // Клавиатура
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.prevSlide();
+                    if (e.key === 'ArrowRight') this.nextSlide();
+                    if (e.key === ' ') this.toggleAutoPlay();
+                });
+
+                // Тач события для мобильных
+                this.track.addEventListener('touchstart', (e) => this.handleTouchStart(e));
+                this.track.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+
+                // Мышь для десктопа (пауза при наведении)
+                this.track.addEventListener('mouseenter', () => this.pauseAutoPlay());
+                this.track.addEventListener('mouseleave', () => this.resumeAutoPlay());
+
+                // Клик на слайд для переключения авто-прокрутки
+                this.track.addEventListener('click', () => this.toggleAutoPlay());
+            }
+
+            handleTouchStart(e) {
+                this.touchStartX = e.changedTouches[0].screenX;
+                this.pauseAutoPlay();
+            }
+
+            handleTouchEnd(e) {
+                this.touchEndX = e.changedTouches[0].screenX;
+                this.handleSwipe();
+                this.resumeAutoPlay();
+            }
+
+            handleSwipe() {
+                const swipeDistance = this.touchStartX - this.touchEndX;
+
+                // Свайп влево -> следующий слайд
+                if (swipeDistance > this.swipeThreshold) {
+                    this.nextSlide();
+                }
+                // Свайп вправо -> предыдущий слайд
+                else if (swipeDistance < -this.swipeThreshold) {
+                    this.prevSlide();
+                }
+            }
+
+            updateSlidePosition() {
+                const translateX = -this.currentSlide * 100;
+                this.track.style.transform = `translateX(${translateX}%)`;
+
+                // Обновляем индикаторы
+                document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === this.currentSlide);
+                });
+
+                // Обновляем активный класс слайда
+                document.querySelectorAll('.carousel-slide').forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentSlide);
+                });
+
+                this.updateCounter();
+                this.updateProgressBar();
+            }
+
+            updateCounter() {
+                this.slideCounter.textContent = `${this.currentSlide + 1} / ${this.totalSlides}`;
+            }
+
+            updateProgressBar() {
+                this.progressBar.style.width = '0%';
+                setTimeout(() => {
+                    this.progressBar.style.width = '100%';
+                }, 10);
+            }
+
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+                this.updateSlidePosition();
+                this.resetAutoPlay();
+            }
+
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.updateSlidePosition();
+                this.resetAutoPlay();
+            }
+
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.updateSlidePosition();
+                this.resetAutoPlay();
+            }
+
+            startAutoPlay() {
+                if (this.isAutoPlay) {
+                    this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayDelay);
+                    this.autoStatusElement.textContent = 'Включена';
+                }
+            }
+
+            pauseAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                }
+            }
+
+            resumeAutoPlay() {
+                if (this.isAutoPlay && !this.autoPlayInterval) {
+                    this.startAutoPlay();
+                }
+            }
+
+            resetAutoPlay() {
+                this.pauseAutoPlay();
+                this.startAutoPlay();
+            }
+
+            toggleAutoPlay() {
+                this.isAutoPlay = !this.isAutoPlay;
+                if (this.isAutoPlay) {
+                    this.startAutoPlay();
+                } else {
+                    this.pauseAutoPlay();
+                    this.autoStatusElement.textContent = 'Выключена';
+                }
+            }
+        }
+
+        // Инициализация карусели при загрузке страницы
+        document.addEventListener('DOMContentLoaded', () => {
+            new Carousel();
+        });
     </script>
 </body>
-
 </html>
+{% endblock content %}

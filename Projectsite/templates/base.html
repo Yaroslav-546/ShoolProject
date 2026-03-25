@@ -10,7 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Новости{% endblock title %}</title>
     <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/events.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -48,10 +50,6 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{% url 'achievements' %}">Достижения</a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{% url 'gallery' %}">Галерея</a>
                         </li>
 
@@ -71,6 +69,13 @@
                         <li class="nav-item mobile-only">
                             <a class="nav-link" href="{% url 'dashboard' %}">
                                 Личный кабинет
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'events:event_list' %}">
+                                Мероприятия
                             </a>
                         </li>
                         {% endif %}
@@ -101,50 +106,92 @@
             {% endblock %}
         </div>
     </main>
-    <footer class="footer">
-        <div class="container-fluid px-4 py-4">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <h5 class="mb-3 text-dark">Точка Роста МБОУ СОШ N2 с.Новобелокатай</h5>
-                    <p class="text-muted">Образовательная платформа для школьников. Записывайтесь на кружки и развивайте свои таланты</p>
+    <footer class="modern-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- О нас -->
+                <div class="footer-col">
+                    <div class="footer-about">
+                        <h3 class="footer-logo">
+                            <i class="fas fa-chalkboard-user me-2"></i>
+                            Точка Роста
+                        </h3>
+                        <p class="footer-description">
+                            Образовательная платформа для школьников. Записывайтесь на кружки, участвуйте в мероприятиях и развивайте свои таланты вместе с нами.
+                        </p>
+                        <div class="footer-badge">
+                            <span class="badge-modern">
+                                <i class="fas fa-star-of-life"></i>
+                                МБОУ СОШ №2 с.Новобелокатай
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h5 class="mb-3 text-dark">Навигация</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="{% url 'index' %}" class="text-dark hover-primary">Главная</a></li>
-                        <li class="mb-2"><a href="{% url 'dashboard' %}" class="text-dark hover-primary">Личный кабинет</a></li>
-                        <li class="mb-2"><a href="{% url 'index' %}" class="text-dark hover-primary">О нас</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 class="mb-3 text-dark">Социальные сети</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">
-                            <a href="https://vk.com/shcola2nb" class="text-dark hover-primary">
-                                <i class="fab fa-vk me-2"></i>ВКонтакте
+                <!-- Навигация -->
+                <div class="footer-col">
+                    <h4 class="footer-title">
+                        <i class="fas fa-compass"></i>
+                        Навигация
+                    </h4>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="{% url 'index' %}" class="footer-link">
+                                <i class="fas fa-home"></i>
+                                <span>Главная</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'dashboard' %}" class="footer-link">
+                                <i class="fas fa-user-circle"></i>
+                                <span>Личный кабинет</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'events:event_list' %}" class="footer-link">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Мероприятия</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'news' %}" class="footer-link">
+                                <i class="fas fa-newspaper"></i>
+                                <span>Новости</span>
                             </a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 class="mb-3 text-dark">Контакты</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2 text-muted">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            Адрес 452580, Республика Башкортостан, Белокатайский район , с.Новобелокатай,ул. Ленина, 24
-                        </li>
-                    </ul>
+                <!-- Социальные сети -->
+                <div class="footer-col">
+                    <h4 class="footer-title">
+                        <i class="fas fa-share-alt"></i>
+                        Социальные сети
+                    </h4>
+                    <div class="social-links">
+                        <a href="https://vk.com/shcola2nb" class="social-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-vk"></i>
+                            <span>ВКонтакте</span>
+                        </a>
+                        <!-- Добавьте другие соцсети при необходимости -->
+                    </div>
                 </div>
-            </div>
 
-            <hr class="my-4 border-secondary">
-
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0 text-muted">&copy; 2025. Все права защищены.</p>
+                <!-- Контакты -->
+                <div class="footer-col">
+                    <h4 class="footer-title">
+                        <i class="fas fa-address-card"></i>
+                        Контакты
+                    </h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Адрес:</strong>
+                                <span>452580, Республика Башкортостан,<br>Белокатайский район, с.Новобелокатай, ул. Ленина, 24</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

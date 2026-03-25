@@ -54,20 +54,20 @@ class CustomUserCreationForm(UserCreationForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control form-label'})
-    
+
     def clean_email(self):
         """Проверка уникальности email"""
         email = self.cleaned_data.get('email')
         if CustomUser.objects.filter(email=email).exists():
             raise ValidationError('Пользователь с таким email уже существует.')
         return email
-    
+
     def save(self, commit=True, request=None):
         """Сохранение пользователя и отправка письма для верификации"""
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
         user.is_active = False  # Аккаунт неактивен до подтверждения email
-        
+
         if commit:
             user.save()
             if request:
@@ -99,7 +99,7 @@ class PasswordResetRequestForm(forms.Form):
             'placeholder': 'Введите email, указанный при регистрации'
         })
     )
-    
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         try:
@@ -114,7 +114,7 @@ class CustomSetPasswordForm(SetPasswordForm):
     """Форма установки нового пароля"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         # Настройка полей
         self.fields['new_password1'].widget.attrs.update({
             'class': 'form-control form-label',
@@ -124,10 +124,10 @@ class CustomSetPasswordForm(SetPasswordForm):
             'class': 'form-control form-label',
             'placeholder': 'Повторите новый пароль'
         })
-        
+
         self.fields['new_password1'].label = 'Новый пароль'
         self.fields['new_password2'].label = 'Подтверждение пароля'
-        
+
         self.fields['new_password1'].help_text = "Пароль должен содержать минимум 8 символов"
 
 class EmailOrUsernameAuthenticationForm(AuthenticationForm):
@@ -150,38 +150,38 @@ class EmailOrUsernameAuthenticationForm(AuthenticationForm):
             'placeholder': 'Введите пароль'
         })
     )
-    
+
     def clean(self):
         username = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
-        
+
         if username and password:
             from django.contrib.auth import authenticate
             from .models import CustomUser
-            
+
             # Пытаемся найти пользователя
             try:
                 user = CustomUser.objects.get(
                     Q(username__iexact=username) | Q(email__iexact=username)
                 )
-                
+
                 # Проверяем пароль
                 if not user.check_password(password):
                     raise forms.ValidationError(
                         _("Неверный логин/email или пароль."),
                         code='invalid_login',
                     )
-                
+
                 # Проверяем активность
                 self.confirm_login_allowed(user)
                 self.user_cache = user
-                
+
             except CustomUser.DoesNotExist:
                 raise forms.ValidationError(
                     _("Неверный логин/email или пароль."),
                     code='invalid_login',
                 )
-        
+
         return self.cleaned_data
 
     def get_user(self):

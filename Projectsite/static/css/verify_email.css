@@ -25,3 +25,10 @@
 .alert {
     border-left: 4px solid #dc3545;
 }
+
+@media (min-width: 991px) {
+    .px-3 {
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+    }
+}

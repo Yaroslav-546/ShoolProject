@@ -19,12 +19,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-#url приложений 
+#url приложений
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
     path('students/', include('students.urls')),
     path('accounts/', include('accounts.urls')),
+    path('events/', include('events.urls')),
 ]
 
 if settings.DEBUG:

@@ -39,11 +39,6 @@
     gap: 5px;
 }
 
-.news-date::before {
-    content: "📅";
-    font-size: 1.1rem;
-}
-
 .news-content {
     padding: 30px 40px;
 }

@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load event_filters %}
+
+{% block title %}Мероприятия - Точка Роста{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/events.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-3 py-md-4">
+    <!-- Hero Section -->
+    <div class="hero-section fade-in-up">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="hero-title">
+                    <i class="fas fa-calendar-alt me-3"></i>
+                    Мероприятия и турниры
+                </h1>
+                <p class="lead mb-4 opacity-75">Примите участие в интересных событиях нашего центра</p>
+                {% if user.is_staff %}
+                    <a href="{% url 'events:event_create' %}" class="btn btn-light btn-custom btn-lg">
+                        <i class="fas fa-plus-circle me-2"></i>Создать мероприятие
+                    </a>
+                {% endif %}
+            </div>
+            <div class="col-md-4 text-md-end d-none d-md-block">
+                <i class="fas fa-trophy fa-5x opacity-25"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="filter-card fade-in-up" style="animation-delay: 0.1s;">
+        <form method="get" class="row g-3 align-items-end">
+            <div class="col-12 col-md-5">
+                <label class="form-label fw-semibold">
+                    <i class="fas fa-tag me-1 text-danger"></i>
+                    Тип мероприятия
+                </label>
+                <select name="type" class="form-select">
+                    <option value="">Все типы</option>
+                    {% for value, label in event_type_choices %}
+                        <option value="{{ value }}" {% if current_type == value %}selected{% endif %}>
+                            {{ label }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-md-5">
+                <label class="form-label fw-semibold">
+                    <i class="fas fa-filter me-1 text-danger"></i>
+                    Статус
+                </label>
+                <select name="status" class="form-select">
+                    <option value="upcoming" {% if current_status == 'upcoming' %}selected{% endif %}>
+                        📅 Предстоящие
+                    </option>
+                    <option value="ongoing" {% if current_status == 'ongoing' %}selected{% endif %}>
+                        ▶️ Идут сейчас
+                    </option>
+                    <option value="active" {% if current_status == 'active' %}selected{% endif %}>
+                        ✅ Активные регистрации
+                    </option>
+                    <option value="past" {% if current_status == 'past' %}selected{% endif %}>
+                        📜 Прошедшие
+                    </option>
+                </select>
+            </div>
+            <div class="col-12 col-md-2">
+                <button type="submit" class="btn btn-primary-custom w-100 btn-custom text-white-important">
+                    <i class="fas fa-search me-2"></i>Найти
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Список мероприятий -->
+    <div class="row g-4">
+        {% for event in events %}
+            <div class="col-12 col-md-6 col-lg-4 fade-in-up">
+                <div class="event-card">
+                    <div class="position-relative">
+                        {% if event.image %}
+                            <img src="{{ event.image.url }}" class="event-image" alt="{{ event.title }}">
+                        {% else %}
+                            <div class="event-image bg-light d-flex align-items-center justify-content-center">
+                                <i class="fas fa-calendar-alt fa-4x text-secondary opacity-50"></i>
+                            </div>
+                        {% endif %}
+                        <div class="event-badge" style="position: absolute; top: 1rem; right: 1rem; z-index: 1;">
+                            <span class="badge-red rounded-pill">
+                                {{ event.get_event_type_display }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 p-md-4">
+                        <h5 class="event-title">{{ event.title|truncatechars:35 }}</h5>
+
+                        <div class="event-info d-flex align-items-center gap-2 mb-2">
+                            <i class="far fa-calendar-alt text-danger"></i>
+                            <span class="text-muted small">{{ event.start_date|date:"d.m.Y H:i" }}</span>
+                        </div>
+                        <div class="event-info d-flex align-items-center gap-2 mb-3">
+                            <i class="fas fa-map-marker-alt text-danger"></i>
+                            <span class="text-muted small">{{ event.location|truncatechars:30 }}</span>
+                        </div>
+
+                        <p class="text-secondary small mb-3">
+                            {{ event.description|truncatewords:20 }}
+                        </p>
+
+                        <div class="event-progress mb-3">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span class="text-muted">Участники:</span>
+                                <span class="fw-semibold">{{ event.current_participants }}/{{ event.max_participants }}</span>
+                            </div>
+                            <div class="progress-custom">
+                                <div class="progress-bar-custom"
+                                     style="width: {% widthratio event.current_participants event.max_participants 100 %}%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                {% if user.is_authenticated %}
+                                    {% with status=user_registrations|get_item:event.id %}
+                                        {% if status == 'confirmed' %}
+                                            <span class="badge bg-success rounded-pill">
+                                                <i class="fas fa-check-circle me-1"></i>Вы записаны
+                                            </span>
+                                        {% elif status == 'waiting' %}
+                                            <span class="badge bg-warning text-dark rounded-pill">
+                                                <i class="fas fa-hourglass-half me-1"></i>Лист ожидания
+                                            </span>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endif %}
+                            </div>
+                            <a href="{% url 'events:event_detail' event.pk %}" class="btn btn-outline-danger btn-custom btn-sm">
+                                Подробнее <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="text-center py-5 fade-in-up">
+                    <i class="fas fa-calendar-times fa-5x mb-4 text-danger opacity-50"></i>
+                    <h3 class="text-muted">Нет мероприятий</h3>
+                    <p class="text-muted">
+                        {% if current_type or current_status %}
+                            По выбранным фильтрам мероприятия не найдены.
+                            <br>
+                            <a href="{% url 'events:event_list' %}" class="btn btn-link mt-3 text-danger">
+                                <i class="fas fa-undo me-1"></i>Сбросить фильтры
+                            </a>
+                        {% else %}
+                            В настоящее время нет доступных мероприятий.
+                            {% if user.is_staff %}
+                                <br>
+                                <a href="{% url 'events:event_create' %}" class="btn btn-primary-custom mt-3 btn-custom">
+                                    <i class="fas fa-plus-circle me-2"></i>Создать первое мероприятие
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Пагинация -->
+    {% if is_paginated %}
+        <nav aria-label="Page navigation" class="mt-5">
+            <ul class="pagination justify-content-center flex-wrap">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if current_type %}&type={{ current_type }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}">
+                            <i class="fas fa-chevron-left"></i> Предыдущая
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for num in paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}{% if current_type %}&type={{ current_type }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}">
+                                {{ num }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if current_type %}&type={{ current_type }}{% endif %}{% if current_status %}&status={{ current_status }}{% endif %}">
+                            Следующая <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+{% endblock %}
