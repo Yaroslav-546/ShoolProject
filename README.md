@@ -40,3 +40,5 @@
 | Bootstrap | 5.x | UI компоненты |
 
 ---
+
+![Lines of Code](https://img.shields.io/tokei/lines/github/Yaroslav-546/ShoolProject)
