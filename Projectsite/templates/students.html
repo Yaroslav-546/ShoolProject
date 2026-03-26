@@ -1,50 +1,391 @@
 {% extends 'base.html' %}
-{% block title %}Ученики{% endblock title %}
-<!DOCTYPE html>
-<html lang="en">
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    <title>Document</title>
-</head>
-<body>
-    {% block content %}
-    {% if user.is_superuser %}
-    <div class="animation-card">
-        <div class="active-table-container">
-        <h2>Ученики</h2>
-        <table id="active-table" class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Фамилия</th>
-                    <th scope="col">Имя</th>
-                    <th scope="col">Кружок</th>
-                    <th scope="col">Класс</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                {% for profile in object_list %}
-                <tr>
-                    <td aria-label="Фамилия">{{ profile.family }}</td>
-                    <td aria-label="Имя">{{ profile.name }}</td>
-                    <td aria-label="Кружок">{{ profile.active }}</td>
-                    <td aria-label="Класс">{{ profile.Class }}</td>
-                </tr>
-                {% endfor %}
-        </table>
-    </div>
-    {% else %}
-        <div class="dlete">
-            <div>
-                <h2>Отказано в доступе</h2>
-                <a href="{% url 'index' %}" class="btn btn-dark"> перейти на главную страницу..</a>
+{% block title %}Ученики{% endblock %}
+
+{% block extra_css %}
+<style>
+    .event-card {
+        background: white;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .bg-gradient-red {
+        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    }
+
+    .stat-card {
+        background: var(--gray-50);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        border: 1px solid var(--gray-200);
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(220, 38, 38, 0.15);
+        border-color: var(--primary-red-light);
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .btn-custom {
+        border-radius: 12px;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary-custom {
+        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+        border: none;
+        color: white;
+    }
+
+    .btn-primary-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
+    }
+
+    .btn-outline-secondary.active {
+        background: var(--primary-red);
+        border-color: var(--primary-red);
+        color: white;
+    }
+
+    .btn-outline-secondary.active:hover {
+        background: var(--primary-red-dark);
+    }
+
+    .table-custom {
+        margin-bottom: 0;
+    }
+
+    .table-custom thead {
+        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+        color: white;
+    }
+
+    .table-custom th {
+        padding: 1rem;
+        font-weight: 600;
+        border: none;
+    }
+
+    .table-custom td {
+        padding: 0.75rem 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .table-custom tbody tr:hover {
+        background: var(--primary-red-light);
+        transition: background 0.3s ease;
+    }
+
+    .badge-circle {
+        background: var(--primary-red-light);
+        color: var(--primary-red);
+        padding: 0.4rem 0.8rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .search-input-group {
+        position: relative;
+    }
+
+    .search-input-group i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray-400);
+        z-index: 1;
+    }
+
+    .search-input-group input {
+        padding-left: 2.5rem;
+        border-radius: 12px;
+        border: 2px solid var(--gray-200);
+        transition: all 0.3s ease;
+    }
+
+    .search-input-group input:focus {
+        border-color: var(--primary-red);
+        box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.25);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+    }
+
+    .empty-state i {
+        font-size: 4rem;
+        color: var(--gray-300);
+        margin-bottom: 1rem;
+    }
+
+    .pagination .page-link {
+        border-radius: 10px;
+        margin: 0 5px;
+        border: none;
+        color: var(--gray-600);
+        transition: all 0.3s ease;
+    }
+
+    .pagination .page-link:hover {
+        background: var(--primary-red-light);
+        color: var(--primary-red);
+        transform: translateY(-2px);
+    }
+
+    .pagination .page-item.active .page-link {
+        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .table-custom {
+            font-size: 0.875rem;
+        }
+
+        .table-custom th,
+        .table-custom td {
+            padding: 0.5rem;
+        }
+
+        .stat-card {
+            padding: 0.75rem;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+        }
+
+        .btn-custom {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if user.is_superuser %}
+<div class="container py-3 py-md-4">
+    <!-- Хлебные крошки -->
+    <nav aria-label="breadcrumb" class="mb-4 fade-in">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{% url 'index' %}">
+                    <i class="fas fa-home me-1"></i>Главная
+                </a>
+            </li>
+            <li class="breadcrumb-item active">Ученики</li>
+        </ol>
+    </nav>
+
+    <div class="event-card fade-in-up">
+        <!-- Заголовок -->
+        <div class="bg-gradient-red p-4 p-md-5 text-white" style="border-radius: 24px 24px 0 0;">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+                <div>
+                    <h2 class="fw-bold mb-2">
+                        <i class="fas fa-users me-2"></i>
+                        Ученики
+                    </h2>
+                    <p class="mb-0 opacity-75">Управление списком зарегистрированных учеников</p>
+                </div>
+                <div>
+                    <span class="badge bg-white text-danger px-3 py-2 rounded-pill">
+                        <i class="fas fa-graduation-cap me-1"></i>
+                        Всего: {{ total_students }}
+                    </span>
+                </div>
             </div>
         </div>
-    {% endif %}
-    {% endblock content %}
-</body>
-</html>
+
+        <div class="p-4 p-md-5">
+            <!-- Статистика -->
+            <div class="row g-3 mb-5 justify-content-center">
+                <div class="col-6 col-md-4">
+                    <div class="stat-card text-center p-3">
+                        <i class="fas fa-users fa-2x mb-2 text-danger"></i>
+                        <div class="stat-number">{{ total_students }}</div>
+                        <div class="text-muted small fw-semibold">Всего учеников</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="stat-card text-center p-3">
+                        <i class="fas fa-chalkboard fa-2x mb-2 text-danger"></i>
+                        <div class="stat-number">{{ total_circles }}</div>
+                        <div class="text-muted small fw-semibold">Кружков</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Поиск и фильтры -->
+            <div class="row g-3 mb-4">
+                <div class="col-12 col-md-5">
+                    <form method="get" class="d-flex gap-2">
+                        <div class="search-input-group flex-grow-1">
+                            <input type="text"
+                                   name="search"
+                                   class="form-control"
+                                   placeholder="🔍 Поиск по ФИО, классу"
+                                   value="{{ search_query }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary-custom btn-custom text-white-important">
+                            <i class="fas fa-search me-1"></i>Поиск
+                    </form>
+                </div>
+                <div class="col-12 col-md-7">
+                    <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}circle="
+                           class="btn btn-outline-secondary btn-custom btn-sm {% if not selected_circle %}active{% endif %}">
+                            <i class="fas fa-list me-1"></i>Все кружки
+                        </a>
+                        {% for circle in circles|slice:":5" %}
+                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}circle={{ circle }}"
+                               class="btn btn-outline-secondary btn-custom btn-sm {% if selected_circle == circle %}active{% endif %}">
+                                {{ circle|truncatechars:15 }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Таблица учеников -->
+            <div class="table-responsive">
+                <table class="table table-custom align-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Фамилия</th>
+                            <th>Имя</th>
+                            <th>Кружок</th>
+                            <th>Класс</th>
+                            <th>Дата записи</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for profile in object_list %}
+                        <tr class="fade-in-up">
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                <strong>{{ profile.family }}</strong>
+                            </td>
+                            <td>{{ profile.name }}</td>
+                            <td>
+                                <span class="badge-circle">
+                                    <i class="fas fa-star me-1"></i>
+                                    {{ profile.active|truncatechars:30 }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-secondary rounded-pill">{{ profile.Class }}</span>
+                            </td>
+                            <td>
+                                <small class="text-muted">
+                                    <i class="far fa-clock me-1"></i>
+                                    {{ profile.created_at|date:"d.m.Y H:i" }}
+                                </small>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="text-center py-5">
+                                <div class="empty-state">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <h5 class="text-muted">Нет учеников</h5>
+                                    <p class="text-muted">
+                                        {% if search_query or selected_circle %}
+                                            По вашему запросу ничего не найдено.
+                                            <br>
+                                            <a href="{% url 'studentslist' %}" class="btn btn-link mt-2 text-danger">
+                                                <i class="fas fa-undo me-1"></i>Сбросить фильтры
+                                            </a>
+                                        {% else %}
+                                            В системе пока нет зарегистрированных учеников.
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Пагинация -->
+            {% if is_paginated %}
+                <nav aria-label="Page navigation" class="mt-4">
+                    <ul class="pagination justify-content-center flex-wrap">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if selected_circle %}&circle={{ selected_circle }}{% endif %}">
+                                    <i class="fas fa-chevron-left"></i> Предыдущая
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        {% for num in paginator.page_range %}
+                            {% if page_obj.number == num %}
+                                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if selected_circle %}&circle={{ selected_circle }}{% endif %}">
+                                        {{ num }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if selected_circle %}&circle={{ selected_circle }}{% endif %}">
+                                    Следующая <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container py-5">
+    <div class="event-card fade-in-up">
+        <div class="bg-gradient-red p-4 p-md-5 text-white text-center" style="border-radius: 24px 24px 0 0;">
+            <i class="fas fa-lock fa-3x mb-3"></i>
+            <h2 class="fw-bold mb-2">Отказано в доступе</h2>
+            <p class="mb-0 opacity-75">У вас нет прав для просмотра этой страницы</p>
+        </div>
+        <div class="p-4 p-md-5 text-center">
+            <i class="fas fa-shield-alt fa-4x mb-3 text-danger opacity-50"></i>
+            <p class="text-muted mb-4">Только администраторы могут просматривать список учеников.</p>
+            <a href="{% url 'index' %}" class="btn btn-primary-custom btn-custom">
+                <i class="fas fa-home me-2"></i>Вернуться на главную
+            </a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

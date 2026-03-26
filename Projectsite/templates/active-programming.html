@@ -1,76 +1,154 @@
 {% extends 'base.html' %}
-{% block title %}Кружок-Программирование{% endblock title %}
-<!DOCTYPE html>
 {% load static %}
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+{% block title %}Программирование - Точка Роста{% endblock %}
 
-<body class="{% block body_class %}{% endblock %}">
-    {% block content %}
-    <div class="main-index">
-        <h1 class="index-h-p-text">Програмирование</h1>
-        <div class="index-container">
-            <div class="index-text">
-                <p> Основная задача курса – способствовать формированию у школьников информационной и функциональной
-                    компетентности, развитие алгоритмического мышления. Назначение курса – помочь детям узнать основные
-                    возможности компьютера и научить их пользоваться им в повседневной жизни. А также:
-                    <br>
-                    -дать учащимся представление о современном подходе к изучению реального мира, о широком
-                    использовании алгоритмов и вычислительной техники в научных исследованиях;
-                    <br>
-                    -сформировать у учащихся умения владеть компьютером как средством решения практических задач;
-                    <br>
-                    -подготовить учеников к активной полноценной жизни и работе в условиях технологически развитого
-                    общества;
-                    <br>
-                    -создать условия для внедрения новых информационных технологий в учебно-воспитательный процесс
-                    школы;
-                    <br>
-                    -реализовать в наиболее полной мере возрастающий интерес учащихся к углубленному изучению
-                    программирования через совершенствование их алгоритмического и логического мышления;
-                    <br>
-                    -формировать знания о роли информационных процессов в живой природе, технике, обществе;
-                    <br>
-                    -формировать знания о значении информатики и вычислительной техники в развитии общества и в
-                    изменении характера труда человека;
-                    <br>
-                    -формировать знания об основных принципах работы компьютера, способах передачи информации;
-                    <br>
-                    -формировать знания об основных этапах информационной технологии решения задач в широком смысле;
-                    <br>
-                    -формировать умения моделирования и применения его в разных предметных областях;
-                    <br>
-                    -формировать умения и навыков самостоятельного использования компьютера в качестве средства для
-                    решения практических задач.
-                    <br>
-                    Реализация этих задач будет способствовать дальнейшему формированию взгляда школьников на мир,
-                    раскрытию роли информатики в формировании естественнонаучной картины мира, развитию мышления, в том
-                    числе формированию алгоритмического стиля мышления, подготовке учеников к жизни в информационном
-                    обществе.
-                </p>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/active-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-3 py-md-4">
+    <!-- Hero Section -->
+    <div class="circle-hero-section circle-fade-in-up">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="circle-hero-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h1 class="circle-hero-title">Программирование</h1>
+                <p class="circle-hero-subtitle">Курс по основам программирования и алгоритмизации</p>
             </div>
-            <div class="index-images-activities">
-                <a data-fancybox="gallery" data-src="{% static 'Images/program.png' %}"><div id="scale-img-1"><img class="index-images-active-1 scale-img" src="{% static 'Images/program.png' %}"></div></a>
-                <a data-fancybox="gallery" data-src="{% static 'Images/program-1.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/program-1.jpg' %}"></div></a>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <i class="fas fa-laptop-code fa-4x opacity-25"></i>
             </div>
         </div>
     </div>
-    {% endblock content %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 
-    <script>
-        document.title = "Кружок-Программирование"
-    </script>
-</body>
+    <!-- Основная информация -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.1s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-info-circle"></i>
+                О курсе
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-info-grid">
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-bullseye"></i>
+                        <h4>Основная задача курса</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <p>Способствовать формированию у школьников информационной и функциональной компетентности, развитие алгоритмического мышления. Назначение курса – помочь детям узнать основные возможности компьютера и научить их пользоваться им в повседневной жизни.</p>
+                    </div>
+                </div>
 
-</html>
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-tasks"></i>
+                        <h4>Задачи курса</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <ul>
+                            <li>Дать учащимся представление о современном подходе к изучению реального мира, о широком использовании алгоритмов и вычислительной техники в научных исследованиях</li>
+                            <li>Сформировать у учащихся умения владеть компьютером как средством решения практических задач</li>
+                            <li>Подготовить учеников к активной полноценной жизни и работе в условиях технологически развитого общества</li>
+                            <li>Создать условия для внедрения новых информационных технологий в учебно-воспитательный процесс школы</li>
+                            <li>Реализовать возрастающий интерес учащихся к углубленному изучению программирования через совершенствование их алгоритмического и логического мышления</li>
+                            <li>Формировать знания о роли информационных процессов в живой природе, технике, обществе</li>
+                            <li>Формировать знания о значении информатики и вычислительной техники в развитии общества</li>
+                            <li>Формировать знания об основных принципах работы компьютера, способах передачи информации</li>
+                            <li>Формировать знания об основных этапах информационной технологии решения задач</li>
+                            <li>Формировать умения моделирования и применения его в разных предметных областях</li>
+                            <li>Формировать умения и навыки самостоятельного использования компьютера в качестве средства для решения практических задач</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-star"></i>
+                        <h4>Результаты обучения</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <p>Реализация этих задач будет способствовать дальнейшему формированию взгляда школьников на мир, раскрытию роли информатики в формировании естественнонаучной картины мира, развитию мышления, в том числе формированию алгоритмического стиля мышления, подготовке учеников к жизни в информационном обществе.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Особенности курса -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.2s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-cogs"></i>
+                Особенности курса
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-features-grid">
+                <div class="circle-feature-item">
+                    <i class="fas fa-brain"></i>
+                    <span>Развитие алгоритмического мышления</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-laptop"></i>
+                    <span>Практическая работа с компьютером</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Решение реальных задач</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-users"></i>
+                    <span>Проектная деятельность</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Развитие логического мышления</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-rocket"></i>
+                    <span>Подготовка к IT-профессиям</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Галерея -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.3s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-images"></i>
+                Фотогалерея
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-gallery-grid">
+                <div class="circle-gallery-item" data-fancybox="gallery" data-src="{% static 'Images/program.png' %}">
+                    <img src="{% static 'Images/program.png' %}" alt="Программирование 1">
+                    <div class="circle-gallery-overlay">
+                        <i class="fas fa-search-plus"></i> Увеличить
+                    </div>
+                </div>
+                <div class="circle-gallery-item" data-fancybox="gallery" data-src="{% static 'Images/program-1.jpg' %}">
+                    <img src="{% static 'Images/program-1.jpg' %}" alt="Программирование 2">
+                    <div class="circle-gallery-overlay">
+                        <i class="fas fa-search-plus"></i> Увеличить
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка записи -->
+    <div class="text-center circle-fade-in-up" style="animation-delay: 0.4s;">
+        <a href="{% url 'sign_up_active' %}" class="circle-btn-main circle-btn-primary-red">
+            <i class="fas fa-pen-alt me-2"></i>Записаться на кружок
+        </a>
+    </div>
+</div>
+{% endblock %}

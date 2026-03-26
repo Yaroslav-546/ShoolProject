@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Участники: {{ event.title }} - Точка Роста{% endblock %}
+{% block title %}Участники: {{ event.title }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
@@ -9,7 +9,6 @@
 
 {% block content %}
 <div class="container py-3 py-md-4">
-    <!-- Хлебные крошки -->
     <nav aria-label="breadcrumb" class="mb-4 fade-in">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -44,7 +43,6 @@
         </div>
 
         <div class="p-4 p-md-5">
-            <!-- Статистика -->
             <div class="row g-3 mb-5">
                 <div class="col-6 col-md-3">
                     <div class="stat-card text-center p-3">
@@ -76,7 +74,6 @@
                 </div>
             </div>
 
-            <!-- Фильтры и поиск -->
             <div class="row g-3 mb-4">
                 <div class="col-12 col-md-5">
                     <form method="get" class="d-flex gap-2">
@@ -109,7 +106,6 @@
                 </div>
             </div>
 
-            <!-- Таблица участников -->
             <div class="table-responsive">
                 <table class="table table-hover align-middle">
                     <thead class="table-light">
@@ -226,7 +222,6 @@
                 </table>
             </div>
 
-            <!-- Пагинация -->
             {% if participants.has_other_pages %}
                 <nav aria-label="Page navigation" class="mt-4">
                     <ul class="pagination justify-content-center flex-wrap">

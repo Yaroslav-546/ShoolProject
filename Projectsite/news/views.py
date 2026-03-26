@@ -58,35 +58,8 @@ class ExitView(TemplateView):
 class Error403(TemplateView):
     template_name = '403.html'
 
-class ActivitiesView(TemplateView):
-    template_name = 'activities.html'
-
-class ActiveProgrammingView(TemplateView):
-    template_name = 'active-programming.html'
-
-class ActiveRoboticsView(TemplateView):
-    template_name = 'active-robotics.html'
-
-class ActiveChessView(TemplateView):
-    template_name = 'active-chess.html'
-
-class ActiveGeoInformaticsView(TemplateView):
-    template_name = 'active-geoinformatics.html'
-
-class ActiveObjzView(TemplateView):
-    template_name = 'active-objz.html'
-
-class ActivePhotoVideoView(TemplateView):
-    template_name = 'active-photo-video.html'
-
-class ActiveVirtualRealityView(TemplateView):
-    template_name = 'active-virtualreality.html'
-
-class ActivePromDesignView(TemplateView):
-    template_name = 'active-promdesign.html'
-
-class ActiveGalleryView(TemplateView):
+class GalleryView(TemplateView):
     template_name = 'gallery.html'
 
-class ActiveAchievementsView(TemplateView):
+class AchievementsView(TemplateView):
     template_name = 'achievements.html'

@@ -1,57 +1,31 @@
 {% extends "admin/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        {% block extrastyle %}
-        <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
-        <style>
-            #header {
-                background-color: rgb(240, 59, 59);
-                color: rgb(255, 255, 255);
-            }
 
-            a:visited {
-                color: rgb(180, 180, 180);
-            }
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Точка Роста - Админ-панель{% endblock %}
 
-            #header a:link, #header a:visited, #logout-form button {
-                color: white;
-            }
+{% block branding %}
+<div id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <i class="fas fa-chalkboard-user"></i>
+        Точка Роста - Административная панель
+    </a>
+</div>
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
 
-            html[data-theme="light"], :root {
-                --primary: rgb(247, 83, 83);
-                --link-fg: rgb(180, 180, 180);
-            }
+{% block nav-global %}{% endblock %}
 
-            .module caption {
-                background: rgb(247, 83, 83);
-            }
+{% block extrahead %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+<link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
+{% endblock %}
 
-            div.breadcrumbs {
-                background: rgb(247, 83, 83) !important;
-                color: white;
-            }
-
-            .theme-toggle svg.theme-icon-when-auto, .theme-toggle svg.theme-icon-when-dark, .theme-toggle svg.theme-icon-when-light {
-                color: rgb(240, 59, 59) !important;
-            }
-        </style>
-        {% endblock %}
-</head>
-<body>
-    {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
-
-    {% block branding %}
-    <h1 id="site_name">
-        <a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a>
-    </h1>
-    {% endblock %}
-
-    {% block nav-global %}{% endblock %}
-</body>
-</html>
+{% block footer %}
+<div id="footer">
+    <p>{% now "Y" %} Точка Роста - Центр цифрового и гуманитарного профилей</p>
+</div>
+{% endblock %}

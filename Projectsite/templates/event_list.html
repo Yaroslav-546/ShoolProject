@@ -2,7 +2,7 @@
 {% load static %}
 {% load event_filters %}
 
-{% block title %}Мероприятия - Точка Роста{% endblock %}
+{% block title %}Мероприятия{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
@@ -10,7 +10,6 @@
 
 {% block content %}
 <div class="container py-3 py-md-4">
-    <!-- Hero Section -->
     <div class="hero-section fade-in-up">
         <div class="row align-items-center">
             <div class="col-md-8">
@@ -31,7 +30,6 @@
         </div>
     </div>
 
-    <!-- Фильтры -->
     <div class="filter-card fade-in-up" style="animation-delay: 0.1s;">
         <form method="get" class="row g-3 align-items-end">
             <div class="col-12 col-md-5">
@@ -76,7 +74,6 @@
         </form>
     </div>
 
-    <!-- Список мероприятий -->
     <div class="row g-4">
         {% for event in events %}
             <div class="col-12 col-md-6 col-lg-4 fade-in-up">
@@ -174,7 +171,6 @@
         {% endfor %}
     </div>
 
-    <!-- Пагинация -->
     {% if is_paginated %}
         <nav aria-label="Page navigation" class="mt-5">
             <ul class="pagination justify-content-center flex-wrap">

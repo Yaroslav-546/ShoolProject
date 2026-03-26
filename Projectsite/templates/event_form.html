@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}{{ title }} - Точка Роста{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/events.css' %}">
@@ -49,7 +49,6 @@
 
                         <div class="row g-4">
                             <div class="col-lg-8">
-                                <!-- Основная информация -->
                                 <div class="form-section">
                                     <h5 class="fw-bold mb-3 text-danger">
                                         <i class="fas fa-info-circle me-2"></i>Основная информация
@@ -87,7 +86,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Даты и время -->
                                 <div class="form-section">
                                     <h5 class="fw-bold mb-3 text-danger">
                                         <i class="fas fa-calendar-alt me-2"></i>Даты и время
@@ -126,7 +124,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Место проведения -->
                                 <div class="form-section">
                                     <h5 class="fw-bold mb-3 text-danger">
                                         <i class="fas fa-map-marker-alt me-2"></i>Место проведения
@@ -150,13 +147,12 @@
                                         {% if form.address.errors %}
                                             <div class="text-danger small mt-1">{{ form.address.errors }}</div>
                                         {% endif %}
-                                        <div class="form-text text-muted">Полный адрес, ссылка на карту, ориентиры.</div>
+                                        <div class="form-text text-muted">Полный адрес или ссылка на карту</div>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-lg-4">
-                                <!-- Участники и изображение -->
                                 <div class="form-section">
                                     <h5 class="fw-bold mb-3 text-danger">
                                         <i class="fas fa-users me-2"></i>Участники

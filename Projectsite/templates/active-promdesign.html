@@ -1,52 +1,283 @@
 {% extends 'base.html' %}
-{% block title %}Кружок Промышленный дизайн{% endblock title %}
-<!DOCTYPE html>
 {% load static %}
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-</head>
+{% block title %}Промышленный дизайн{% endblock %}
 
-<body class="{% block body_class %}{% endblock %}">
-    {% block content %}
-    <div class="main-index">
-        <h1 class="index-h-p-text">Промышленный Дизайн</h1>
-        <div class="index-container">
-            <div class="index-text">
-                <p> Дизайн является одной из основных сфер творческой деятельности человека, направленной на
-                    проектирование материальной среды. В современном мире дизайн охватывает практически все сферы жизни.
-                    В связи с этим всё больше возрастает потребность в высококвалифицированных трудовых ресурсах в
-                    области промышленного (индустриального) дизайна.
-                    <br><br>
-                    Программа учебного курса «Промышленный дизайн» направлена на междисциплинарную
-                    проектно-художественную деятельность с интегрированием естественнонаучных, технических, гуманитарных
-                    знаний, а также на развитие инженерного и художественного мышления обучающегося.
-                    <br><br>
-                    Учебный курс «Промышленный дизайн» фокусируется на приобретении обучающимися практических навыков в
-                    области определения потребительской ниши товаров, прогнозирования запросов потребителей, создания
-                    инновационной продукции, проектирования технологичного изделия.
-                </p>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/active-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-3 py-md-4">
+    <!-- Hero Section -->
+    <div class="circle-hero-section circle-fade-in-up">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="circle-hero-icon">
+                    <i class="fas fa-drafting-compass"></i>
+                </div>
+                <h1 class="circle-hero-title">Промышленный дизайн</h1>
+                <p class="circle-hero-subtitle">Проектирование материальной среды и создание инновационной продукции</p>
             </div>
-            <div class="index-images-activities">
-                <a data-fancybox="gallery" data-src="{% static 'Images/promdis.jpg' %}"><div id="scale-img-1"><img class="index-images-active-1 scale-img" src="{% static 'Images/promdis.jpg' %}"></div></a>
-                <a data-fancybox="gallery" data-src="{% static 'Images/promdis-1.jpg' %}"><div id="scale-img-2"><img class="index-images-active-2 scale-img" src="{% static 'Images/promdis-1.jpg' %}"></div></a>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <i class="fas fa-cube fa-4x opacity-25"></i>
             </div>
         </div>
     </div>
-    {% endblock content %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 
-    <script>
-        document.title = "Кружок Промышленный дизайн"
-    </script>
-</body>
+    <!-- Основная информация -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.1s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-info-circle"></i>
+                О программе
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-info-grid">
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-bullseye"></i>
+                        <h4>Актуальность</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <p>Дизайн является одной из основных сфер творческой деятельности человека, направленной на проектирование материальной среды. В современном мире дизайн охватывает практически все сферы жизни. В связи с этим всё больше возрастает потребность в высококвалифицированных трудовых ресурсах в области промышленного (индустриального) дизайна.</p>
+                    </div>
+                </div>
 
-</html>
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Направленность программы</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <p>Программа учебного курса «Промышленный дизайн» направлена на междисциплинарную проектно-художественную деятельность с интегрированием естественнонаучных, технических, гуманитарных знаний, а также на развитие инженерного и художественного мышления обучающегося.</p>
+                    </div>
+                </div>
+
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Практические навыки</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <p>Учебный курс «Промышленный дизайн» фокусируется на приобретении обучающимися практических навыков в области определения потребительской ниши товаров, прогнозирования запросов потребителей, создания инновационной продукции, проектирования технологичного изделия.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Что вы изучите -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.2s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-cogs"></i>
+                Ключевые навыки
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-features-grid">
+                <div class="circle-feature-item">
+                    <i class="fas fa-pencil-ruler"></i>
+                    <span>Проектирование изделий</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Генерация идей</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-cube"></i>
+                    <span>3D-моделирование</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-palette"></i>
+                    <span>Цветоведение и композиция</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Прогнозирование запросов</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-industry"></i>
+                    <span>Технологичность производства</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Навыки, которые вы получите -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.25s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-star"></i>
+                Что вы научитесь создавать
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-drafting-compass fa-3x mb-3" style="color: rgb(240, 59, 59);"></i>
+                        <h5 class="fw-bold">Дизайн-проекты</h5>
+                        <p class="small text-muted">Создание полноценных проектов промышленных изделий</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-cube fa-3x mb-3" style="color: rgb(240, 59, 59);"></i>
+                        <h5 class="fw-bold">3D-модели</h5>
+                        <p class="small text-muted">Разработка трехмерных моделей будущих продуктов</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-chart-line fa-3x mb-3" style="color: rgb(240, 59, 59);"></i>
+                        <h5 class="fw-bold">Инновационные решения</h5>
+                        <p class="small text-muted">Создание уникальных и востребованных продуктов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Области применения -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.3s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-globe"></i>
+                Где применяется промышленный дизайн
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>Электроника и гаджеты</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-car"></i>
+                        <span>Автомобилестроение</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-home"></i>
+                        <span>Мебель и интерьер</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-tshirt"></i>
+                        <span>Бытовые товары</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-medkit"></i>
+                        <span>Медицинское оборудование</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-running"></i>
+                        <span>Спортивный инвентарь</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Этапы проектирования -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.35s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-tasks"></i>
+                Этапы создания продукта
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-search fa-2x mb-2" style="color: rgb(240, 59, 59);"></i>
+                        <h6 class="fw-bold">Анализ рынка</h6>
+                        <p class="small text-muted">Изучение потребностей и конкурентов</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-lightbulb fa-2x mb-2" style="color: rgb(240, 59, 59);"></i>
+                        <h6 class="fw-bold">Генерация идей</h6>
+                        <p class="small text-muted">Создание концепций и эскизов</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-cube fa-2x mb-2" style="color: rgb(240, 59, 59);"></i>
+                        <h6 class="fw-bold">3D-моделирование</h6>
+                        <p class="small text-muted">Разработка объемной модели</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-flask fa-2x mb-2" style="color: rgb(240, 59, 59);"></i>
+                        <h6 class="fw-bold">Прототипирование</h6>
+                        <p class="small text-muted">Создание опытного образца</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-chart-line fa-2x mb-2" style="color: rgb(240, 59, 59);"></i>
+                        <h6 class="fw-bold">Тестирование</h6>
+                        <p class="small text-muted">Проверка и доработка</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-rocket fa-2x mb-2" style="color: rgb(240, 59, 59);"></i>
+                        <h6 class="fw-bold">Внедрение</h6>
+                        <p class="small text-muted">Запуск в производство</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Галерея -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.4s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-images"></i>
+                Фотогалерея
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-gallery-grid">
+                <div class="circle-gallery-item" data-fancybox="gallery" data-src="{% static 'Images/promdis.jpg' %}">
+                    <img src="{% static 'Images/promdis.jpg' %}" alt="Промышленный дизайн 1">
+                    <div class="circle-gallery-overlay">
+                        <i class="fas fa-search-plus"></i> Увеличить
+                    </div>
+                </div>
+                <div class="circle-gallery-item" data-fancybox="gallery" data-src="{% static 'Images/promdis-1.jpg' %}">
+                    <img src="{% static 'Images/promdis-1.jpg' %}" alt="Промышленный дизайн 2">
+                    <div class="circle-gallery-overlay">
+                        <i class="fas fa-search-plus"></i> Увеличить
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка записи -->
+    <div class="text-center circle-fade-in-up" style="animation-delay: 0.5s;">
+        <a href="{% url 'sign_up_active' %}" class="circle-btn-main circle-btn-primary-red">
+            <i class="fas fa-pen-alt me-2"></i>Записаться на кружок
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,636 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* Основные переменные */
+:root {
+    --primary-red: #dc2626;
+    --primary-red-dark: #b91c1c;
+    --primary-red-light: #fee2e2;
+    --primary-red-soft: #fef2f2;
+    --white: #ffffff;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+    --danger: #ef4444;
+}
+
+/* Общие стили */
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
+}
+
+/* Хедер админки */
+#header {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.2);
+    text-align: center;
+}
+
+#header h1 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.5px;
+}
+
+#header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+#header h1 a:hover {
+    opacity: 0.9;
+}
+
+/* Ссылки в хедере */
+#header a:link, #header a:visited {
+    color: white;
+}
+
+#user-tools {
+    font-weight: 500;
+    text-align: center;
+    margin-top: 5px;
+}
+
+#content {
+    margin: 20px auto;
+    background: var(--white);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--gray-200);
+    max-width: 1300px;
+}
+
+/* Для страниц без боковой панели */
+#content-main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Сетка для главной страницы админки */
+#content-main {
+    display: block;
+    width: 100%;
+}
+
+/* Стили для блоков приложений */
+.module {
+    background: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+
+.main.shifted > #nav-sidebar {
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+div.breadcrumbs {
+    background: var(--primary-red-dark) !important;
+    color: #ffcfcf !important;
+}
+
+#nav-sidebar .current-model {
+    background: #ffdfdf !important;
+}
+
+#nav-sidebar .current-app .section:link, #nav-sidebar .current-app .section:visited {
+    color: #ffdfdf !important;
+}
+
+.module h2 {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    color: white;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.module caption {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    color: white;
+    padding: 12px 20px;
+    font-weight: 600;
+}
+
+/* Стили для блока "Последние действия" */
+#content-related {
+    float: none;
+    width: 100%;
+    margin: 30px 0 0 0;
+    padding: 0;
+    background: transparent;
+    clear: both;
+}
+
+#content-related .module {
+    background: var(--white);
+    border-radius: 20px;
+    margin-bottom: 0;
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+#content-related h2 {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    color: white;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0;
+    border-radius: 20px 20px 0 0;
+}
+
+#content-related h3 {
+    color: var(--primary-red);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    margin: 0;
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+#content-related ul {
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+}
+
+#content-related ul li {
+    padding: 8px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    transition: all 0.3s ease;
+}
+
+#content-related ul li:hover {
+    background: var(--primary-red-light);
+}
+
+#content-related ul li a {
+    color: var(--gray-700);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+#content-related ul li a:hover {
+    color: var(--primary-red);
+}
+
+#content-related ul li .action-time {
+    color: var(--gray-400);
+    font-size: 0.7rem;
+    margin-left: 8px;
+}
+
+/* Таблицы - увеличены для лучшего отображения */
+#result_list {
+    border-radius: 12px;
+    overflow-x: auto;
+    overflow-y: visible;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    width: 100%;
+    margin-bottom: 20px;
+    display: table;
+}
+
+#result_list th {
+    background: var(--gray-100);
+    color: var(--gray-700);
+    font-weight: 600;
+    border-bottom: 2px solid var(--gray-200);
+    padding: 12px 15px;
+    white-space: nowrap;
+}
+
+#result_list td {
+    border-bottom: 1px solid var(--gray-200);
+    padding: 10px 15px;
+}
+
+#result_list tr:hover {
+    background: var(--primary-red-light);
+}
+
+/* Адаптивная таблица для мобильных */
+@media (max-width: 768px) {
+    #result_list {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    #result_list th, #result_list td {
+        white-space: nowrap;
+    }
+}
+
+/* Кнопки */
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, a.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
+    background: linear-gradient(135deg, var(--primary-red-dark) 0%, var(--primary-red) 100%);
+}
+
+/* Кнопка "Сохранить и продолжить" */
+.default {
+    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+}
+
+.default:hover {
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* Кнопка удаления */
+.deletelink {
+    background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%) !important;
+}
+
+.deletelink:hover {
+    box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+}
+
+/* Строка действий внизу */
+.submit-row {
+    background: var(--gray-100);
+    border-radius: 16px;
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid var(--gray-200);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+/* Панель фильтров для страницы списка */
+#changelist {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#changelist #changelist-form {
+    flex: 1;
+    min-width: 0;
+}
+
+#changelist-filter {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid var(--gray-200);
+    width: 280px;
+    flex-shrink: 0;
+}
+
+#changelist-filter h2 {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: white;
+}
+
+#changelist-filter h3 {
+    color: var(--gray-700);
+    font-weight: 600;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+#changelist-filter ul li a {
+    color: var(--gray-600);
+    transition: all 0.3s ease;
+}
+
+#changelist-filter ul li a:hover {
+    color: var(--primary-red);
+    padding-left: 5px;
+}
+
+/* Формы */
+.form-row {
+    margin-bottom: 15px;
+    padding: 15px;
+    background: var(--gray-50);
+    border-radius: 12px;
+    border: 1px solid var(--gray-200);
+}
+
+label {
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+input, textarea, select {
+    border-radius: 10px;
+    border: 1px solid var(--gray-300);
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 500px;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    outline: none;
+}
+
+/* Поля для числовых значений и дат */
+input[type="number"], input[type="date"], input[type="datetime-local"] {
+    max-width: 200px;
+}
+
+/* Сообщения */
+.messagelist li {
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+}
+
+.messagelist li.success {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    color: #065f46;
+    border-left: 4px solid var(--success);
+}
+
+.messagelist li.warning {
+    background: linear-gradient(135deg, #fed7aa 0%, #ffedd5 100%);
+    color: #92400e;
+    border-left: 4px solid var(--warning);
+}
+
+.messagelist li.error {
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+    color: #991b1b;
+    border-left: 4px solid var(--danger);
+}
+
+/* Пагинация */
+.paginator {
+    background: var(--gray-100);
+    border-radius: 12px;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.paginator a:link, .paginator a:visited {
+    background: var(--white);
+    color: var(--primary-red);
+    border-radius: 8px;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.paginator a:hover {
+    background: var(--primary-red);
+    color: white;
+}
+
+/* Датапикер */
+.calendar {
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid var(--gray-200);
+    z-index: 1000;
+}
+
+.calendar caption {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 1024px) {
+    #container {
+        padding: 0 15px;
+    }
+    
+    #content {
+        padding: 20px;
+        max-width: 100%;
+    }
+    
+    #changelist {
+        flex-direction: column;
+    }
+    
+    #changelist-filter {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #header {
+        padding: 0.8rem 1rem;
+    }
+    
+    #content {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .form-row {
+        padding: 10px;
+    }
+    
+    .submit-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .submit-row input {
+        width: 100%;
+    }
+    
+    #content-related {
+        margin-top: 20px;
+    }
+    
+    input, textarea, select {
+        max-width: 100%;
+    }
+}
+
+/* Анимация загрузки */
+.loading {
+    background: var(--primary-red-light);
+}
+
+/* Чекбоксы и радиокнопки */
+input[type="checkbox"], input[type="radio"] {
+    accent-color: var(--primary-red);
+    width: 16px;
+    height: 16px;
+    max-width: 16px;
+}
+
+/* Поле поиска */
+#searchbar {
+    border-radius: 12px;
+    border: 2px solid var(--gray-200);
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+}
+
+#searchbar:focus {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Ссылки в таблицах */
+.field-__str__ a, .field-name a {
+    color: var(--primary-red);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.field-__str__ a:hover, .field-name a:hover {
+    color: var(--primary-red-dark);
+    text-decoration: underline;
+}
+
+/* Индикаторы */
+.selector-available h2, .selector-chosen h2 {
+    background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Кастомные кнопки действий */
+.actions button {
+    background: linear-gradient(135deg, var(--gray-600) 0%, var(--gray-700) 100%);
+    border-radius: 8px;
+    padding: 5px 15px;
+}
+
+.actions button:hover {
+    transform: translateY(-2px);
+}
+
+/* Стили для иконок */
+.addlink, .changelink, .deletelink {
+    padding-left: 20px;
+    background-position: left center;
+}
+
+/* Футер админки */
+#footer {
+    background: var(--gray-100);
+    padding: 15px;
+    text-align: center;
+    color: var(--gray-600);
+    border-top: 1px solid var(--gray-200);
+    margin-top: 20px;
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-red);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-red-dark);
+}
+.dashboard #content {
+    max-width: 1200px !important;
+    width: 95% !important;
+}
+
+.theme-toggle svg.theme-icon-when-auto, .theme-toggle svg.theme-icon-when-dark, .theme-toggle svg.theme-icon-when-light {
+    color: var(--primary-red-dark) !important;
+}
+
+.actions {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.actions select {
+    margin-right: 5px;
+}
+
+.actions button {
+    margin-left: 5px;
+}
+
+#toolbar {
+    order: 1;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#toolbar form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#toolbar input[type="text"] {
+    flex: 1;
+    max-width: 300px;
+}
+
+#toolbar input[type="submit"] {
+    width: auto;
+    padding: 6px 15px;
+    white-space: nowrap;
+}
+

@@ -22,7 +22,8 @@
         href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.css"
     />
 </head>
-
+{% block extra_css %}
+{% endblock %}
 <body class="{% block body_class %}{% endblock %}">
     {% block header %}
     <header>
@@ -53,6 +54,14 @@
                             <a class="nav-link" aria-current="page" href="{% url 'gallery' %}">Галерея</a>
                         </li>
 
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'events:event_list' %}">
+                                Мероприятия
+                            </a>
+                        </li>
+                        {% endif %}
+
                         {% if user.is_superuser %}
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{% url 'post_new' %}">Добавить Новости</a>
@@ -69,13 +78,6 @@
                         <li class="nav-item mobile-only">
                             <a class="nav-link" href="{% url 'dashboard' %}">
                                 Личный кабинет
-                            </a>
-                        </li>
-                        {% endif %}
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'events:event_list' %}">
-                                Мероприятия
                             </a>
                         </li>
                         {% endif %}
@@ -211,16 +213,53 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.0/dist/fancybox/fancybox.umd.js"></script>
     <script>
-        Fancybox.bind("[data-fancybox]", {
+        Fancybox.bind('[data-fancybox="gallery"]', {
+            // Основные настройки
+            closeButton: "auto",
+            dragToClose: true,
+
+            // Настройки навигации
             Carousel: {
-                Zoomable: {
-                Panzoom: {
-                    clickAction: "iterateZoom",
-                    maxScale: 2,
-                },
+                infinite: true,
+                Navigation: {
+                    prev: '<i class="bi bi-chevron-left"></i>',
+                    next: '<i class="bi bi-chevron-right"></i>'
+                }
             },
-        },
-    });
+
+            // Анимация
+            animated: true,
+            showClass: "fade-in",
+            hideClass: "fade-out",
+
+            // Панель инструментов
+            Toolbar: {
+                display: {
+                    left: ["infobar"],
+                    middle: [],
+                    right: ["close"]
+                }
+            },
+
+            // Подписи к изображениям
+            caption: function(fancybox, slide) {
+                return slide.caption || slide.$trigger?.dataset?.caption || '';
+            },
+
+            // Клавиатурная навигация
+            keyboard: {
+                Escape: "close",
+                ArrowLeft: "prev",
+                ArrowRight: "next"
+            },
+
+            // Защита от прокрутки страницы
+            backdropClick: "close",
+            mainClass: "fancybox-custom",
+
+            // Адаптивность
+            placeFocusBack: false
+        });
     </script>
     <canvas id="windSnow"></canvas>
     <script>
@@ -319,5 +358,4 @@
     });
     </script>
 </body>
-
 </html>
