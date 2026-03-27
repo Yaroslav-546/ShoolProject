@@ -40,5 +40,7 @@
 | Bootstrap | 5.x | UI компоненты |
 
 ---
+
 Ссылка на сайт: https://tochkarostanb.pythonanywhere.com/
+
 ---
