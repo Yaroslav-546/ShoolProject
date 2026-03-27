@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.static import serve
 
 #url приложений
 urlpatterns = [
@@ -26,6 +27,8 @@ urlpatterns = [
     path('students/', include('students.urls')),
     path('accounts/', include('accounts.urls')),
     path('events/', include('events.urls')),
+    path('robots.txt', serve, {'path': 'robots.txt', 'document_root': settings.STATIC_ROOT}),
+    path('sitemap.xml', serve, {'path': 'sitemap.xml', 'document_root': settings.STATIC_ROOT}),
 ]
 
 if settings.DEBUG:

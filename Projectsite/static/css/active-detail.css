@@ -1,6 +1,6 @@
 /* Hero Section */
 .circle-hero-section {
-    background: linear-gradient(135deg, rgb(240, 59, 59) 0%, #b91c1c 100%);
+    background: linear-gradient(135deg, #ff3a3a 0%, #ea6666 100%);
     border-radius: 28px;
     padding: 2.5rem 2rem;
     margin-bottom: 2rem;
@@ -68,7 +68,7 @@
 }
 
 .circle-card-header-red {
-    background: linear-gradient(135deg, rgb(240, 59, 59) 0%, #b91c1c 100%);
+    background: linear-gradient(135deg, #fc3232 0%, #f14141 100%);
     padding: 1.25rem 1.75rem;
     color: white;
 }
@@ -283,7 +283,7 @@
     .circle-hero-title {
         font-size: 2rem;
     }
-    
+
     .circle-hero-icon {
         font-size: 3rem;
     }
@@ -294,36 +294,36 @@
         padding: 2rem 1.5rem;
         text-align: center;
     }
-    
+
     .circle-hero-title {
         font-size: 1.8rem;
     }
-    
+
     .circle-card-body {
         padding: 1.25rem;
     }
-    
+
     .circle-info-block {
         padding: 1.25rem;
     }
-    
+
     .circle-info-block-title h4 {
         font-size: 1.1rem;
     }
-    
+
     .circle-features-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .circle-gallery-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
-    
+
     .circle-gallery-item {
         max-width: 280px;
     }
-    
+
     .circle-btn-main {
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
@@ -334,19 +334,19 @@
     .circle-hero-title {
         font-size: 1.5rem;
     }
-    
+
     .circle-hero-icon {
         font-size: 2.5rem;
     }
-    
+
     .circle-card-header-red h3 {
         font-size: 1.1rem;
     }
-    
+
     .circle-info-block-text {
         font-size: 0.9rem;
     }
-    
+
     .circle-feature-item span {
         font-size: 0.85rem;
     }

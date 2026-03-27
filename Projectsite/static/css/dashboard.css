@@ -143,4 +143,14 @@ body {
     .stats {
         grid-template-columns: 1fr;
     }
+
+    .dashboard-container {
+        padding: 2px;
+    }
+}
+
+@media (max-width: 352px){
+    .info-item {
+        display: block;
+    }
 }

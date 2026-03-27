@@ -470,11 +470,6 @@
 }
 
 @media (max-width: 576px) {
-    .container {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
     .hero-section {
         padding: 1.5rem;
         text-align: center;
@@ -506,6 +501,52 @@
         width: 100%;
     }
 }
+@media (max-width: 425px) {
+    .stat-number {
+        font-size: clamp(1.15rem, 4vw, 1.5rem);
+    }
+}
+
+@media (max-width: 350px) {
+    .stat-number {
+        font-size: clamp(1.0rem, 4vw, 1.5rem);
+    }
+}
+
+@media (min-width: 769px) {
+    .stat-number {
+        font-size: clamp(1.1rem, 4vw, 1.1rem);
+    }
+}
+
+@media (min-width: 1000px) {
+    .stat-number {
+        font-size: clamp(1.1rem, 4vw, 1.1rem);
+    }
+}
+
+@media (min-width: 1400px) {
+    .stat-number {
+        font-size: clamp(1.5rem, 4vw, 1.5rem);
+    }
+}
+
+@media (max-width: 425px) {
+    .info-card, .registration-card {
+        padding: 0.4rem;
+    }
+}
+
+@media (max-width: 455px) {
+    .col-11  {
+        width: 100%;
+    }
+
+    #p-4 {
+        padding: 0.7rem !important;
+    }
+}
+
 
 /* Скелетон загрузки */
 .skeleton {

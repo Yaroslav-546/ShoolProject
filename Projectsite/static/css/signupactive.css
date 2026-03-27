@@ -82,3 +82,16 @@
 .btn-outline-primary:hover>span {
     color: white;
 }
+
+
+
+@media (max-width: 455px) {
+    .registration-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+}

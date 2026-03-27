@@ -170,7 +170,7 @@
 /* Адаптивность */
 @media (max-width: 768px) {
     .news-detail-container {
-        padding: 15px;
+        padding: 2px;
     }
 
     .news-header {
@@ -182,7 +182,7 @@
     }
 
     .news-content {
-        padding: 20px;
+        padding: 15px;
     }
 
     .news-body {

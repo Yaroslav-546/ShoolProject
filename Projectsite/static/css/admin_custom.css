@@ -125,6 +125,68 @@ div.breadcrumbs {
     margin: 0;
 }
 
+@media (max-width: 1024px) {
+    #toolbar form #searchbar {
+        width: 100% !important;
+        max-width: 200px !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    /*.object-tools {*/
+    /*    float: left !important;*/
+    /*    margin: 0 0 15px !important;*/
+    /*    padding: 0 !important;*/
+    /*    overflow: hidden !important;*/
+    /*}*/
+
+    .object-tools li {
+        float: none !important;
+    }
+}
+
+/* Оптимизация таблицы для мобильных устройств - карточками */
+@media (max-width: 1024px) {
+    #result_list {
+        border: 0;
+    }
+
+    #result_list thead {
+        display: none;
+    }
+
+    #result_list tr {
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid var(--gray-200);
+        border-radius: 12px;
+        padding: 10px;
+        background: white;
+    }
+
+    #result_list td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border: none;
+        border-bottom: 1px solid var(--gray-200);
+        text-align: right;
+    }
+
+    #result_list td:last-child {
+        border-bottom: none;
+    }
+
+    #result_list td:before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--primary-red);
+        text-align: left;
+        margin-right: 15px;
+    }
+}
+
 .module caption {
     background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
     color: white;
@@ -233,13 +295,8 @@ div.breadcrumbs {
 }
 
 /* Адаптивная таблица для мобильных */
-@media (max-width: 768px) {
-    #result_list {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
+@media (max-width: 1024px) {
+
     #result_list th, #result_list td {
         white-space: nowrap;
     }
@@ -298,7 +355,7 @@ div.breadcrumbs {
 #changelist {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 0px;
 }
 
 #changelist #changelist-form {
@@ -360,9 +417,7 @@ label {
 input, textarea, select {
     border-radius: 10px;
     border: 1px solid var(--gray-300);
-    padding: 8px 12px;
     transition: all 0.3s ease;
-    width: 100%;
     max-width: 500px;
 }
 
@@ -442,52 +497,53 @@ input[type="number"], input[type="date"], input[type="datetime-local"] {
 
 /* Адаптивность для мобильных */
 @media (max-width: 1024px) {
-    #container {
-        padding: 0 15px;
-    }
-    
+
     #content {
         padding: 20px;
         max-width: 100%;
     }
-    
-    #changelist {
-        flex-direction: column;
-    }
-    
+
     #changelist-filter {
         width: 100%;
         margin-bottom: 20px;
     }
 }
 
-@media (max-width: 768px) {
+#changelist-filter {
+    flex: 1 0 200px !important;
+}
+
+#changelist-filter {
+    margin: 0 0 0 !important;
+}
+
+@media (max-width: 1024px) {
     #header {
         padding: 0.8rem 1rem;
     }
-    
+
     #content {
         margin: 10px;
         padding: 15px;
     }
-    
+
     .form-row {
         padding: 10px;
     }
-    
+
     .submit-row {
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .submit-row input {
         width: 100%;
     }
-    
+
     #content-related {
         margin-top: 20px;
     }
-    
+
     input, textarea, select {
         max-width: 100%;
     }
@@ -588,7 +644,7 @@ input[type="checkbox"], input[type="radio"] {
 }
 .dashboard #content {
     max-width: 1200px !important;
-    width: 95% !important;
+    width: 90% !important;
 }
 
 .theme-toggle svg.theme-icon-when-auto, .theme-toggle svg.theme-icon-when-dark, .theme-toggle svg.theme-icon-when-light {
