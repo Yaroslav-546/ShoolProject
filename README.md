@@ -41,5 +41,4 @@
 
 ---
 Ссылка на сайт: https://tochkarostanb.pythonanywhere.com/
-
 ---
