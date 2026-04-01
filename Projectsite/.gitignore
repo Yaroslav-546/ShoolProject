@@ -111,10 +111,33 @@ media/
 *.pyc
 *.db
 *.pid
-
-# Ignore Django Migrations in Development if you are working on team
-
-# Only for Development only
-# **/migrations/**
-# !**/migrations
-# !**/migrations/__init__.py
+# .gitignore for Django projects  
+# Python-specific  
+    *.pyc  
+    __pycache__/  
+# Django  
+    *.log  
+    db.sqlite3  
+    media/  
+# Virtual environment  
+    venv/  
+    env/  
+# Django migrations  
+    /migrations/  
+# Ignore local settings  
+    /local_settings.py  
+# Ignore Visual Studio Code settings  
+    .vscode/  
+# Ignore Jupyter Notebooks  
+    *.ipynb_checkpoints/  
+# Ignore Docker Compose files  
+    docker-compose.yml  
+    docker-compose.override.yml  
+    docker-compose.*.yml  
+# Ignore Celery Beat schedule file  
+    celerybeat-schedule  
+# Ignore Celery worker state and results  
+    celerybeat.pid  
+    celerybeat.db  
+# Ignore pipenv virtual environment  
+    Pipfile.lock
