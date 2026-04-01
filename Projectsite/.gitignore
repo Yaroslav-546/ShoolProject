@@ -81,6 +81,8 @@ celerybeat-schedule
 
 # dotenv
 .env
+# sqlite3
+.sqlite3
 
 # virtualenv
 .venv
