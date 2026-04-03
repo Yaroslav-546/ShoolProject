@@ -13,7 +13,6 @@ from .models import Event, EventRegistration
 from .forms import EventForm, EventRegistrationForm
 from .utils import send_registration_email, send_cancellation_email, send_waiting_list_email, send_confirmation_from_waiting_email
 
-
 class StaffRequiredMixin(UserPassesTestMixin):
     """Миксин для проверки, является ли пользователь сотрудником (админом)"""
     def test_func(self):

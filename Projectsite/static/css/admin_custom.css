@@ -77,8 +77,11 @@ body {
 /* Для страниц без боковой панели */
 #content-main {
     width: 100%;
-    max-width: 1200px;
     margin: 0 auto;
+}
+
+#toolbar #searchbar {
+    max-width: 60% !important;
 }
 
 /* Сетка для главной страницы админки */
@@ -688,5 +691,14 @@ input[type="checkbox"], input[type="radio"] {
     width: auto;
     padding: 6px 15px;
     white-space: nowrap;
+}
+
+.aligned label {
+    min-width: 100px !important;
+    width: 100px !important;
+}
+
+input, textarea, select {
+    max-width: 100% !important;
 }
 

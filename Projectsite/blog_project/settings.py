@@ -16,8 +16,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 env_path = BASE_DIR / '.env'
@@ -29,7 +27,7 @@ load_dotenv(env_path)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = [os.getenv('HOST1'), os.getenv('HOST2'), os.getenv('HOST3')]
 
 
@@ -45,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'students.apps.StudentsConfig',
     'news.apps.NewsConfig',
-    'events.apps.EventsConfig'
+    'events.apps.EventsConfig',
+    'circles.apps.CirclesConfig'
 ]
 
 MIDDLEWARE = [
@@ -57,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'blog_project.middleware.AdminAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'blog_project.urls'
@@ -153,9 +153,10 @@ AUTHENTICATION_BACKENDS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 EMAIL_HOST_USER = os.getenv('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+SITE_URL = os.getenv('SITE_URL')

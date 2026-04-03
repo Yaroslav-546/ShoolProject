@@ -14,7 +14,7 @@
     }
 
     .bg-gradient-red {
-        background: linear-gradient(135deg, var(--primary-red) 0%, var(--primary-red-dark) 100%);
+        background: linear-gradient(135deg, #ff3a3a 0%, #ea6666 100%);;
     }
 
     .stat-card {
@@ -189,18 +189,6 @@
 {% block content %}
 {% if user.is_superuser %}
 <div class="container py-3 py-md-4">
-    <!-- Хлебные крошки -->
-    <nav aria-label="breadcrumb" class="mb-4 fade-in">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="{% url 'index' %}">
-                    <i class="fas fa-home me-1"></i>Главная
-                </a>
-            </li>
-            <li class="breadcrumb-item active">Ученики</li>
-        </ol>
-    </nav>
-
     <div class="event-card fade-in-up">
         <!-- Заголовок -->
         <div class="bg-gradient-red p-4 p-md-5 text-white" style="border-radius: 24px 24px 0 0;">

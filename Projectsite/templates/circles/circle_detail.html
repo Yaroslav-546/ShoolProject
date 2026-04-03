@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ circle.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/active-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+{{ circle.content|safe }}
+{% endblock %}

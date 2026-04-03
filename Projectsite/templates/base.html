@@ -47,7 +47,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="{% url 'activities' %}">Кружки</a>
+                            <a class="nav-link" aria-current="page" href="{% url 'circles:circles_list' %}">Кружки</a>
                         </li>
 
                         <li class="nav-item">
@@ -85,7 +85,7 @@
                     <ul class="navbar-nav ms-auto mg-r-main" id="navbarNav">
                         {% if user.is_authenticated %}
                         <li class="nav-item desktop-only">
-                            <a aria-current="page" href="{% url 'dashboard' %}"><img src="{{ user.avatar.url }}" alt="Аватар" class="user-avatar" onerror="this.src='/media/users/default_avatar.png'"></a>
+                            <a aria-current="page" href="{% url 'dashboard' %}"><img src="{{ user.avatar.url }}" alt="Аватар" class="user-avatar" onerror="this.src='/media/users/default_avatar.svg'"></a>
                         </li>
                         {% else %}
                         <li class="nav-item">

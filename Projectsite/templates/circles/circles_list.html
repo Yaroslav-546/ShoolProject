@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Кружки{% endblock %}
+{% block title %}Кружки - Точка Роста{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -65,6 +65,84 @@
 
     .btn-outline-secondary.active:hover {
         background: var(--primary-red-dark);
+    }
+
+    /* Кнопки управления */
+    .admin-actions {
+        gap: 0.5rem;
+        white-space: nowrap;
+    }
+
+    .btn-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        background: #6c757d;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-icon:hover {
+        transform: translateY(-2px);
+        color: white;
+        text-decoration: none;
+    }
+
+    .btn-edit {
+        background: #6c757d;
+    }
+
+    .btn-edit:hover {
+        background: #5a6268;
+    }
+
+    .btn-delete {
+        background: #dc3545;
+    }
+
+    .btn-delete:hover {
+        background: #c82333;
+    }
+
+    /* Для мобильных карточек */
+    .circle-mobile-actions {
+        margin-top: 0.75rem;
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+    }
+
+    .circle-mobile-actions .btn-icon {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+
+    /* Название кружка - красное */
+    .table-custom td:first-child a {
+        color: var(--primary-red) !important;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .table-custom td:first-child a:hover {
+        color: var(--primary-red-dark) !important;
+        text-decoration: underline;
+    }
+
+    .circle-mobile-header h3 a {
+        color: var(--primary-red) !important;
+        text-decoration: none;
+    }
+
+    .circle-mobile-header h3 a:hover {
+        color: var(--primary-red-dark) !important;
+        text-decoration: underline;
     }
 
     /* Десктопная таблица */
@@ -131,15 +209,6 @@
         font-weight: 700;
         margin: 0;
         flex: 1;
-    }
-
-    .circle-mobile-header a {
-        color: var(--primary-red);
-        text-decoration: none;
-    }
-
-    .circle-mobile-header a:hover {
-        color: var(--primary-red);
     }
 
     .circle-mobile-body {
@@ -271,6 +340,12 @@
             padding: 0.3rem 0.6rem;
             font-size: 0.7rem;
         }
+        
+        .admin-actions {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 0.5rem;
+        }
     }
 
     @media (min-width: 769px) {
@@ -309,16 +384,21 @@
                     </h2>
                     <p class="mb-0 opacity-75">Развитие творческих и технических способностей детей</p>
                 </div>
-                <div>
+                <div class="d-flex gap-2 align-items-center">
                     <span class="badge bg-white text-danger px-3 py-2 rounded-pill">
                         <i class="fas fa-graduation-cap me-1"></i>
-                        9 кружков
+                        {{ circles|length }} кружков
                     </span>
+                    {% if user.is_staff %}
+                    <a href="{% url 'circles:circle_create' %}" class="btn btn-light btn-sm rounded-pill">
+                        <i class="fas fa-plus-circle me-1"></i>Создать
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
 
-        <div class="p-4 p-md-5" id="p-4">
+        <div class="p-4 p-md-5">
             <!-- Поиск и фильтры -->
             <div class="row g-3 mb-4">
                 <div class="col-12 col-md-5">
@@ -381,28 +461,42 @@
                             <th>Время занятий</th>
                             <th>Кабинет</th>
                             <th>Преподаватель</th>
+                            {% if user.is_staff %}
+                            <th>Управление</th>
+                            {% endif %}
                         </thead>
                     <tbody>
                         {% for circle in circles %}
                         <tr class="fade-in-up">
                             <td>{{ forloop.counter }}</td>
                             <td>
-                                <a href="{{ circle.url }}" class="text-decoration-none fw-semibold" style="color: var(--primary-red);">
+                                <a href="{% url 'circles:circle_detail' circle.slug %}" class="text-decoration-none fw-semibold" style="color: var(--primary-red);">
                                     <i class="{{ circle.icon }} me-2"></i>{{ circle.name }}
                                 </a>
                             </td>
                             <td><span class="badge-grade">{{ circle.grade }}</span></td>
                             <td>
-                                {% for time in circle.schedule %}
-                                    <span class="schedule-tag">{{ time }}</span>
+                                {% for schedule in circle.get_schedule_display %}
+                                    <span class="schedule-tag">{{ schedule }}</span>
                                 {% endfor %}
                             </td>
                             <td><span class="badge bg-secondary rounded-pill">Каб. №{{ circle.room }}</span></td>
                             <td><span class="teacher-badge"><i class="fas fa-chalkboard-user"></i>{{ circle.teacher }}</span></td>
+                            {% if user.is_staff %}
+                            <td class="admin-actions">
+                                <a href="{% url 'circles:circle_edit' circle.slug %}" class="btn-icon btn-edit" title="Редактировать">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="{% url 'circles:circle_delete' circle.slug %}" class="btn-icon btn-delete" title="Удалить" 
+                                   onclick="return confirm('Вы уверены, что хотите удалить кружок «{{ circle.name }}»?')">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                            {% endif %}
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="6" class="text-center py-5">
+                            <td colspan="{% if user.is_staff %}7{% else %}6{% endif %}" class="text-center py-5">
                                 <div class="empty-state">
                                     <i class="fas fa-chalkboard"></i>
                                     <h5 class="text-muted">Кружки не найдены</h5>
@@ -410,11 +504,17 @@
                                         {% if search_query or selected_day %}
                                             По вашему запросу ничего не найдено.
                                             <br>
-                                            <a href="{% url 'circles_list' %}" class="btn btn-link mt-2 text-danger">
+                                            <a href="{% url 'circles:circles_list' %}" class="btn btn-link mt-2 text-danger">
                                                 <i class="fas fa-undo me-1"></i>Сбросить фильтры
                                             </a>
                                         {% else %}
                                             В системе пока нет зарегистрированных кружков.
+                                            {% if user.is_staff %}
+                                                <br>
+                                                <a href="{% url 'circles:circle_create' %}" class="btn btn-primary-custom mt-3">
+                                                    <i class="fas fa-plus-circle me-2"></i>Создать первый кружок
+                                                </a>
+                                            {% endif %}
                                         {% endif %}
                                     </p>
                                 </div>
@@ -432,7 +532,7 @@
                     <div class="circle-mobile-header">
                         <i class="{{ circle.icon }}"></i>
                         <h3>
-                            <a href="{{ circle.url }}" class="text-decoration-none">
+                            <a href="{% url 'circles:circle_detail' circle.slug %}">
                                 {{ circle.name }}
                             </a>
                         </h3>
@@ -445,8 +545,8 @@
                         <div class="circle-mobile-info">
                             <i class="far fa-clock"></i>
                             <div>
-                                {% for time in circle.schedule %}
-                                    <span class="schedule-tag-mobile">{{ time }}</span>
+                                {% for schedule in circle.get_schedule_display %}
+                                    <span class="schedule-tag-mobile">{{ schedule }}</span>
                                 {% endfor %}
                             </div>
                         </div>
@@ -458,6 +558,17 @@
                             <i class="fas fa-chalkboard-user"></i>
                             <span class="teacher-badge">{{ circle.teacher }}</span>
                         </div>
+                        {% if user.is_staff %}
+                        <div class="circle-mobile-actions">
+                            <a href="{% url 'circles:circle_edit' circle.slug %}" class="btn-icon btn-edit" title="Редактировать">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{% url 'circles:circle_delete' circle.slug %}" class="btn-icon btn-delete" title="Удалить"
+                               onclick="return confirm('Вы уверены, что хотите удалить кружок «{{ circle.name }}»?')">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 {% empty %}
@@ -468,7 +579,7 @@
                         {% if search_query or selected_day %}
                             По вашему запросу ничего не найдено.
                             <br>
-                            <a href="{% url 'circles_list' %}" class="btn btn-link mt-2 text-danger">
+                            <a href="{% url 'circles:circles_list' %}" class="btn btn-link mt-2 text-danger">
                                 <i class="fas fa-undo me-1"></i>Сбросить фильтры
                             </a>
                         {% else %}
@@ -479,13 +590,12 @@
                 {% endfor %}
             </div>
 
-            {% if user.is_authenticated %}
+            <!-- Запись на кружки -->
             <div class="alert alert-info border-0 rounded-4 mt-4 text-center">
                 <i class="fas fa-info-circle me-2"></i>
                 <strong>Запись на кружки</strong> — для записи на кружок перейдите на страницу
                 <a href="{% url 'sign_up_active' %}" class="alert-link text-danger">записи</a> и выберите интересующее направление.
             </div>
-            {% endif %}
         </div>
     </div>
 </div>
