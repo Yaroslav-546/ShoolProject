@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Мои обращения{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <div class="feedback-card fade-in-up">
+        <div class="feedback-header-red">
+            <h2><i class="fas fa-comments me-2"></i>Мои обращения</h2>
+        </div>
+        <div class="feedback-body">
+            {% if feedbacks %}
+                <div class="feedback-list-group">
+                    {% for fb in feedbacks %}
+                        <div class="feedback-list-item">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <a href="{% url 'feedback:user_detail' fb.pk %}" class="flex-grow-1 text-decoration-none">
+                                    <div class="feedback-meta">
+                                        <span class="feedback-subject">{{ fb.subject }}</span>
+                                        <span class="badge-status badge-{{ fb.status }}">
+                                            {{ fb.get_status_display }}
+                                        </span>
+                                    </div>
+                                    <div class="feedback-date">{{ fb.created_at|date:"d.m.Y H:i" }}</div>
+                                    <div class="feedback-preview">{{ fb.message|truncatewords:25 }}</div>
+                                </a>
+                                <form method="post" action="{% url 'feedback:user_delete' fb.pk %}" class="ms-2" onsubmit="return confirm('Удалить это обращение?');">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% include 'includes/pagination.html' with page_obj=page_obj %}
+            {% else %}
+                <div class="alert alert-info">У вас пока нет обращений.</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

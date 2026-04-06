@@ -29,7 +29,7 @@ class Circle(models.Model):
 
     # Дни недели для фильтрации
     days = models.CharField('Дни недели', max_length=200, blank=True, null=True,
-                            help_text='Дни через запятую: monday,friday')
+                            help_text='Дни недели через запятую: (например) monday,friday<br>monday-Понедельник<br>tuesday-Вторник<br>wednesday-Среда<br>thursday-Четверг<br>friday-Пятница<br>saturday-Суббота<br>sunday-Воскресенье')
 
     # Порядок сортировки
     order = models.IntegerField('Порядок', default=0)

@@ -36,6 +36,13 @@ class ProfileFormView(LoginRequiredMixinCustom, CreateView):
         kwargs['request'] = self.request
         return kwargs
 
+    def get_initial(self):
+        initial = super().get_initial()
+        circle_name = self.request.GET.get('circle')
+        if circle_name:
+            initial['active'] = circle_name
+        return initial
+
     def form_valid(self, form):
         if not self.request.user.is_authenticated:
             form.add_error(None, "Для записи на кружок необходимо авторизоваться")

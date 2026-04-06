@@ -243,20 +243,6 @@
                             <i class="fas fa-search me-1"></i>Поиск
                     </form>
                 </div>
-                <div class="col-12 col-md-7">
-                    <div class="d-flex flex-wrap gap-2 justify-content-md-end">
-                        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}circle="
-                           class="btn btn-outline-secondary btn-custom btn-sm {% if not selected_circle %}active{% endif %}">
-                            <i class="fas fa-list me-1"></i>Все кружки
-                        </a>
-                        {% for circle in circles|slice:":5" %}
-                            <a href="?{% if search_query %}search={{ search_query }}&{% endif %}circle={{ circle }}"
-                               class="btn btn-outline-secondary btn-custom btn-sm {% if selected_circle == circle %}active{% endif %}">
-                                {{ circle|truncatechars:15 }}
-                            </a>
-                        {% endfor %}
-                    </div>
-                </div>
             </div>
 
             <!-- Таблица учеников -->

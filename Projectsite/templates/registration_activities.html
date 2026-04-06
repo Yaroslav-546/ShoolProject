@@ -49,7 +49,13 @@
 
                     <div class="mb-3">
                         <label for="{{ form.active.id_for_label }}" class="form-label">{{ form.active.label }}</label>
-                        {{ form.active }}
+                        <select name="active" class="form-control form-select">
+                            {% for value, label in form.fields.active.choices %}
+                                <option value="{{ value }}" {% if form.initial.active == value %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                            {% endfor %}
+                        </select>
                         {% if form.active.errors %}
                             <div class="text-danger">{{ form.active.errors }}</div>
                         {% endif %}

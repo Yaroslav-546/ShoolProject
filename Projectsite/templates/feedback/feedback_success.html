@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Сообщение отправлено{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/feedback.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="feedback-card fade-in-up text-center" style="max-width: 500px; margin: 0 auto;">
+        <div class="feedback-body">
+            <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+            <h3>Спасибо!</h3>
+            <p class="mb-4">Ваше сообщение отправлено. Мы ответим вам в ближайшее время.</p>
+            <a href="{% url 'index' %}" class="btn-feedback btn-feedback-primary">На главную</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

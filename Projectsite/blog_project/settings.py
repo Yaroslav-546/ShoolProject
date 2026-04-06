@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'students.apps.StudentsConfig',
     'news.apps.NewsConfig',
     'events.apps.EventsConfig',
-    'circles.apps.CirclesConfig'
+    'circles.apps.CirclesConfig',
+    'feedback.apps.FeedbackConfig'
 ]
 
 MIDDLEWARE = [
