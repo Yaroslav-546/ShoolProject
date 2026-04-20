@@ -1,0 +1,215 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}ОБЖ{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/active-detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container py-3 py-md-4">
+    <!-- Hero Section -->
+    <div class="circle-hero-section circle-fade-in-up">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="circle-hero-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1 class="circle-hero-title">Основы безопасности жизнедеятельности</h1>
+                <p class="circle-hero-subtitle">Школа безопасности - формирование навыков безопасного поведения</p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <i class="fas fa-first-aid fa-4x opacity-25"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основная информация -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.1s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-info-circle"></i>
+                О программе
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-info-grid">
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-bullseye"></i>
+                        <h4>Цель программы</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <p>Программа «Школа безопасности» ориентирована на создание у обучающихся правильного представления о личной безопасности, на расширение знаний и приобретение практических навыков поведения при попадании в экстремальные и чрезвычайные ситуации.</p>
+                    </div>
+                </div>
+
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Содержание курса</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <p>В содержание курса «Школа безопасности» входят аспекты различных знаний из предметов естественнонаучного цикла и ОБЖ, которые систематизируют знания в области безопасности жизнедеятельности, полученные учащимися в процессе обучения в школе, и способствуют формированию цельного представления в области безопасности жизнедеятельности личности.</p>
+                    </div>
+                </div>
+
+                <div class="circle-info-block">
+                    <div class="circle-info-block-title">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>Почему это важно</h4>
+                    </div>
+                    <div class="circle-info-block-text">
+                        <p>Знания основ безопасности жизнедеятельности помогают сохранить здоровье и жизнь в критических ситуациях, развивают ответственность за себя и окружающих, формируют культуру безопасного поведения в повседневной жизни.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ключевые направления -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.2s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-cogs"></i>
+                Ключевые направления обучения
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-features-grid">
+                <div class="circle-feature-item">
+                    <i class="fas fa-fire-extinguisher"></i>
+                    <span>Пожарная безопасность</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-car"></i>
+                    <span>Безопасность дорожного движения</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-water"></i>
+                    <span>Безопасность на воде</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-band-aid"></i>
+                    <span>Первая медицинская помощь</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-biohazard"></i>
+                    <span>Чрезвычайные ситуации</span>
+                </div>
+                <div class="circle-feature-item">
+                    <i class="fas fa-home"></i>
+                    <span>Безопасность в быту</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Навыки, которые вы получите -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.25s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-star"></i>
+                Что вы научитесь делать
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-hand-holding-heart fa-3x mb-3" style="color: rgb(240, 59, 59);"></i>
+                        <h5 class="fw-bold">Оказывать первую помощь</h5>
+                        <p class="small text-muted">Правила оказания доврачебной помощи при различных травмах</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-bell fa-3x mb-3" style="color: rgb(240, 59, 59);"></i>
+                        <h5 class="fw-bold">Действовать в ЧС</h5>
+                        <p class="small text-muted">Алгоритм действий при пожарах, наводнениях и других ЧС</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="circle-info-block text-center">
+                        <i class="fas fa-brain fa-3x mb-3" style="color: rgb(240, 59, 59);"></i>
+                        <h5 class="fw-bold">Принимать решения</h5>
+                        <p class="small text-muted">Быстро и правильно действовать в опасных ситуациях</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Практические занятия -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.3s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-hands-helping"></i>
+                Практические занятия
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-heartbeat"></i>
+                        <span>Отработка приемов первой помощи</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-tint"></i>
+                        <span>Наложение жгутов и повязок</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-running"></i>
+                        <span>Эвакуация из здания</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="circle-feature-item">
+                        <i class="fas fa-fire"></i>
+                        <span>Использование огнетушителей</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Галерея -->
+    <div class="circle-main-card circle-fade-in-up" style="animation-delay: 0.35s;">
+        <div class="circle-card-header-red">
+            <h3>
+                <i class="fas fa-images"></i>
+                Фотогалерея
+            </h3>
+        </div>
+        <div class="circle-card-body">
+            <div class="circle-gallery-grid">
+                <div class="circle-gallery-item" data-fancybox="gallery" data-src="{% static 'Images/obj.jpg' %}">
+                    <img src="{% static 'Images/obj.jpg' %}" alt="ОБЖ 1">
+                    <div class="circle-gallery-overlay">
+                        <i class="fas fa-search-plus"></i> Увеличить
+                    </div>
+                </div>
+                <div class="circle-gallery-item" data-fancybox="gallery" data-src="{% static 'Images/obj-1.jpg' %}">
+                    <img src="{% static 'Images/obj-1.jpg' %}" alt="ОБЖ 2">
+                    <div class="circle-gallery-overlay">
+                        <i class="fas fa-search-plus"></i> Увеличить
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка записи -->
+    <div class="text-center circle-fade-in-up" style="animation-delay: 0.45s;">
+        <a href="{% url 'sign_up_active' %}" class="circle-btn-main circle-btn-primary-red">
+            <i class="fas fa-pen-alt me-2"></i>Записаться на кружок
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from django.conf import settings
 
 #Модель пост- новости
 class News(models.Model):

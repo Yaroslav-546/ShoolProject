@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Удаление кружка - Точка Роста{% endblock %}
+
+{% block extra_css %}
+<style>
+    .delete-container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .delete-header {
+        background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+        padding: 2rem;
+        color: white;
+    }
+    
+    .delete-header i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+    }
+    
+    .delete-body {
+        padding: 2rem;
+    }
+    
+    .delete-body p {
+        color: var(--gray-600);
+        margin-bottom: 1rem;
+    }
+    
+    .circle-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-red);
+        margin: 1rem 0;
+    }
+    
+    .delete-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+    
+    .btn-danger {
+        background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-danger:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+    }
+    
+    .btn-secondary {
+        background: var(--gray-200);
+        color: var(--gray-700);
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="delete-container fade-in-up">
+        <div class="delete-header">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h1>Удаление кружка</h1>
+        </div>
+        <div class="delete-body">
+            <p>Вы уверены, что хотите удалить кружок?</p>
+            <div class="circle-name">«{{ circle.name }}»</div>
+            <p class="small text-muted">Это действие нельзя отменить.</p>
+            
+            <form method="post">
+                {% csrf_token %}
+                <div class="delete-actions">
+                    <a href="{% url 'circles:circles_list' %}" class="btn-secondary">
+                        <i class="fas fa-times me-2"></i>Отмена
+                    </a>
+                    <button type="submit" class="btn-danger">
+                        <i class="fas fa-trash-alt me-2"></i>Удалить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

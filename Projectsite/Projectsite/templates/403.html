@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/errors.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
+    <title>Нет доступа</title>
+</head>
+
+<body class="{% block body_class %}error403-main-bg-color{% endblock %}">
+    {% block content %}
+    <div class="error-403-container">
+        <div class="error-403-container-main-text">
+            <span class="error403-403-text" id="error403-text-color">403</span>
+            <span class="error403-zapret-text" id="error403-text-color">Запрещено</span></h2>
+        </div>
+        <div class="error-403-container-p-text">
+            <span class="error403-p-text" id="error403-text-color">Вам не разрешён доступ к этому ресурсу из-за настроек сервера. Пожалуйста, проверьте адрес, который вы
+                пытались открыть.</span>
+            <span class="error403-p-text" id="error403-text-color">Приносим извинения за причиненные неудобства.</span>
+        </div>
+
+        <a href="{% url 'index' %}" class="return-button">Вернуться на главную страницу</a>
+    </div>
+    {% endblock content %}
+
+    <script>
+        const windowInnerHeight = window.innerHeight;
+        document.getElementsByClassName('error-403-container')[0].style.height = ""+window.innerHeight + "px";
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,369 @@
+/* Hero Section */
+.circle-hero-section {
+    background: linear-gradient(135deg, #ff3a3a 0%, #ea6666 100%);
+    border-radius: 28px;
+    padding: 2.5rem 2rem;
+    margin-bottom: 2rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.circle-hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+    animation: heroRotate 20s linear infinite;
+}
+
+@keyframes heroRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.circle-hero-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.circle-hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.circle-hero-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* Основная карточка */
+.circle-main-card {
+    background: white;
+    border-radius: 28px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.circle-main-card:hover {
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+}
+
+.circle-card-header-red {
+    background: linear-gradient(135deg, #fc3232 0%, #f14141 100%);
+    padding: 1.25rem 1.75rem;
+    color: white;
+}
+
+.circle-card-header-red h3 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.circle-card-header-red i {
+    font-size: 1.5rem;
+}
+
+.circle-card-body {
+    padding: 1.75rem;
+}
+
+/* Информационные блоки */
+.circle-info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.circle-info-block {
+    background: #f9fafb;
+    border-radius: 20px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.circle-info-block:hover {
+    transform: translateX(5px);
+    border-color: #fee2e2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.circle-info-block-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #fee2e2;
+}
+
+.circle-info-block-title i {
+    font-size: 1.5rem;
+    color: rgb(240, 59, 59);
+}
+
+.circle-info-block-title h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.circle-info-block-text {
+    color: #4b5563;
+    line-height: 1.6;
+}
+
+.circle-info-block-text p {
+    margin-bottom: 0.75rem;
+}
+
+.circle-info-block-text ul {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+}
+
+.circle-info-block-text li {
+    margin-bottom: 0.5rem;
+}
+
+/* Особенности курса */
+.circle-features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.circle-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.circle-feature-item:hover {
+    transform: translateX(5px);
+}
+
+.circle-feature-item i {
+    font-size: 1.2rem;
+    color: rgb(240, 59, 59);
+    width: 30px;
+}
+
+.circle-feature-item span {
+    color: #374151;
+    font-size: 0.9rem;
+}
+
+/* Галерея */
+.circle-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.circle-gallery-item {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 4/3;
+    max-width: 320px;
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.circle-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.circle-gallery-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.circle-gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.circle-gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 0.75rem;
+    color: white;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+.circle-gallery-item:hover .circle-gallery-overlay {
+    transform: translateY(0);
+}
+
+/* Кнопки */
+.circle-btn-main {
+    border-radius: 12px;
+    padding: 0.7rem 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.circle-btn-primary-red {
+    background: linear-gradient(135deg, rgb(240, 59, 59) 0%, #b91c1c 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.circle-btn-primary-red:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+    color: white;
+}
+
+.circle-btn-outline-red {
+    border: 2px solid rgb(240, 59, 59);
+    background: transparent;
+    color: rgb(240, 59, 59);
+}
+
+.circle-btn-outline-red:hover {
+    background: rgb(240, 59, 59);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .circle-hero-title {
+        font-size: 2rem;
+    }
+
+    .circle-hero-icon {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .circle-hero-section {
+        padding: 2rem 1.5rem;
+        text-align: center;
+    }
+
+    .circle-hero-title {
+        font-size: 1.8rem;
+    }
+
+    .circle-card-body {
+        padding: 1.25rem;
+    }
+
+    .circle-info-block {
+        padding: 1.25rem;
+    }
+
+    .circle-info-block-title h4 {
+        font-size: 1.1rem;
+    }
+
+    .circle-features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .circle-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .circle-gallery-item {
+        max-width: 280px;
+    }
+
+    .circle-btn-main {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .circle-hero-title {
+        font-size: 1.5rem;
+    }
+
+    .circle-hero-icon {
+        font-size: 2.5rem;
+    }
+
+    .circle-card-header-red h3 {
+        font-size: 1.1rem;
+    }
+
+    .circle-info-block-text {
+        font-size: 0.9rem;
+    }
+
+    .circle-feature-item span {
+        font-size: 0.85rem;
+    }
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.circle-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
