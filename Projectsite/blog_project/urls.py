@@ -29,6 +29,7 @@ urlpatterns = [
     path('events/', include('events.urls')),
     path('circles/', include('circles.urls')),
     path('feedback/', include('feedback.urls')),
+    path('gallery/', include('gallery.urls')),
     path('robots.txt', serve, {'path': 'robots.txt', 'document_root': settings.STATIC_ROOT}),
     path('sitemap.xml', serve, {'path': 'sitemap.xml', 'document_root': settings.STATIC_ROOT}),
 ]

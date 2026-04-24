@@ -131,7 +131,7 @@
 .goal-block {
     display: flex;
     gap: 1.25rem;
-    padding: 1.25rem;
+    padding: 1rem;
     background: #f9fafb;
     border-radius: 20px;
     transition: all 0.3s ease;
@@ -206,7 +206,6 @@
     padding: 0.7rem 1.5rem;
     font-weight: 600;
     transition: all 0.3s ease;
-    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
@@ -344,7 +343,7 @@
     }
 
     .card-body {
-        padding: 1.25rem;
+        padding: 1rem;
     }
 
     .gallery-grid {
@@ -352,6 +351,7 @@
     }
 
     .btn-main {
+        text-align: center;
         padding: 0.5rem 1rem;
         font-size: 0.85rem;
     }

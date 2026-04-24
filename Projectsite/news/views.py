@@ -57,9 +57,3 @@ class ExitView(TemplateView):
 
 class Error403(TemplateView):
     template_name = '403.html'
-
-class GalleryView(TemplateView):
-    template_name = 'gallery.html'
-
-class AchievementsView(TemplateView):
-    template_name = 'achievements.html'

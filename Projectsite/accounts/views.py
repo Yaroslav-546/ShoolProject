@@ -28,7 +28,7 @@ class RegisterView(CreateView):
             'На вашу электронную почту отправлено письмо с ссылкой для подтверждения.'
         )
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         """Обработка ошибок формы"""
         messages.error(self.request, 'Пожалуйста, исправьте ошибки в форме.')
@@ -36,10 +36,10 @@ class RegisterView(CreateView):
 
 class VerifyEmailView(TemplateView):
     template_name = 'registration/verify_email.html'
-    
+
     def get(self, request, *args, **kwargs):
         token = kwargs.get('token')
-        
+
         try:
             user = CustomUser.objects.get(email_verification_token=token)
             if not user.email_verified:
@@ -47,19 +47,19 @@ class VerifyEmailView(TemplateView):
                 user.is_active = True  # Активируем аккаунт
                 user.email_verification_token = None  # Удаляем использованный токен
                 user.save()
-                
+
                 messages.success(
                     request,
                     'Ваш email успешно подтверждён! Теперь вы можете войти в свой аккаунт.'
                 )
             else:
                 messages.info(request, 'Ваш email уже был подтверждён ранее.')
-                
+
         except CustomUser.DoesNotExist:
             messages.error(request, 'Неверная или устаревшая ссылка для подтверждения.')
-        
+
         return super().get(request, *args, **kwargs)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Подтверждение email'
@@ -68,13 +68,13 @@ class VerifyEmailView(TemplateView):
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
     authentication_form = EmailOrUsernameAuthenticationForm  # Используем нашу форму
-    
+
     def form_invalid(self, form):
         response = super().form_invalid(form)
-        
+
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
-        
+
         if username and password:
             # Проверяем существует ли пользователь
             try:
@@ -82,19 +82,19 @@ class CustomLoginView(LoginView):
                 user = CustomUser.objects.get(
                     Q(username__iexact=username) | Q(email__iexact=username)
                 )
-                
+
                 if not user.check_password(password):
                     messages.error(self.request, _("Неверный пароль. Попробуйте еще раз."))
                 elif not user.is_active:
                     messages.error(self.request, _("Ваш аккаунт не активирован. Проверьте почту с письмом активации"))
                 elif not user.email_verified:
                     messages.warning(self.request, _("Email не подтвержден. Проверьте вашу почту."))
-                    
+
             except CustomUser.DoesNotExist:
                 messages.error(self.request, _("Пользователь с такими данными не найден."))
-        
+
         return response
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Добавляем информацию о том, что можно вводить email
@@ -145,14 +145,14 @@ class PasswordResetView(FormView):
     template_name = 'registration/password_reset.html'
     form_class = PasswordResetRequestForm
     success_url = reverse_lazy('password-reset-done')
-    
+
     def form_valid(self, form):
         email = form.cleaned_data['email']
         user = CustomUser.objects.get(email=email)
-        
+
         # Отправка письма со ссылкой для сброса
         user.send_password_reset_email(self.request)
-        
+
         messages.info(
             self.request,
             f'На адрес {email} отправлено письмо с инструкциями по сбросу пароля.'
@@ -168,7 +168,7 @@ class PasswordResetConfirmView(FormView):
     template_name = 'registration/password_reset_confirm.html'
     form_class = CustomSetPasswordForm
     success_url = reverse_lazy('password-reset-complete')
-    
+
     def dispatch(self, request, *args, **kwargs):
         # Проверяем токен
         self.token = kwargs.get('token')
@@ -180,30 +180,26 @@ class PasswordResetConfirmView(FormView):
         except CustomUser.DoesNotExist:
             messages.error(request, 'Неверная ссылка для сброса пароля.')
             return redirect('password-reset')
-        
+
         return super().dispatch(request, *args, **kwargs)
-    
+
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.user
         return kwargs
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['validlink'] = True
         context['user'] = self.user
         return context
-    
+
     def form_valid(self, form):
-        # Сохраняем новый пароль
         form.save()
-        
-        # Очищаем токен
+
         self.user.clear_password_reset_token()
-        
-        # Автоматически логиним пользователя
         login(self.request, self.user)
-        
+
         messages.success(
             self.request,
             f'Пароль успешно изменён! Вы вошли в систему как {self.user.get_full_name()}.'

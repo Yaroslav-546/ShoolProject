@@ -102,7 +102,6 @@ class RegistrationDeleteView(LoginRequiredMixinCustom, DeleteView):
     success_url = reverse_lazy('my_registrations')
 
     def get_queryset(self):
-        # Пользователь может удалять только свои записи
         return Profile.objects.filter(user=self.request.user)
 
     def delete(self, request, *args, **kwargs):
@@ -119,7 +118,6 @@ class StudentsListView(RedirectPermissionRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        # Поиск по фамилии, имени или классу
         search_query = self.request.GET.get('search', '')
         if search_query:
             queryset = queryset.filter(
@@ -128,7 +126,6 @@ class StudentsListView(RedirectPermissionRequiredMixin, ListView):
                 Q(Class__icontains=search_query)
             )
 
-        # Фильтр по кружку
         circle_filter = self.request.GET.get('circle', '')
         if circle_filter:
             queryset = queryset.filter(active=circle_filter)
@@ -138,14 +135,11 @@ class StudentsListView(RedirectPermissionRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Получаем все уникальные кружки для фильтра
         circles = Profile.objects.values_list('active', flat=True).distinct()
 
-        # Статистика
         total_students = self.get_queryset().count()
         total_circles = Profile.objects.values('active').distinct().count()
 
-        # Среднее количество учеников на кружок
         if total_circles > 0:
             avg_per_circle = round(total_students / total_circles, 1)
         else:

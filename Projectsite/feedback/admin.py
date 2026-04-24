@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.utils.html import format_html
 from .models import Feedback
 
 @admin.register(Feedback)
@@ -17,6 +16,6 @@ class FeedbackAdmin(admin.ModelAdmin):
 
     def reply_status(self, obj):
         if obj.admin_reply:
-            return format_html('<span style="color: green;">✓ Ответ отправлен</span>')
-        return format_html('<span style="color: orange;">⏳ Ожидает ответа</span>')
+            return "✓ Ответ отправлен"
+        return "⏳ Ожидает ответа"
     reply_status.short_description = 'Статус ответа'

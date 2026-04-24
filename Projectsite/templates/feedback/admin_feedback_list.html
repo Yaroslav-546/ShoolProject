@@ -9,7 +9,7 @@
     .admin-table th, .admin-table td { padding: 0.75rem; border-bottom: 1px solid #e5e7eb; text-align: left; }
     .admin-table th { background: #f9fafb; font-weight: 600; }
     .admin-table tr:hover { background: #fef2f2; }
-    @media (max-width: 768px) { .admin-table, .admin-table thead, .admin-table tbody, .admin-table tr, .admin-table td { display: block; } .admin-table th { display: none; } .admin-table td { position: relative; padding-left: 50%; } .admin-table td:before { content: attr(data-label); position: absolute; left: 0.75rem; font-weight: 600; } }
+    @media (max-width: 768px) { .admin-table, .admin-table thead, .admin-table tbody, .admin-table tr, .admin-table td { display: block; } .admin-table th { display: none; } .button-right-imp { padding-left: 70% !important; } .admin-table td { position: relative; padding-left: 30%; } .admin-table td:before { content: attr(data-label); position: absolute; left: 0.75rem; font-weight: 600; } }
 </style>
 {% endblock %}
 {% block content %}
@@ -40,7 +40,7 @@
                             <td data-label="Email">{{ item.email }}</td>
                             <td data-label="Тема">{{ item.subject }}</td>
                             <td data-label="Статус"><span class="badge-status badge-{{ item.status }}">{{ item.get_status_display }}</span></td>
-                            <td data-label="Действия">
+                            <td data-label="Действия" class="button-right-imp">
                                 <a href="{% url 'feedback:admin_reply' item.pk %}" class="btn btn-sm btn-primary">Ответить</a>
                             </td>
                         </tr>

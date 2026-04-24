@@ -4,12 +4,6 @@
 {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Точка Роста - Админ-панель{% endblock %}
 
 {% block branding %}
-<div id="site-name">
-    <a href="{% url 'admin:index' %}">
-        <i class="fas fa-chalkboard-user"></i>
-        Точка Роста - Административная панель
-    </a>
-</div>
 {% if user.is_anonymous %}
   {% include "admin/color_theme_toggle.html" %}
 {% endif %}
@@ -20,12 +14,60 @@
 {% block extrahead %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
 <link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
-{% endblock %}
+<style>
+/*    .bg-danger {*/
+/*        background-color: rgb(255 255 255) !important;*/
+/*    }*/
+    input:focus, textarea:focus, select:focus {
+        border-color: #3b82f6 !important; /* Синий цвет границы */
+        box-shadow: 0 0 0 3px rgba(59,130,246,0.2) !important; /* Внешняя тень */
+        outline: none !important;
+        transition: all 0.15s ease;
+    }
 
-{% block footer %}
-<div id="footer">
-    <p>{% now "Y" %} Точка Роста - Центр цифрового и гуманитарного профилей</p>
-</div>
+    /* Увеличение контраста для текстовых полей */
+    input, textarea, select {
+        border-width: 1.5px !important;
+        background-color: #ffffff;
+        border-radius: 5px;
+    }
+
+    /* Стилизация для полей с ошибками */
+    .errorlist li {
+        color: #dc2626;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+
+    /* Улучшение читаемости меток */
+    label {
+        font-weight: 500;
+        margin-bottom: 0.25rem;
+        color: #374151;
+    }
+
+    input, textarea, select {
+        font-size: 1rem !important;      /* размер шрифта */
+        padding: 0.3rem 1rem !important; /* внутренние отступы */
+        line-height: 1.5 !important;
+    }
+
+    /* Дополнительно для textarea – высота */
+    textarea {
+        min-height: 120px !important;
+    }
+
+    /* Если хотите увеличить и select */
+    select {
+        padding: 0.75rem 2rem 0.75rem 1rem !important;
+    }
+
+    .bg-primary-900.cursor-pointer.flex.items-center.justify-center.px-3.py-1.rounded-default.text-sm.text-white.whitespace-nowrap {
+        display: inline-flex !important;
+    }
+    /*.text-font-important-light {*/
+    /*    color: oklch(0.71 0.18 20.79) !important;*/
+    /*}*/
+</style>
 {% endblock %}

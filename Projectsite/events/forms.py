@@ -64,26 +64,21 @@ class EventRegistrationForm(forms.ModelForm):
         if not self.event:
             raise ValidationError('Событие не указано')
 
-        # Проверяем, есть ли активная (не отмененная) запись
         existing_registration = EventRegistration.objects.filter(
             event=self.event,
             user=self.user
         ).first()
 
         if existing_registration:
-            # Если запись отменена, разрешаем создать новую
             if existing_registration.status == 'cancelled':
-                # Удаляем старую отмененную запись
                 existing_registration.delete()
             else:
-                # Если запись активна, запрещаем повторную регистрацию
                 raise ValidationError(
                     f'Вы уже записаны на это событие. '
                     f'Статус: {existing_registration.get_status_display()}. '
                     f'Дата записи: {existing_registration.registration_date.strftime("%d.%m.%Y %H:%M")}'
                 )
 
-        # Проверяем, открыта ли регистрация
         if not self.event.is_registration_open():
             raise ValidationError('Регистрация на это событие закрыта')
 

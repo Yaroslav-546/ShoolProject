@@ -8,6 +8,8 @@ Disallow: /password-reset/
 Disallow: /profile/
 Disallow: /studentslist/
 Disallow: /my_registrations/
+Disallow: /students/activities
+Disallow: /post/
 
 Sitemap: https://tochkarostanb.pythonanywhere.com/sitemap.xml
 Host: tochkarostanb.pythonanywhere.com

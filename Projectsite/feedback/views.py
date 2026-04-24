@@ -26,7 +26,6 @@ class FeedbackFormView(LoginRequiredMixin, FormView):
         return initial
 
     def form_valid(self, form):
-        # Сохраняем сообщение в базу
         feedback = form.save(commit=False)
         if self.request.user.is_authenticated:
             feedback.user = self.request.user
@@ -44,7 +43,6 @@ class UserFeedbackDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('feedback:user_list')
 
     def get_queryset(self):
-        # Пользователь может удалять только свои сообщения
         return Feedback.objects.filter(email=self.request.user.email)
 
     def delete(self, request, *args, **kwargs):

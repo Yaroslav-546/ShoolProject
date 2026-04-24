@@ -15,6 +15,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from django.templatetags.static import static
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,6 +35,7 @@ ALLOWED_HOSTS = [os.getenv('HOST1'), os.getenv('HOST2'), os.getenv('HOST3')]
 # Application definition
 
 INSTALLED_APPS = [
+    'unfold',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,8 +48,73 @@ INSTALLED_APPS = [
     'events.apps.EventsConfig',
     'circles.apps.CirclesConfig',
     'feedback.apps.FeedbackConfig',
+    'gallery.apps.GalleryConfig',
     'django_cleanup',
 ]
+
+UNFOLD = {
+    # Основные настройки
+    "SITE_TITLE": "Точка Роста — Админ-панель",
+    "SITE_HEADER": "Точка Роста",
+    "SITE_URL": "/",
+
+    # Логотипы (светлая и тёмная тема)
+    "SITE_FAVICONS": [
+        {
+            "rel": "icon",
+            "sizes": "32x32",
+            "type": "image/svg+xml",
+            "href": lambda request: static("Images/main-icon.svg"),
+        },
+    ],
+
+    "SITE_ICON": "/static/Images/main-icon.svg",
+    "SITE_LOGO": "/static/Images/main-icon.svg",   # для светлой темы
+    "SITE_LOGO_DARK": "/static/Images/main-icon.svg", # для тёмной
+
+    # Тёмная тема
+    "DARK_MODE": True,                # включает переключатель
+    "DEFAULT_THEME": "auto",          # "light", "dark" или "auto"
+
+
+    # Дополнительные возможности
+    "SHOW_HISTORY": True,
+    "SHOW_VIEW_ON_SITE": True,
+    # "TABS": ["detail", "history", "delete"],  # вкладки в формах
+
+    # Расширенные фильтры
+    "FILTERS": {
+        "auto_complete": True,
+        "datetime": True,
+        "numeric": True,
+        "text": True,
+    },
+}
+
+JAZZMIN_SETTINGS = {
+    "site_brand": "Точка Роста",  # Здесь укажите нужное название
+    "site_title": "Панель управления Точка Роста",
+    "site_header": "Точка Роста",
+    "welcome_sign": "Добро пожаловать в админ-панель Точки Роста",
+    "copyright": "Точка Роста © 2026",
+    "site_logo": "Images/main-icon.svg",
+    "site_logo_classes": "img-circle",
+    "site_icon": "Images/main-icon.svg",
+    "show_theme_chooser": True,     # Добавляет выпадающий список тем в навигацию
+    "icons": {
+        "auth.User": "fas fa-users",
+        "auth.Group": "fas fa-users-cog",
+        "events.Event": "fas fa-calendar-alt",
+        "students.Profile": "fas fa-user-graduate",
+        "circles.Circle": "fas fa-chalkboard",
+        "feedback.Feedback": "fas fa-envelope",
+    },
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",              # Светлая тема по умолчанию (можно заменить на 'darkly', 'united' и др.)
+    "dark_mode_theme": "darkly",    # Тёмная тема для систем с тёмным режимом
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

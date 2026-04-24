@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Добавить новость - Точка Роста{% endblock %}
+{% block title %}Добавить новость{% endblock %}
 
 {% block extra_css %}
     <link href="{% static 'css/news_add.css' %}" rel="stylesheet">
 {% endblock %}
-    
+
 {% block content %}
 
 {% if user.is_superuser %}

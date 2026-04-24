@@ -24,22 +24,19 @@ class EventListView(LoginRequiredMixin, ListView):
     Список всех событий (турниров)
     """
     model = Event
-    template_name = 'event_list.html'  # Исправлено: добавил events/
+    template_name = 'event_list.html'
     context_object_name = 'events'
     paginate_by = 12
 
     def get_queryset(self):
         queryset = super().get_queryset()
 
-        # Получаем параметры фильтрации
         self.event_type = self.request.GET.get('type', '')
         self.status = self.request.GET.get('status', 'upcoming')
 
-        # Фильтр по типу события
         if self.event_type:
             queryset = queryset.filter(event_type=self.event_type)
 
-        # Фильтр по статусу
         now = timezone.now()
         if self.status == 'upcoming':
             queryset = queryset.filter(start_date__gt=now, is_active=True)
@@ -50,7 +47,6 @@ class EventListView(LoginRequiredMixin, ListView):
         elif self.status == 'active':
             queryset = queryset.filter(is_active=True, registration_deadline__gte=now)
 
-        # Сортировка
         queryset = queryset.order_by('start_date')
 
         return queryset
@@ -58,17 +54,14 @@ class EventListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Получаем записи текущего пользователя
         user_registrations = EventRegistration.objects.filter(
             user=self.request.user
         ).values('event_id', 'status')
 
-        # Преобразуем QuerySet в словарь {event_id: status}
         registrations_dict = {}
         for reg in user_registrations:
             registrations_dict[reg['event_id']] = reg['status']
 
-        # Вычисляем статистику
         events_list = context['events']
         total_participants = sum(event.current_participants for event in events_list)
         total_free_slots = sum(event.available_slots() for event in events_list)
@@ -100,7 +93,6 @@ class EventDetailView(LoginRequiredMixin, FormMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Проверяем, записан ли пользователь
         user_registration = EventRegistration.objects.filter(
             event=self.object,
             user=self.request.user
@@ -135,33 +127,11 @@ class EventDetailView(LoginRequiredMixin, FormMixin, DetailView):
 
         return self.get(request, *args, **kwargs)
 
-    def cancel_registration(self, request):
-        """Отмена записи"""
-        registration = EventRegistration.objects.filter(
-            event=self.object,
-            user=request.user
-        ).first()
-
-        if registration:
-            # Если запись была подтверждена, уменьшаем счетчик участников
-            if registration.status == 'confirmed':
-                self.object.current_participants -= 1
-                self.object.save()
-
-            # Удаляем запись вместо изменения статуса
-            registration.delete()
-            messages.success(request, 'Вы успешно отменили запись на событие.')
-        else:
-            messages.warning(request, 'Запись не найдена.')
-
-        return redirect(self.get_success_url())
-
     def register(self, request):
         """Запись на событие"""
         form = self.get_form()
 
         if form.is_valid():
-            # Проверяем, есть ли отмененная запись
             cancelled_registration = EventRegistration.objects.filter(
                 event=self.object,
                 user=request.user,
@@ -169,7 +139,6 @@ class EventDetailView(LoginRequiredMixin, FormMixin, DetailView):
             ).first()
 
             if cancelled_registration:
-                # Восстанавливаем отмененную запись
                 cancelled_registration.reactivate()
                 messages.success(request, f'Вы успешно восстановили запись на событие "{self.object.title}"!')
                 return redirect(self.get_success_url())
@@ -178,17 +147,14 @@ class EventDetailView(LoginRequiredMixin, FormMixin, DetailView):
 
             registration.save()
 
-            # Проверяем, не нужно ли поставить в лист ожидания
             if registration.event.current_participants >= registration.event.max_participants:
                 registration.status = 'waiting'
                 registration.save()
                 messages.info(request, f'Вы добавлены в лист ожидания на событие "{self.object.title}".')
-                # Отправляем письмо о добавлении в лист ожидания
                 send_waiting_list_email(request.user, self.object, registration)
             else:
                 registration.confirm_registration()
                 messages.success(request, f'Вы успешно записаны на событие "{self.object.title}"!')
-                # Отправляем письмо о подтверждении регистрации
                 send_registration_email(request.user, self.object, registration)
 
             return redirect(self.get_success_url())
@@ -206,7 +172,6 @@ class EventDetailView(LoginRequiredMixin, FormMixin, DetailView):
             was_confirmed = registration.status == 'confirmed'
 
             if was_confirmed:
-                # Уменьшаем счетчик участников
                 self.object.current_participants -= 1
                 self.object.save()
 
@@ -214,10 +179,8 @@ class EventDetailView(LoginRequiredMixin, FormMixin, DetailView):
             registration.save()
             messages.success(request, 'Вы успешно отменили запись на событие.')
 
-            # Отправляем письмо об отмене
             send_cancellation_email(request.user, self.object, registration)
 
-            # Если есть люди в листе ожидания, активируем следующего
             self.activate_next_from_waiting_list(request)
         else:
             messages.warning(request, 'Запись не найдена.')
@@ -234,7 +197,6 @@ class EventDetailView(LoginRequiredMixin, FormMixin, DetailView):
         if next_registration and self.object.current_participants < self.object.max_participants:
             next_registration.confirm_registration()
             messages.info(request, f'Участник {next_registration.full_name} перемещен из листа ожидания.')
-            # Отправляем письмо о подтверждении из листа ожидания
             send_confirmation_from_waiting_email(next_registration.user, self.object, next_registration)
 
 
@@ -244,7 +206,7 @@ class EventCreateView(StaffRequiredMixin, LoginRequiredMixin, CreateView):
     """
     model = Event
     form_class = EventForm
-    template_name = 'event_form.html'  # Исправлено: добавил events/
+    template_name = 'event_form.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -293,10 +255,8 @@ class EventParticipantsView(StaffRequiredMixin, LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # ========== ВАЖНО: Получаем ВСЕХ участников для статистики ==========
         all_participants = EventRegistration.objects.filter(event=self.object).select_related('user')
 
-        # Статистика считается от ВСЕХ участников (БЕЗ фильтрации!)
         context['stats'] = {
             'total': all_participants.count(),
             'confirmed': all_participants.filter(status='confirmed').count(),
@@ -306,16 +266,12 @@ class EventParticipantsView(StaffRequiredMixin, LoginRequiredMixin, DetailView):
             'checked_in': all_participants.filter(checked_in=True).count(),
         }
 
-        # ========== Фильтрация для отображения ==========
-        # Берем копию для фильтрации
         filtered_participants = all_participants
 
-        # Фильтр по статусу
         self.status_filter = self.request.GET.get('status', '')
         if self.status_filter:
             filtered_participants = filtered_participants.filter(status=self.status_filter)
 
-        # Поиск
         self.search_query = self.request.GET.get('search', '')
         if self.search_query:
             filtered_participants = filtered_participants.filter(
@@ -325,7 +281,6 @@ class EventParticipantsView(StaffRequiredMixin, LoginRequiredMixin, DetailView):
                 Q(user__username__icontains=self.search_query)  # Добавил поиск по username
             )
 
-        # Пагинация для ОТФИЛЬТРОВАННЫХ участников
         paginator = Paginator(filtered_participants, 20)
         page_number = self.request.GET.get('page')
         context['participants'] = paginator.get_page(page_number)

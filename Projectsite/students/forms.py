@@ -24,28 +24,23 @@ class ProfileForm(forms.ModelForm):
         self.request = kwargs.pop('request', None)
         super().__init__(*args, **kwargs)
 
-        # Базовый queryset активных кружков, отсортированный по порядку
         circles_qs = Circle.objects.filter(is_active=True).order_by('order', 'name')
 
-        # Если пользователь авторизован, исключаем кружки, на которые он уже записан
         if self.request and self.request.user.is_authenticated:
             registered_circles_names = Profile.objects.filter(
                 user=self.request.user
             ).values_list('active', flat=True)
             circles_qs = circles_qs.exclude(name__in=registered_circles_names)
 
-        # Формируем choices: пустой пункт + названия доступных кружков
         choices = [('', '---------')] + [(circle.name, circle.name) for circle in circles_qs]
         self.fields['active'].choices = choices
 
-        # Если пользователь уже авторизован и у него есть класс, подставляем его
         if self.request and self.request.user.is_authenticated:
             user = self.request.user
             if user.grade:
                 self.fields['Class'].initial = user.grade
                 self.fields['Class'].widget.attrs['readonly'] = True
 
-        # Обновляем классы для всех полей (кроме select, он уже имеет свой класс)
         for field_name in self.fields:
             if field_name != 'active':
                 self.fields[field_name].widget.attrs.update({'class': 'form-control'})

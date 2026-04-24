@@ -1,29 +1,20 @@
 {% extends 'base.html' %}
-{% block title %}Галерея{% endblock title %}
-
 {% load static %}
-{% block content %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Адаптивная карусель с FancyBox</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
-</head>
-<body>
-    <div class="carousel-container-main">
-        <div class="carousel-container">
 
+{% block title %}Галерея{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="carousel-container-main">
+    <div class="carousel-container">
         <div class="carousel">
             <div class="progress-bar" id="progressBar"></div>
+            <div class="carousel-track" id="carouselTrack"></div>
 
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Слайды будут добавлены JavaScript -->
-            </div>
-
-            <!-- Компьютерные стрелки -->
             <button class="carousel-btn btn-prev" id="prevBtn">
                 <i class="bi bi-chevron-left"></i>
             </button>
@@ -31,402 +22,199 @@
                 <i class="bi bi-chevron-right"></i>
             </button>
 
-            <!-- Индикаторы -->
-            <div class="carousel-indicators" id="indicators">
-                <!-- Индикаторы добавятся автоматически -->
-            </div>
-
-            <!-- Счетчик -->
+            <div class="carousel-indicators" id="indicators"></div>
             <div class="slide-counter" id="slideCounter">1 / 5</div>
         </div>
 
-        <div class="carousel-info" style="text-align: center; margin-top: 20px; color: #666;">
-            <p><i class="bi bi-info-circle"></i> Всего слайдов: <span id="totalSlides">5</span> | Автопрокрутка: <span id="autoStatus">Включена</span> | <i class="bi bi-arrows-fullscreen"></i> Нажмите на изображение для увеличения</p>
+        <div class="carousel-info">
+            <p><i class="bi bi-info-circle"></i> Всего слайдов: <span id="totalSlides">0</span>
+            | Автопрокрутка: <span id="autoStatus">Включена</span>
+            | <i class="bi bi-arrows-fullscreen"></i> Нажмите на изображение для увеличения</p>
         </div>
     </div>
-    </div>
-    <script>
-        // Данные для слайдов
-        const slidesData = [
-            {
-                image: "{% static 'Images/chess-1.png' %}",
-                description: "Шахматы"
-            },
-            {
-                image: "{% static 'Images/chess-2.jpg' %}",
-                description: "Шахматы"
-            },
-            {
-                image: "{% static 'Images/chess-new-gambit.jpg' %}",
-                description: "Шахматы 'Новый гамбит'"
-            },
-            {
-                image: "{% static 'Images/day-respublic.jpg' %}",
-                description: "День Республики"
-            },
-            {
-                image: "{% static 'Images/geoinform.jpg' %}",
-                description: "Геоинформатика"
-            },
-            {
-                image: "{% static 'Images/geoinform-1.jpg' %}",
-                description: "Геоинформатика"
-            },
-            {
-                image: "{% static 'Images/Night-in-museum.jpg' %}",
-                description: "Ночь музеев 2021"
-            },
-            {
-                image: "{% static 'Images/obj.jpg' %}",
-                description: "ОБЖ"
-            },
-            {
-                image: "{% static 'Images/obj-1.jpg' %}",
-                description: "ОБЖ"
-            },
-            {
-                image: "{% static 'Images/program-1.jpg' %}",
-                description: "Программирование"
-            },
-            {
-                image: "{% static 'Images/promdis.jpg' %}",
-                description: "Промышленный дизайн"
-            },
-            {
-                image: "{% static 'Images/promdis-1.jpg' %}",
-                description: "Промышленный дизайн"
-            },
-            {
-                image: "{% static 'Images/votocnimok-jpg.jpg' %}",
-                description: "Фотосъемка"
-            },
-            {
-                image: "{% static 'Images/votocnimok-jpg-1.jpg' %}",
-                description: "Фотосъемка"
-            },
-            {
-                image: "{% static 'Images/vr.jpg' %}",
-                description: "Виртуальная реальность"
-            },
-            {
-                image: "{% static 'Images/vr-1.jpg' %}",
-                description: "Виртуальная реальность"
-            },
-            {
-                image: "{% static 'Images/program.png' %}",
-                description: "Программирование"
-            },
-            {
-                image: "{% static 'Images/robotics-1.png' %}",
-                description: "Робототехника"
-            },
-            {
-                image: "{% static 'Images/robotics-2.png' %}",
-                description: "Робототехника"
-            },
-            {
-                image: "{% static 'Images/volonter.jpg' %}",
-                description: "Волонтерство"
-            },
-            {
-                image: "{% static 'Images/giber.jpg' %}",
-                description: "Соревнования по Берлоге"
-            },
-            {
-                image: "{% static 'Images/win-fast-chess.jpg' %}",
-                description: "Шахматы"
-            },
-            {
-                image: "{% static 'Images/new-resurs.jpg' %}",
-                description: "Новое оборудование"
-            },
-            {
-                image: "{% static 'Images/win-day-resp.jpg' %}",
-                description: "Шахматы"
-            },
-            {
-                image: "{% static 'Images/win-white.jpg' %}",
-                description: "Шахматы"
-            },
-        ];
+</div>
 
-        class Carousel {
-            constructor() {
-                this.currentSlide = 0;
-                this.totalSlides = slidesData.length;
-                this.track = document.getElementById('carouselTrack');
-                this.indicatorsContainer = document.getElementById('indicators');
-                this.slideCounter = document.getElementById('slideCounter');
-                this.totalSlidesElement = document.getElementById('totalSlides');
-                this.progressBar = document.getElementById('progressBar');
+<script>
+    const slidesData = [
+        {% for img in images %}
+        {
+            image: "{{ img.image.url }}",
+            description: "{{ img.description|default:img.title|escapejs }}"
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ];
+
+    class Carousel {
+        constructor() {
+            this.currentSlide = 0;
+            this.totalSlides = slidesData.length;
+            this.track = document.getElementById('carouselTrack');
+            this.indicatorsContainer = document.getElementById('indicators');
+            this.slideCounter = document.getElementById('slideCounter');
+            this.totalSlidesElement = document.getElementById('totalSlides');
+            this.progressBar = document.getElementById('progressBar');
+            this.autoPlayInterval = null;
+            this.autoPlayDelay = 10000;
+            this.isAutoPlay = true;
+            this.autoStatusElement = document.getElementById('autoStatus');
+            this.touchStartX = 0;
+            this.touchEndX = 0;
+            this.swipeThreshold = 50;
+
+            this.init();
+            this.startAutoPlay();
+        }
+
+        init() {
+            this.createSlides();
+            this.createIndicators();
+            this.updateCounter();
+            this.addEventListeners();
+            this.updateSlidePosition();
+        }
+
+        createSlides() {
+            slidesData.forEach((slide, index) => {
+                const slideElement = document.createElement('div');
+                slideElement.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+                slideElement.innerHTML = `
+                    <a href="${slide.image}" data-fancybox="gallery" data-caption="${slide.description}" class="fancybox-link">
+                        <img src="${slide.image}" alt="${slide.description}">
+                    </a>
+                    <div class="slide-content">
+                        <p>${slide.description}</p>
+                    </div>
+                `;
+                this.track.appendChild(slideElement);
+            });
+            this.totalSlidesElement.textContent = this.totalSlides;
+        }
+
+        createIndicators() {
+            for (let i = 0; i < this.totalSlides; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
+                indicator.dataset.index = i;
+                indicator.addEventListener('click', () => this.goToSlide(i));
+                this.indicatorsContainer.appendChild(indicator);
+            }
+        }
+
+        addEventListeners() {
+            document.getElementById('prevBtn').addEventListener('click', () => this.prevSlide());
+            document.getElementById('nextBtn').addEventListener('click', () => this.nextSlide());
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') this.prevSlide();
+                if (e.key === 'ArrowRight') this.nextSlide();
+                if (e.key === ' ') this.toggleAutoPlay();
+            });
+            this.track.addEventListener('touchstart', (e) => this.handleTouchStart(e));
+            this.track.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+            this.track.addEventListener('mouseenter', () => this.pauseAutoPlay());
+            this.track.addEventListener('mouseleave', () => this.resumeAutoPlay());
+            this.track.addEventListener('click', (e) => {
+                if (!e.target.closest('.fancybox-link')) {
+                    this.toggleAutoPlay();
+                }
+            });
+        }
+
+        handleTouchStart(e) {
+            this.touchStartX = e.changedTouches[0].screenX;
+            this.pauseAutoPlay();
+        }
+
+        handleTouchEnd(e) {
+            this.touchEndX = e.changedTouches[0].screenX;
+            const swipeDistance = this.touchStartX - this.touchEndX;
+            if (swipeDistance > this.swipeThreshold) this.nextSlide();
+            else if (swipeDistance < -this.swipeThreshold) this.prevSlide();
+            this.resumeAutoPlay();
+        }
+
+        updateSlidePosition() {
+            const translateX = -this.currentSlide * 100;
+            this.track.style.transform = `translateX(${translateX}%)`;
+            document.querySelectorAll('.indicator').forEach((ind, idx) => {
+                ind.classList.toggle('active', idx === this.currentSlide);
+            });
+            document.querySelectorAll('.carousel-slide').forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === this.currentSlide);
+            });
+            this.updateCounter();
+            this.updateProgressBar();
+        }
+
+        updateCounter() {
+            this.slideCounter.textContent = `${this.currentSlide + 1} / ${this.totalSlides}`;
+        }
+
+        updateProgressBar() {
+            this.progressBar.style.width = '0%';
+            setTimeout(() => this.progressBar.style.width = '100%', 10);
+        }
+
+        nextSlide() {
+            this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+            this.updateSlidePosition();
+            this.resetAutoPlay();
+        }
+
+        prevSlide() {
+            this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+            this.updateSlidePosition();
+            this.resetAutoPlay();
+        }
+
+        goToSlide(index) {
+            this.currentSlide = index;
+            this.updateSlidePosition();
+            this.resetAutoPlay();
+        }
+
+        startAutoPlay() {
+            if (this.isAutoPlay && this.totalSlides) {
+                this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayDelay);
+                this.autoStatusElement.textContent = 'Включена';
+            }
+        }
+
+        pauseAutoPlay() {
+            if (this.autoPlayInterval) {
+                clearInterval(this.autoPlayInterval);
                 this.autoPlayInterval = null;
-                this.autoPlayDelay = 10000; // 10 секунд
-                this.isAutoPlay = true;
-                this.autoStatusElement = document.getElementById('autoStatus');
-                this.touchStartX = 0;
-                this.touchEndX = 0;
-                this.swipeThreshold = 50; // Минимальное расстояние свайпа
-
-                this.init();
-                this.startAutoPlay();
-            }
-
-            init() {
-                // Создаем слайды
-                this.createSlides();
-
-                // Создаем индикаторы
-                this.createIndicators();
-
-                // Обновляем счетчик
-                this.updateCounter();
-
-                // Назначаем обработчики событий
-                this.addEventListeners();
-
-                // Показываем первый слайд
-                this.updateSlidePosition();
-            }
-
-            createSlides() {
-                slidesData.forEach((slide, index) => {
-                    const slideElement = document.createElement('div');
-                    slideElement.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
-                    slideElement.innerHTML = `
-                        <a href="${slide.image}" data-fancybox="gallery" data-caption="${slide.description}" class="fancybox-link">
-                            <img src="${slide.image}" alt="${slide.description}">
-                        </a>
-                        <div class="slide-content">
-                            <p>${slide.description}</p>
-                        </div>
-                    `;
-                    this.track.appendChild(slideElement);
-                });
-
-                this.totalSlidesElement.textContent = this.totalSlides;
-            }
-
-            createIndicators() {
-                for (let i = 0; i < this.totalSlides; i++) {
-                    const indicator = document.createElement('div');
-                    indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
-                    indicator.dataset.index = i;
-                    indicator.addEventListener('click', () => this.goToSlide(i));
-                    this.indicatorsContainer.appendChild(indicator);
-                }
-            }
-
-            addEventListeners() {
-                // Стрелки
-                document.getElementById('prevBtn').addEventListener('click', () => this.prevSlide());
-                document.getElementById('nextBtn').addEventListener('click', () => this.nextSlide());
-
-                // Клавиатура
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'ArrowLeft') this.prevSlide();
-                    if (e.key === 'ArrowRight') this.nextSlide();
-                    if (e.key === ' ') this.toggleAutoPlay();
-                });
-
-                // Тач события для мобильных
-                this.track.addEventListener('touchstart', (e) => this.handleTouchStart(e));
-                this.track.addEventListener('touchend', (e) => this.handleTouchEnd(e));
-
-                // Мышь для десктопа (пауза при наведении)
-                this.track.addEventListener('mouseenter', () => this.pauseAutoPlay());
-                this.track.addEventListener('mouseleave', () => this.resumeAutoPlay());
-
-                // Клик на слайд для переключения авто-прокрутки
-                this.track.addEventListener('click', (e) => {
-                    // Не переключаем автопрокрутку если кликнули по ссылке FancyBox
-                    if (!e.target.closest('.fancybox-link')) {
-                        this.toggleAutoPlay();
-                    }
-                });
-            }
-
-            handleTouchStart(e) {
-                this.touchStartX = e.changedTouches[0].screenX;
-                this.pauseAutoPlay();
-            }
-
-            handleTouchEnd(e) {
-                this.touchEndX = e.changedTouches[0].screenX;
-                this.handleSwipe();
-                this.resumeAutoPlay();
-            }
-
-            handleSwipe() {
-                const swipeDistance = this.touchStartX - this.touchEndX;
-
-                // Свайп влево -> следующий слайд
-                if (swipeDistance > this.swipeThreshold) {
-                    this.nextSlide();
-                }
-                // Свайп вправо -> предыдущий слайд
-                else if (swipeDistance < -this.swipeThreshold) {
-                    this.prevSlide();
-                }
-            }
-
-            updateSlidePosition() {
-                const translateX = -this.currentSlide * 100;
-                this.track.style.transform = `translateX(${translateX}%)`;
-
-                // Обновляем индикаторы
-                document.querySelectorAll('.indicator').forEach((indicator, index) => {
-                    indicator.classList.toggle('active', index === this.currentSlide);
-                });
-
-                // Обновляем активный класс слайда
-                document.querySelectorAll('.carousel-slide').forEach((slide, index) => {
-                    slide.classList.toggle('active', index === this.currentSlide);
-                });
-
-                this.updateCounter();
-                this.updateProgressBar();
-            }
-
-            updateCounter() {
-                this.slideCounter.textContent = `${this.currentSlide + 1} / ${this.totalSlides}`;
-            }
-
-            updateProgressBar() {
-                this.progressBar.style.width = '0%';
-                setTimeout(() => {
-                    this.progressBar.style.width = '100%';
-                }, 10);
-            }
-
-            nextSlide() {
-                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-                this.updateSlidePosition();
-                this.resetAutoPlay();
-            }
-
-            prevSlide() {
-                this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-                this.updateSlidePosition();
-                this.resetAutoPlay();
-            }
-
-            goToSlide(index) {
-                this.currentSlide = index;
-                this.updateSlidePosition();
-                this.resetAutoPlay();
-            }
-
-            startAutoPlay() {
-                if (this.isAutoPlay) {
-                    this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayDelay);
-                    this.autoStatusElement.textContent = 'Включена';
-                }
-            }
-
-            pauseAutoPlay() {
-                if (this.autoPlayInterval) {
-                    clearInterval(this.autoPlayInterval);
-                    this.autoPlayInterval = null;
-                }
-            }
-
-            resumeAutoPlay() {
-                if (this.isAutoPlay && !this.autoPlayInterval) {
-                    this.startAutoPlay();
-                }
-            }
-
-            resetAutoPlay() {
-                this.pauseAutoPlay();
-                this.startAutoPlay();
-            }
-
-            toggleAutoPlay() {
-                this.isAutoPlay = !this.isAutoPlay;
-                if (this.isAutoPlay) {
-                    this.startAutoPlay();
-                } else {
-                    this.pauseAutoPlay();
-                    this.autoStatusElement.textContent = 'Выключена';
-                }
             }
         }
 
-        // Инициализация карусели при загрузке страницы
-        document.addEventListener('DOMContentLoaded', () => {
+        resumeAutoPlay() {
+            if (this.isAutoPlay && !this.autoPlayInterval && this.totalSlides) {
+                this.startAutoPlay();
+            }
+        }
+
+        resetAutoPlay() {
+            this.pauseAutoPlay();
+            this.startAutoPlay();
+        }
+
+        toggleAutoPlay() {
+            this.isAutoPlay = !this.isAutoPlay;
+            if (this.isAutoPlay) this.startAutoPlay();
+            else {
+                this.pauseAutoPlay();
+                this.autoStatusElement.textContent = 'Выключена';
+            }
+        }
+    }
+
+    // Инициализация, только если есть изображения
+    document.addEventListener('DOMContentLoaded', () => {
+        if (slidesData.length > 0) {
             new Carousel();
-        });
-    </script>
-    <style>
-        /* Дополнительные стили для FancyBox интеграции */
-        .fancybox-link {
-            display: block;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
+        } else {
+            document.getElementById('carouselTrack').innerHTML = '<div class="carousel-slide"><div style="text-align:center; padding: 100px;">Нет изображений в галерее</div></div>';
+            document.getElementById('totalSlides').textContent = '0';
         }
-        
-        .fancybox-link img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .fancybox-link:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Кастомные стили для FancyBox */
-        .fancybox-custom .fancybox__toolbar {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 8px;
-            margin: 10px;
-        }
-        
-        .fancybox-custom .fancybox__nav button {
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            margin: 0 10px;
-        }
-        
-        .fancybox-custom .fancybox__nav button:hover {
-            background: rgba(0, 0, 0, 0.9);
-        }
-        
-        .fancybox-custom .fancybox__slide {
-            padding: 40px;
-        }
-        
-        /* Анимации для FancyBox */
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes fade-out {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-            }
-        }
-        
-        .fade-in {
-            animation: fade-in 0.3s ease-out;
-        }
-        
-        .fade-out {
-            animation: fade-out 0.3s ease-out;
-        }
-    </style>
-</body>
-</html>
-{% endblock content %}
+    });
+</script>
+{% endblock %}

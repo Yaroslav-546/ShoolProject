@@ -340,7 +340,7 @@
             padding: 0.3rem 0.6rem;
             font-size: 0.7rem;
         }
-        
+
         .admin-actions {
             display: flex;
             justify-content: flex-start;
@@ -380,7 +380,7 @@
                 <div>
                     <h2 class="fw-bold mb-2">
                         <i class="fas fa-chalkboard-user me-2"></i>
-                        Кружки и секции
+                        Кружки
                     </h2>
                     <p class="mb-0 opacity-75">Развитие творческих и технических способностей детей</p>
                 </div>
@@ -398,7 +398,7 @@
             </div>
         </div>
 
-        <div class="p-4 p-md-5">
+        <div class="p-3 p-md-5">
             <!-- Поиск и фильтры -->
             <div class="row g-3 mb-4">
                 <div class="col-12 col-md-5">
@@ -487,7 +487,7 @@
                                 <a href="{% url 'circles:circle_edit' circle.slug %}" class="btn-icon btn-edit" title="Редактировать">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{% url 'circles:circle_delete' circle.slug %}" class="btn-icon btn-delete" title="Удалить" 
+                                <a href="{% url 'circles:circle_delete' circle.slug %}" class="btn-icon btn-delete" title="Удалить"
                                    onclick="return confirm('Вы уверены, что хотите удалить кружок «{{ circle.name }}»?')">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>

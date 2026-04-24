@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Точка Роста - Админ-панель{% endblock %}
+
+{% block branding %}
+<div id="site-name">
+    <a href="{% url 'admin:index' %}">
+        <i class="fas fa-chalkboard-user"></i>
+        Точка Роста - Административная панель
+    </a>
+</div>
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
+<link rel="icon" type="image/png" href="{% static 'Images/main-icon.svg' %}" type="image/svg+xml"/>
+<style>
+    .bg-danger {
+        background-color: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block footer %}
+<div id="footer">
+    <p>{% now "Y" %} Точка Роста - Центр цифрового и гуманитарного профилей</p>
+</div>
+{% endblock %}
