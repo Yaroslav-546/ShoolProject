@@ -1,4 +1,4 @@
-# 🌱 TochkaRostaNB
+# TochkaRostaNB
 
 <div align="center">
   
