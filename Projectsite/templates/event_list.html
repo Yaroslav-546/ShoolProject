@@ -53,16 +53,16 @@
                 </label>
                 <select name="status" class="form-select">
                     <option value="upcoming" {% if current_status == 'upcoming' %}selected{% endif %}>
-                        📅 Предстоящие
+                        Предстоящие
                     </option>
                     <option value="ongoing" {% if current_status == 'ongoing' %}selected{% endif %}>
-                        ▶️ Идут сейчас
+                        Идут сейчас
                     </option>
                     <option value="active" {% if current_status == 'active' %}selected{% endif %}>
-                        ✅  Регистрация открыта
+                        Регистрация открыта
                     </option>
                     <option value="past" {% if current_status == 'past' %}selected{% endif %}>
-                        📜 Прошедшие
+                        Прошедшие
                     </option>
                 </select>
             </div>

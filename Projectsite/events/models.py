@@ -4,7 +4,6 @@ from django.conf import settings
 class Event(models.Model):
     EVENT_TYPES = [
         ('chess', 'Шахматный турнир'),
-        ('robotics', 'Соревнование по робототехнике'),
         ('programming', 'Олимпиада по программированию'),
         ('photo', 'Фотоконкурс'),
         ('other', 'Другое'),

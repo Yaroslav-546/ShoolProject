@@ -53,12 +53,10 @@ INSTALLED_APPS = [
 ]
 
 UNFOLD = {
-    # Основные настройки
     "SITE_TITLE": "Точка Роста — Админ-панель",
     "SITE_HEADER": "Точка Роста",
     "SITE_URL": "/",
 
-    # Логотипы (светлая и тёмная тема)
     "SITE_FAVICONS": [
         {
             "rel": "icon",
@@ -69,20 +67,16 @@ UNFOLD = {
     ],
 
     "SITE_ICON": "/static/Images/main-icon.svg",
-    "SITE_LOGO": "/static/Images/main-icon.svg",   # для светлой темы
-    "SITE_LOGO_DARK": "/static/Images/main-icon.svg", # для тёмной
+    "SITE_LOGO": "/static/Images/main-icon.svg",   
+    "SITE_LOGO_DARK": "/static/Images/main-icon.svg", 
 
-    # Тёмная тема
-    "DARK_MODE": True,                # включает переключатель
-    "DEFAULT_THEME": "auto",          # "light", "dark" или "auto"
+    "DARK_MODE": True,                
+    "DEFAULT_THEME": "auto",          
 
 
-    # Дополнительные возможности
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
-    # "TABS": ["detail", "history", "delete"],  # вкладки в формах
 
-    # Расширенные фильтры
     "FILTERS": {
         "auto_complete": True,
         "datetime": True,
@@ -91,30 +85,30 @@ UNFOLD = {
     },
 }
 
-JAZZMIN_SETTINGS = {
-    "site_brand": "Точка Роста",  # Здесь укажите нужное название
-    "site_title": "Панель управления Точка Роста",
-    "site_header": "Точка Роста",
-    "welcome_sign": "Добро пожаловать в админ-панель Точки Роста",
-    "copyright": "Точка Роста © 2026",
-    "site_logo": "Images/main-icon.svg",
-    "site_logo_classes": "img-circle",
-    "site_icon": "Images/main-icon.svg",
-    "show_theme_chooser": True,     # Добавляет выпадающий список тем в навигацию
-    "icons": {
-        "auth.User": "fas fa-users",
-        "auth.Group": "fas fa-users-cog",
-        "events.Event": "fas fa-calendar-alt",
-        "students.Profile": "fas fa-user-graduate",
-        "circles.Circle": "fas fa-chalkboard",
-        "feedback.Feedback": "fas fa-envelope",
-    },
-}
+# JAZZMIN_SETTINGS = {
+#     "site_brand": "Точка Роста",  
+#     "site_title": "Панель управления Точка Роста",
+#     "site_header": "Точка Роста",
+#     "welcome_sign": "Добро пожаловать в админ-панель Точки Роста",
+#     "copyright": "Точка Роста © 2026",
+#     "site_logo": "Images/main-icon.svg",
+#     "site_logo_classes": "img-circle",
+#     "site_icon": "Images/main-icon.svg",
+#     "show_theme_chooser": True,     
+#     "icons": {
+#         "auth.User": "fas fa-users",
+#         "auth.Group": "fas fa-users-cog",
+#         "events.Event": "fas fa-calendar-alt",
+#         "students.Profile": "fas fa-user-graduate",
+#         "circles.Circle": "fas fa-chalkboard",
+#         "feedback.Feedback": "fas fa-envelope",
+#     },
+# }
 
-JAZZMIN_UI_TWEAKS = {
-    "theme": "flatly",              # Светлая тема по умолчанию (можно заменить на 'darkly', 'united' и др.)
-    "dark_mode_theme": "darkly",    # Тёмная тема для систем с тёмным режимом
-}
+# JAZZMIN_UI_TWEAKS = {
+#     "theme": "flatly",              
+#     "dark_mode_theme": "darkly",    
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
