@@ -82,7 +82,6 @@
     letter-spacing: 0.5px;
 }
 
-/* Основные карточки */
 .main-card {
     background: white;
     border-radius: 24px;
@@ -121,7 +120,6 @@
     padding: 1.75rem;
 }
 
-/* Блоки целей */
 .goals-list {
     display: flex;
     flex-direction: column;
@@ -176,12 +174,13 @@
     line-height: 1.5;
     margin: 0;
     font-size: 0.9rem;
+    text-align: justify;
 }
 
-/* Информационный блок */
 .info-text {
     line-height: 1.6;
     color: #374151;
+    text-align: justify;
 }
 
 .info-text p {
@@ -200,7 +199,6 @@
     display: inline-block;
 }
 
-/* Кнопки */
 .btn-main {
     border-radius: 12px;
     padding: 0.7rem 1.5rem;
@@ -238,7 +236,6 @@
     transform: translateY(-2px);
 }
 
-/* Галерея */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -296,7 +293,6 @@
     margin-right: 0.5rem;
 }
 
-/* Адаптивность */
 @media (max-width: 992px) {
     .hero-title {
         font-size: 2.2rem;
@@ -379,7 +375,6 @@
     }
 }
 
-/* Анимации */
 @keyframes fadeInUp {
     from {
         opacity: 0;

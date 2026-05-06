@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 #Настройки
-
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -31,11 +30,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = True
 ALLOWED_HOSTS = [os.getenv('HOST1'), os.getenv('HOST2'), os.getenv('HOST3')]
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    'unfold',
+    "unfold",
+    "unfold.contrib.forms",
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

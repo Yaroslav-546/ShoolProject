@@ -1,4 +1,3 @@
-# students/forms.py
 from django import forms
 from .models import Profile
 from circles.models import Circle

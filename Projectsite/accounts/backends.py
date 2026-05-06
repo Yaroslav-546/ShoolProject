@@ -16,21 +16,17 @@ class EmailOrUsernameModelBackend(ModelBackend):
             return None
         
         try:
-            # Ищем пользователя по email ИЛИ username (без учета регистра)
             user = UserModel.objects.get(
                 Q(email__iexact=username) | Q(username__iexact=username)
             )
         except UserModel.DoesNotExist:
-            # Для безопасности создаем "пустышку", чтобы время отклика было одинаковым
             UserModel().set_password(password)
             return None
         except UserModel.MultipleObjectsReturned:
-            # Если есть несколько пользователей (маловероятно), берем первого
             user = UserModel.objects.filter(
                 Q(email__iexact=username) | Q(username__iexact=username)
             ).first()
         
-        # Проверяем пароль и активность пользователя
         if user and user.check_password(password) and self.user_can_authenticate(user):
             return user
         return None

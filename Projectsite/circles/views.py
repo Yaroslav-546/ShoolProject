@@ -26,7 +26,6 @@ class CirclesListView(ListView):
     def get_queryset(self):
         queryset = Circle.objects.filter(is_active=True).order_by('order', 'name')
 
-        # Поиск
         search_query = self.request.GET.get('search', '')
         if search_query:
             queryset = queryset.filter(
@@ -35,7 +34,6 @@ class CirclesListView(ListView):
                 Q(grade__icontains=search_query)
             )
 
-        # Фильтр по дню недели
         selected_day = self.request.GET.get('day', '')
         if selected_day:
             circles = []

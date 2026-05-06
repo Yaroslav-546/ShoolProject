@@ -15,6 +15,12 @@ class Profile(models.Model):
         verbose_name = 'Ученик'
         verbose_name_plural = 'Ученики'
         unique_together = ['user', 'active']
+    
+    def save(self, *args, **kwargs):
+        if self.user:
+            self.family = self.user.last_name
+            self.name = self.user.first_name
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.family} {self.name}, {self.active}"

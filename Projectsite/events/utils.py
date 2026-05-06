@@ -9,7 +9,6 @@ def send_registration_email(user, event, registration):
     """
     subject = f'Подтверждение регистрации на мероприятие "{event.title}"'
 
-    # HTML контекст для письма
     context = {
         'user': user,
         'event': event,
@@ -17,7 +16,6 @@ def send_registration_email(user, event, registration):
         'site_url': settings.SITE_URL if hasattr(settings, 'SITE_URL') else '',
     }
 
-    # HTML версия письма
     html_message = render_to_string('registration_confirmation.html', context)
     plain_message = strip_tags(html_message)
 

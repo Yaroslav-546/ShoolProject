@@ -31,7 +31,6 @@ class CustomUser(AbstractUser):
         ]
     )
 
-    # Валидаторы для фамилии
     last_name = models.CharField(
         'Фамилия',
         max_length=150,
@@ -43,7 +42,6 @@ class CustomUser(AbstractUser):
         ]
     )
 
-    # Отчество (оставляем как было)
     patronymic = models.CharField(
         'Отчество',
         max_length=150,
@@ -86,7 +84,7 @@ class CustomUser(AbstractUser):
     def generate_password_reset_token(self):
         """Генерация токена для сброса пароля"""
         self.reset_password_token = secrets.token_urlsafe(32)
-        self.reset_password_expires = timezone.now() + timedelta(hours=24)  # Токен на 24 часа
+        self.reset_password_expires = timezone.now() + timedelta(hours=24)
         self.save()
         return self.reset_password_token
 

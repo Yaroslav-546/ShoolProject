@@ -21,7 +21,7 @@ class RegisterView(CreateView):
 
     def form_valid(self, form):
         """Отправка письма для верификации после успешной регистрации"""
-        response = form.save(commit=True, request=self.request) # type: ignore
+        response = form.save(commit=True, request=self.request) 
         messages.success(
             self.request,
             'Регистрация прошла успешно! '
@@ -44,8 +44,8 @@ class VerifyEmailView(TemplateView):
             user = CustomUser.objects.get(email_verification_token=token)
             if not user.email_verified:
                 user.email_verified = True
-                user.is_active = True  # Активируем аккаунт
-                user.email_verification_token = None  # Удаляем использованный токен
+                user.is_active = True  
+                user.email_verification_token = None 
                 user.save()
 
                 messages.success(
@@ -67,7 +67,7 @@ class VerifyEmailView(TemplateView):
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
-    authentication_form = EmailOrUsernameAuthenticationForm  # Используем нашу форму
+    authentication_form = EmailOrUsernameAuthenticationForm  
 
     def form_invalid(self, form):
         response = super().form_invalid(form)
@@ -76,7 +76,6 @@ class CustomLoginView(LoginView):
         password = form.cleaned_data.get('password')
 
         if username and password:
-            # Проверяем существует ли пользователь
             try:
                 from .models import CustomUser
                 user = CustomUser.objects.get(
@@ -97,7 +96,6 @@ class CustomLoginView(LoginView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Добавляем информацию о том, что можно вводить email
         context['login_hint'] = 'Вы можете использовать логин или email для входа'
         return context
 
@@ -170,7 +168,6 @@ class PasswordResetConfirmView(FormView):
     success_url = reverse_lazy('password-reset-complete')
 
     def dispatch(self, request, *args, **kwargs):
-        # Проверяем токен
         self.token = kwargs.get('token')
         try:
             self.user = CustomUser.objects.get(reset_password_token=self.token)

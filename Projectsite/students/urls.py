@@ -1,7 +1,6 @@
 from django.urls import path
 from .views import SuccessView, ProfileFormView, StudentsListView, MyRegistrationsView, RegistrationDeleteView
 
-# Пути
 urlpatterns = [
     path('sign_up_active/', ProfileFormView.as_view(), name='sign_up_active'),
     path('success/', SuccessView.as_view(), name='success'),

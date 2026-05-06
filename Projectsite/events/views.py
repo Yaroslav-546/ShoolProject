@@ -278,7 +278,7 @@ class EventParticipantsView(StaffRequiredMixin, LoginRequiredMixin, DetailView):
                 Q(full_name__icontains=self.search_query) |
                 Q(grade__icontains=self.search_query) |
                 Q(email__icontains=self.search_query) |
-                Q(user__username__icontains=self.search_query)  # Добавил поиск по username
+                Q(user__username__icontains=self.search_query) 
             )
 
         paginator = Paginator(filtered_participants, 20)

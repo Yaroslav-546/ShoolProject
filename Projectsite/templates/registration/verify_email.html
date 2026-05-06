@@ -1,67 +1,137 @@
 {% extends 'base.html' %}
-
-{% block title %}Подтверждение Email{% endblock title %}
-
 {% load static %}
+
+{% block title %}Подтверждение Email — Точка Роста{% endblock %}
+
+{% block extra_css %}
+<style>
+    .verify-card {
+        background: white;
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+    }
+    .bg-gradient-red {
+        background: linear-gradient(135deg, #ff3a3a 0%, #ea6666 100%);
+    }
+    .btn-red {
+        background: linear-gradient(135deg, #fc3232 0%, #f14141 100%);
+        border: none;
+        border-radius: 40px;
+        padding: 0.8rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.3s;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-red:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
+        color: white;
+    }
+    .btn-outline-red {
+        border: 2px solid #dc2626;
+        color: #dc2626;
+        background: transparent;
+        border-radius: 40px;
+        padding: 0.5rem 1.5rem;
+        font-weight: 600;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+    .btn-outline-red:hover {
+        background: #dc2626;
+        color: white;
+        transform: translateY(-2px);
+    }
+    .alert-custom {
+        border-radius: 16px;
+        border: none;
+        border-left: 4px solid;
+    }
+    .alert-success {
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        color: #065f46;
+        border-left-color: #10b981;
+    }
+    .alert-danger {
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        color: #991b1b;
+        border-left-color: #ef4444;
+    }
+    .footer-link {
+        transition: all 0.2s;
+    }
+    .footer-link:hover {
+        opacity: 0.8;
+    }
+    @media (max-width: 768px) {
+        .btn-red, .btn-outline-red {
+            width: 100%;
+            text-align: center;
+        }
+        .row.g-3 > div {
+            margin-bottom: 0.75rem;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="{% static 'css/verify_email.css' %}">
-</head>
-<body>
 <div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-lg border-0 rounded-4">
-                <div class="card-header bg-white border-0 pt-4">
-                    <div class="text-center">
-                        <h2 class="fw-bold text-dark mb-2">Подтверждение Email</h2>
-                        <p class="text-muted">Проверка вашего электронного адреса</p>
-                    </div>
+        <div class="col-lg-6">
+            <div class="verify-card fade-in-up">
+                <div class="bg-gradient-red p-4 text-white text-center" style="border-radius: 28px 28px 0 0;">
+                    <h2 class="fw-bold mb-2">
+                        <i class="fas fa-envelope me-2"></i>Подтверждение Email
+                    </h2>
+                    <p class="mb-0 opacity-75">Проверка вашего электронного адреса</p>
                 </div>
 
-                <div class="card-body px-5 py-4">
+                <div class="p-4">
                     {% if messages %}
                         {% for message in messages %}
-                            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}
-                                alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+                            <div class="alert alert-custom alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show mb-4">
                                 <div class="d-flex align-items-center">
-                                    <i class="bi bi-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-triangle{% else %}info-circle{% endif %}-fill me-3"></i>
+                                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %} me-2 fs-5"></i>
                                     <div>{{ message }}</div>
                                 </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                             </div>
                         {% endfor %}
                     {% endif %}
 
-                    <div class="text-center mt-4">
+                    <div class="text-center mt-3">
                         {% if user.is_authenticated %}
-                            <a href="{% url 'dashboard' %}" class="btn btn-danger btn-lg px-5 rounded-pill shadow">
-                                <i class="bi bi-speedometer2 me-2"></i>Перейти в личный кабинет
+                            <a href="{% url 'dashboard' %}" class="btn-red px-5">
+                                <i class="fas fa-tachometer-alt me-2"></i>В личный кабинет
                             </a>
                         {% else %}
-                            <a href="{% url 'login' %}" class="btn btn-danger btn-lg px-5 rounded-pill shadow">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Войти в систему
+                            <a href="{% url 'login' %}" class="btn-red px-5">
+                                <i class="fas fa-sign-in-alt me-2"></i>Войти
                             </a>
                         {% endif %}
                     </div>
                 </div>
 
-                <div class="card-footer bg-white border-0 pb-4 text-center">
+                <div class="border-top p-4 text-center">
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <a href="{% url 'index' %}" class="text-decoration-none text-danger d-flex align-items-center justify-content-center">
-                                <i class="bi bi-house-door me-2"></i> На главную
+                            <a href="{% url 'index' %}" class="text-decoration-none text-danger footer-link">
+                                <i class="fas fa-home me-2"></i>На главную
                             </a>
                         </div>
                         <div class="col-md-4">
-                            <a href="{% url 'login' %}" class="text-decoration-none text-danger d-flex align-items-center justify-content-center">
-                                <i class="bi bi-person-circle me-2"></i> Вход в аккаунт
+                            <a href="{% url 'login' %}" class="text-decoration-none text-danger footer-link">
+                                <i class="fas fa-sign-in-alt me-2"></i>Вход
                             </a>
                         </div>
                         <div class="col-md-4">
-                            <a href="{% url 'register' %}" class="text-decoration-none text-danger d-flex align-items-center justify-content-center">
-                                <i class="bi bi-person-plus me-2"></i> Регистрация
+                            <a href="{% url 'register' %}" class="text-decoration-none text-danger footer-link">
+                                <i class="fas fa-user-plus me-2"></i>Регистрация
                             </a>
                         </div>
                     </div>
@@ -70,6 +140,4 @@
         </div>
     </div>
 </div>
-</body>
-</html>
 {% endblock %}

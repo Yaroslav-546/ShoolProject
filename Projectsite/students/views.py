@@ -50,8 +50,6 @@ class ProfileFormView(LoginRequiredMixinCustom, CreateView):
 
         profile = form.save(commit=False)
         profile.user = self.request.user
-        profile.family = self.request.user.last_name
-        profile.name = self.request.user.first_name
 
         if Profile.objects.filter(user=self.request.user, active=profile.active).exists():
             existing_reg = Profile.objects.filter(
@@ -70,7 +68,6 @@ class ProfileFormView(LoginRequiredMixinCustom, CreateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        # Добавляем сообщение об ошибке для невалидной формы
         if form.errors:
             for field, errors in form.errors.items():
                 for error in errors:
